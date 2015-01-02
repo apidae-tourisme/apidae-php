@@ -8,5 +8,12 @@
             "email": "coucou@jolicode.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle-services": "0.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sitra\\ApiClient\\": "src"
+        }
+    }
 }
