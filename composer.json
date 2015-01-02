@@ -1,0 +1,12 @@
+{
+    "name": "sitra/api-client",
+    "description": "Sitra API official PHP Client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JoliCode",
+            "email": "coucou@jolicode.com"
+        }
+    ],
+    "require": {}
+}
