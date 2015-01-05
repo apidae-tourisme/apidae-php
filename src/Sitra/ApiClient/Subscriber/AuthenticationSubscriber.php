@@ -14,6 +14,9 @@ class AuthenticationSubscriber implements SubscriberInterface
     private $config;
     private $client;
 
+    // @todo Invalidate in case of expiration
+    private $accessToken;
+
     public function __construct(DescriptionInterface $description, array $config, ClientInterface $client)
     {
         $this->description  = $description;
@@ -67,13 +70,13 @@ class AuthenticationSubscriber implements SubscriberInterface
     }
 
     /**
-     * @todo Call the real service and cache the result for subsequent requests
      * @return string
      */
     protected function getOAuthToken()
     {
-        return false;
-        // @todo Wait for API fix (getting an error 500)
+        if ($this->accessToken) {
+            return $this->accessToken;
+        }
 
         $tokenResponse = $this->client->get('/oauth/token', [
             'auth' => [
@@ -82,7 +85,14 @@ class AuthenticationSubscriber implements SubscriberInterface
             ],
             'query' => [
                 'grant_type' => 'client_credentials',
-            ]
-        ]);
+            ],
+            'headers' => [
+                'accept' => 'application/json',
+            ],
+        ])->json();
+
+        $this->accessToken = $tokenResponse['access_token'];
+
+        return $this->accessToken;
     }
 }

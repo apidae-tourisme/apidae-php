@@ -27,3 +27,12 @@ Todo (make use of https://composer.borreli.com/ ?)
 - How to tweak (switch Curl by another client)
 - How to catch errors
 - How to use Exports...
+
+### Todo implementation
+
+- Sitra error wrapping
+- SSO integration
+- Export
+ - Exemple of notification end-point?
+ - Call of the confirmation URL
+- Finish all touristic methods
