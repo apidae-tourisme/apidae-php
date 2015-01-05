@@ -14,10 +14,21 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
  *
  * @todo   complete this list
  * @method array getObjectById() getObjectById(array $params)
+ *
  * @method array getMetadata() getMetadata(array $params)
+ * @method array deleteMetadata() deleteMetadata(array $params)
+ * @method array putMetadata() putMetadata(array $params)
  */
 class Client extends GuzzleClient
 {
+    protected $config = [
+        'baseUrl'       => 'http://api.sitra-tourisme.com/',
+        'apiKey'        => null,
+        'projectId'     => null,
+        'OAuthClientId' => null,
+        'OAuthSecret'   => null,
+    ];
+
     /**
      * @todo  expose options for the Guzzle client like timeout
      * @todo  validate $config params
@@ -25,17 +36,17 @@ class Client extends GuzzleClient
      */
     public function __construct(array $config = [])
     {
-        $baseUrl = $config['baseUrl'] ? $config['baseUrl'] : 'http://api.sitra-tourisme.com/';
-        $client = new BaseClient(['base_url' => $baseUrl]);
+        $this->config = array_merge($this->config, $config);
+
+        $client = new BaseClient(['base_url' => $this->config['baseUrl']]);
 
         $operations = array_merge(
             TouristicObjects::$operations,
             Metadata::$operations
         );
 
-        $serviceConfig = [];
         $descriptionData = [
-            'baseUrl' => $baseUrl,
+            'baseUrl' => $this->config['baseUrl'],
             'operations' => $operations,
             'models' => [
                 'getResponse' => [
@@ -49,10 +60,10 @@ class Client extends GuzzleClient
 
         $description = new Description($descriptionData);
 
-        parent::__construct($client, $description, $serviceConfig);
+        parent::__construct($client, $description, []);
 
         $this->getEmitter()->attach(
-            new AuthenticationSubscriber($description, $config, $this->getHttpClient())
+            new AuthenticationSubscriber($description, $this->config, $this->getHttpClient())
         );
     }
 }

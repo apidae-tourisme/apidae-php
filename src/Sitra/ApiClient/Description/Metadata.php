@@ -7,7 +7,7 @@ use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
 
 class Metadata
 {
-    const ALLOWED_KEY_REGEX = '/membre[s|_\d+]?|projet[s|_\d+]?|general/';
+    const ALLOWED_KEY_REGEX = '/^(membre(s|$)(\.membre_\d+)?)$|^(projet(s|$)(\.projet_\d+)?)$|^general$|^node$/';
 
     public static $operations = array(
         // @see http://www.sitra-rhonealpes.com/wiki/index.php/API_-_services_-_v002/metadata/
@@ -111,14 +111,14 @@ class Metadata
                 if (preg_match(self::ALLOWED_KEY_REGEX, $name) === 0) {
                     throw new InvalidMetadataFormatException();
                 }
+
+                if (is_array($data)) {
+                    $metadata[$name] = json_encode($data);
+                }
             }
         }
 
         // Force "form style" format
         return new Query($metadata);
-
-        // @todo Encode json if value is array
-        // @todo throw error if no value
-        // @todo check array keys if we can
     }
 }
