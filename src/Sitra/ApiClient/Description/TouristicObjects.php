@@ -14,28 +14,28 @@ class TouristicObjects
                 'id' => [
                     'type' => 'integer',
                     'location' => 'uri',
-                    'required' => true
+                    'required' => true,
                 ],
                 'responseFields' => [
                     'type' => 'string',
-                    'location' => 'query'
+                    'location' => 'query',
                 ],
                 'locales' => [
                     'type' => 'string',
-                    'location' => 'query'
+                    'location' => 'query',
                 ],
                 'apiKey' => [
                     'type' => 'string',
                     'location' => 'query',
-                    'required' => true
+                    'required' => true,
                 ],
                 'projetId' => [
                     'type' => 'string',
                     'location' => 'query',
-                    'required' => true
-                ]
-            ]
-        ]
+                    'required' => true,
+                ],
+            ],
+        ],
         // @todo Complete with all operations following the example
     );
 }

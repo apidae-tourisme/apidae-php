@@ -8,8 +8,8 @@ use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
 
-class AuthentificationSubscriber implements SubscriberInterface {
-
+class AuthenticationSubscriber implements SubscriberInterface
+{
     private $description;
     private $config;
     private $client;
@@ -81,9 +81,8 @@ class AuthentificationSubscriber implements SubscriberInterface {
                 $this->config['OAuthSecret'],
             ],
             'query' => [
-                'grant_type' => 'client_credentials'
+                'grant_type' => 'client_credentials',
             ]
         ]);
     }
 }
-

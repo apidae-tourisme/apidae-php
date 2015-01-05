@@ -6,9 +6,8 @@ use GuzzleHttp\Client as BaseClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use Sitra\ApiClient\Description\Metadata;
-use Sitra\ApiClient\Description\OAuth;
 use Sitra\ApiClient\Description\TouristicObjects;
-use Sitra\ApiClient\Subscriber\AuthentificationSubscriber;
+use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 
 /**
  * Magic operations:
@@ -42,10 +41,10 @@ class Client extends GuzzleClient
                 'getResponse' => [
                     'type' => 'object',
                     'additionalProperties' => [
-                        'location' => 'json'
-                    ]
-                ]
-            ]
+                        'location' => 'json',
+                    ],
+                ],
+            ],
         ];
 
         $description = new Description($descriptionData);
@@ -53,7 +52,7 @@ class Client extends GuzzleClient
         parent::__construct($client, $description, $serviceConfig);
 
         $this->getEmitter()->attach(
-            new AuthentificationSubscriber($description, $config, $this->getHttpClient())
+            new AuthenticationSubscriber($description, $config, $this->getHttpClient())
         );
     }
 }
