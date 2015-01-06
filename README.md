@@ -21,7 +21,95 @@ Todo (make use of https://composer.borreli.com/ ?)
 
 ## Usage
 
-### Configuration
+### Creating a Client
+
+Todo config
+OAuth only need for Metadata.
+
+### Read Touristic Objects
+
+### Metadata
+
+#### List metadata
+
+You can ask for metadata like this:
+
+```php
+$metadata = $client->getMetadata([
+    'referenceId' => 123457, 
+    'nodeId' => 'jolicode'
+]);
+
+$metadata = $client->getMetadata([
+    'referenceId' => 123457, 
+    'nodeId' => 'jolicode', 
+    'targetType' => 'membre'
+]);
+
+$metadata = $client->getMetadata([
+    'referenceId' => 123457, 
+    'nodeId' => 'jolicode', 
+    'targetType' => 'membre', 
+    'targetId' => 21
+]);
+```
+
+#### Delete metadata
+
+In the same way, you can delete metadata:
+
+```php
+$client->deleteMetadata([
+    'referenceId' => 123457, 
+    'nodeId' => 'jolicode', 
+    'targetType' => 'membre', 
+    'targetId' => 21
+]);
+
+// Remove them all
+$client->deleteMetadata([
+    'referenceId' => 123457, 
+    'nodeId' => 'jolicode'
+]);
+```
+
+#### Insert and update metadata
+
+Metadata API accept a large number of formats, they are all supported by this client.
+
+```php
+// Simple way on "general" target
+$client->putMetadata([
+    'referenceId' => 123457,
+    'nodeId' => 'jolicode',
+    'metadata' => [
+        'general' => '{"MyInfos": "Nice weather"}',
+    ]
+]);
+
+// Simple, with a targetId of 21 on "membres" target
+$client->putMetadata([
+    'referenceId' => 123457,
+    'nodeId' => 'jolicode',
+    'metadata' => [
+        'membres.membre_21' => '{"MyInfos": "Nice weather"}',
+    ]
+]);
+
+// Multiple (notice the double JSON encoding)
+$client->putMetadata([
+    'referenceId' => 123457,
+    'nodeId' => 'jolicode',
+    'metadata' => [
+        'node' => json_encode([
+            'general' => json_encode(['toto' => true, 'foo' => 'bar']),
+            'membres' => ([
+                ['targetId' => 111, 'jsonData' => json_encode(['foo' => 'barbar'])]
+            ]),
+        ])
+    ]
+]);
+```
 
 ### Exports
 
@@ -52,7 +140,9 @@ Then, you have to:
 The library handle the first two points for you like this:
 
 ```php
-$exportFiles = $client->getExportFiles(['url' => $exportNotification['urlRecuperation']]);
+$exportFiles = $client->getExportFiles([
+    'url' => $exportNotification['urlRecuperation']
+]);
 ```
 
 `$exportFiles` is then a [`Finder`](http://symfony.com/doc/current/components/finder.html) object you can iterate on:
@@ -66,9 +156,9 @@ foreach ($exportFiles->files() as $file) {
     echo '<br>';
 }
 
-// Filter files by name, size, date...
-foreach ($exportFiles->name('objets_lies_modifies-14*')->size('< 100K')->date('since 1 hour ago') as $file) {
-    echoo $file->getRealpath();
+// Filter files by name...
+foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
+    echo $file->getRealpath();
 }
 ```
 
