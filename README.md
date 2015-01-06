@@ -28,6 +28,8 @@ OAuth only need for Metadata.
 
 ### Read Touristic Objects
 
+todo
+
 ### Metadata
 
 #### List metadata
@@ -113,7 +115,11 @@ $client->putMetadata([
 
 ### Exports
 
-Your notification end point may look like this:
+*This feature require the PHP ZIP extension.*
+
+Exports are an asynchronous feature of Sitra allowing you to retrieve a large quantity of data without 
+performing a lot of API calls. When a new export is done via Sitra and ready to take care,
+your application receive a notification which looks like this:
 
 ```php
 $exportNotification = $_POST;
@@ -129,15 +135,20 @@ array(
 );
 ```
 
-From a notification, you must store those information and answer Sitra asap with a success response.
-Then, you have to:
+You **must** store those information and answer Sitra as soon as possible with a success response.
+
+Then, to handle this export, you need to:
 
 1. download the export;
 1. extract the files;
 1. do your own logic about what you need;
 1. and if everything is OK, you must call "urlConfirmation".
 
-The library handle the first two points for you like this:
+The library handle the first two points and the last one.
+
+#### Download and extract export
+
+Simply call the `getExportFiles` method and provide the `urlRecuperation`:
 
 ```php
 $exportFiles = $client->getExportFiles([
@@ -161,6 +172,8 @@ foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
     echo $file->getRealpath();
 }
 ```
+
+#### Confirmation
 
 When you have finished your tasks, you must confirm to Sitra that everything went fine.
 
