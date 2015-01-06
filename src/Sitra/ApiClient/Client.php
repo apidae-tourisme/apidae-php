@@ -5,6 +5,7 @@ namespace Sitra\ApiClient;
 use GuzzleHttp\Client as BaseClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
+use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
@@ -18,6 +19,8 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
  * @method array getMetadata() getMetadata(array $params)
  * @method array deleteMetadata() deleteMetadata(array $params)
  * @method array putMetadata() putMetadata(array $params)
+ *
+ * @method array confirmExport() confirmExport(array $params)
  */
 class Client extends GuzzleClient
 {
@@ -42,7 +45,8 @@ class Client extends GuzzleClient
 
         $operations = array_merge(
             TouristicObjects::$operations,
-            Metadata::$operations
+            Metadata::$operations,
+            Exports::$operations
         );
 
         $descriptionData = [

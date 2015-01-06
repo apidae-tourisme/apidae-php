@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69c6e1daa838fab4e63f2cb3248727ec",
+    "hash": "27f1dddd02a3db7dcde3151fe0969cbc",
     "packages": [
         {
             "name": "guzzlehttp/command",
@@ -257,6 +257,60 @@
             "time": "2014-10-12 19:18:40"
         },
         {
+            "name": "mmoreram/extractor",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmoreram/extractor.git",
+                "reference": "c7d3318f9de9fe075bac48f3dc576910b0ed19c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmoreram/extractor/zipball/c7d3318f9de9fe075bac48f3dc576910b0ed19c6",
+                "reference": "c7d3318f9de9fe075bac48f3dc576910b0ed19c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/finder": "~2.1"
+            },
+            "suggest": {
+                "ext-phar": "For usage of Phar adapter",
+                "ext-rar": "For usage of Rar adapter",
+                "ext-zip": "For usage of Zip adapter"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mmoreram\\Extractor\\": "src/Extractor"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "Extractor project for php",
+            "keywords": [
+                "extractor",
+                "phar",
+                "php",
+                "rar",
+                "zip"
+            ],
+            "time": "2014-10-29 12:34:35"
+        },
+        {
             "name": "react/promise",
             "version": "v2.2.0",
             "source": {
@@ -299,6 +353,53 @@
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
             "time": "2014-12-30 13:32:42"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v2.6.1",
+            "target-dir": "Symfony/Component/Finder",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Finder.git",
+                "reference": "0d3ef7f6ec55a7af5eca7914eaa0dacc04ccc721"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/0d3ef7f6ec55a7af5eca7914eaa0dacc04ccc721",
+                "reference": "0d3ef7f6ec55a7af5eca7914eaa0dacc04ccc721",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Finder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-12-02 20:19:20"
         }
     ],
     "packages-dev": [],
