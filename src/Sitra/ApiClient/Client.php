@@ -5,10 +5,14 @@ namespace Sitra\ApiClient;
 use GuzzleHttp\Client as BaseClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
+use Mmoreram\Extractor\Extractor;
+use Mmoreram\Extractor\Filesystem\SpecificDirectory;
+use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Magic operations:
@@ -69,5 +73,41 @@ class Client extends GuzzleClient
         $this->getEmitter()->attach(
             new AuthenticationSubscriber($description, $this->config, $this->getHttpClient())
         );
+    }
+
+    /**
+     * Download and read zip export
+     *
+     * @param array $params
+     * @return \Symfony\Component\Finder\Finder
+     */
+    public function getExportFiles(array $params)
+    {
+        $client = $this->getHttpClient();
+
+        if (empty($params['url'])) {
+            throw new \InvalidArgumentException("Missing 'url' parameter! Must be the 'urlRecuperation' you got from the notification.");
+        }
+
+        if (preg_match('/\.zip$/i', $params['url']) !== 1) {
+            throw new \InvalidArgumentException("'url' parameter does not looks good! Must be the 'urlRecuperation' you got from the notification.");
+        }
+
+        $temporaryDirectory = new TemporaryDirectory();
+        $zipFullPath        = sprintf('%s/export.zip', $temporaryDirectory->getDirectoryPath());
+        $exportFullPath     = sprintf('%s/export/', $temporaryDirectory->getDirectoryPath());
+        mkdir($temporaryDirectory->getDirectoryPath());
+        mkdir($exportFullPath);
+
+        // Download the ZIP file in temp directory
+        $response = $client->get($params['url'], ['stream' => true]);
+        file_put_contents($zipFullPath, $response->getBody());
+
+        // Extract the ZIP file
+        $extractor = new Extractor(
+            new SpecificDirectory($exportFullPath)
+        );
+
+        return $extractor->extractFromFile($zipFullPath);
     }
 }
