@@ -23,8 +23,40 @@ Todo (make use of https://composer.borreli.com/ ?)
 
 ### Creating a Client
 
-Todo config
-OAuth only need for Metadata.
+All you need to do then is create a `Client` instance:
+
+```php
+$client = new \Sitra\ApiClient\Client([
+    'apiKey'        => 'XXX',
+    'projectId'     => 672,
+    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'OAuthClientId' => 'XXX',
+    'OAuthSecret'   => 'XXX',
+]);
+```
+
+This class is stateless and can be used as a service. You can then call any method directly:
+
+```php
+$metadata = $client->getMetadata(['referenceId' => 123457, 'nodeId' => 'jolicode']);
+$search = $client->searchDetailedAgenda(['query' => '{"searchQuery": "vélo"}']);
+$search = $client->searchObject(['query' => '{"searchQuery": "vélo"}']);
+$object = $client->getObjectById(['id' => 163512]);
+```
+
+Result is always a decoded PHP Array.
+
+#### Options
+
+- `apiKey`: Project API Key;
+- `projectId`: Corresponding projectId;
+- `baseUrl`: Not mandatory, useful if you want to hit pre-production i.e.;
+- `OAuthClientId`: Only for Metadata, a valid OAuth Client Id;
+- `OAuthSecret`: Only for Metadata, the corresponding secret.
+
+#### Handling errors
+
+// TODO
 
 ### Read Touristic Objects
 
@@ -222,7 +254,7 @@ $criteria = $client->getReferenceInternalCriteria([
 
 ```php
 $selections = $client->getReferenceSelection([
-    'query' => '{"selectionIds":[  64, 5896 ]}'
+    'query' => '{"selectionIds":[64, 5896]}'
 ]);
 ```
 
