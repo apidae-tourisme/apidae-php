@@ -28,7 +28,7 @@ If you can't use Composer, please follow those steps to install and use the libr
 - Extract the ZIP file and add the whole "vendor" directory to your project;
 - Include the file `vendor/autoload.php` if you do not have an autoloader already.
 
-However we **strongly** encourage you to [use Composer](https://getcomposer.org/) on all your projets.
+However we **strongly** encourage you to [use Composer](https://getcomposer.org/) on all your projects.
 
 ## Usage
 
@@ -369,9 +369,11 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 
 *You may also use the `$exportFiles` iterator to remove files from your server filesystem after usage.*
 
-### Todo implementation
+### Todo
 
-- Allow configuration tweak (curl timeout?)
+- Allow configuration tweak (curl timeout? proxy?)
+- Export download directory should be configurable
+- Fix all @todo
 - Add some documentation about switching the HTTP client?
 - SSO integration
 - Tag the first release
