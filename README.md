@@ -13,7 +13,7 @@ to [Sitra API Documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_
 
 ### Via Composer
 
-    composer require sitra-tourisme/sitra-api-php
+    composer require sitra-tourisme/sitra-api-php dev-master
     
 ### Standalone (when you can't use Composer)
 
