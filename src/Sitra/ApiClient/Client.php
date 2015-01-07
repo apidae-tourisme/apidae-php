@@ -10,9 +10,9 @@ use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
+use Sitra\ApiClient\Description\Search;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Magic operations:
@@ -25,6 +25,8 @@ use Symfony\Component\Finder\Finder;
  * @method array putMetadata() putMetadata(array $params)
  *
  * @method array confirmExport() confirmExport(array $params)
+ *
+ * @method array searchObject() searchObject(array $params)
  */
 class Client extends GuzzleClient
 {
@@ -50,7 +52,8 @@ class Client extends GuzzleClient
         $operations = array_merge(
             TouristicObjects::$operations,
             Metadata::$operations,
-            Exports::$operations
+            Exports::$operations,
+            Search::$operations
         );
 
         $descriptionData = [

@@ -7,6 +7,7 @@ use GuzzleHttp\Command\Event\InitEvent;
 use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
+use GuzzleHttp\Utils;
 
 class AuthenticationSubscriber implements SubscriberInterface
 {
@@ -66,6 +67,18 @@ class AuthenticationSubscriber implements SubscriberInterface
             $token = $this->getOAuthToken();
 
             $event->getRequest()->addHeader('Authorization', sprintf('Bearer %s', $token));
+        }
+
+        // searchObject query use the authentication inside a query string JSON!
+        if ($operation->getName() === 'searchObject') {
+            $data = Utils::jsonDecode($event->getRequest()->getQuery()->get('query'), true);
+
+            if (!isset($data['apiKey']) && !isset($data['projetId'])) {
+                $data['apiKey'] = $this->config['apiKey'];
+                $data['projetId'] = $this->config['projectId'];
+
+                $event->getRequest()->getQuery()->set('query', json_encode($data));
+            }
         }
     }
 

@@ -30,6 +30,35 @@ OAuth only need for Metadata.
 
 todo
 
+### Search Touristic Objects
+
+Search queries accept a JSON formatted search object that must contain your API credentials, 
+by using this client, you can send only the search related fields in your JSON and we will add automatically the 
+appropriate fields if absent.
+
+#### List search results
+
+You can send search in a couple of ways:
+
+```php
+// As JSON string
+$search = $client->searchObject(['query' => '{"searchQuery": "vélo"}']);
+
+// As PHP Array
+$search = $client->searchObject(['query' => [
+    "searchQuery" => "vélo",
+    "count" => 20,
+    "first" => 10,
+]]);
+
+// With the credentials it works too (but we handle them for you)
+$search = $client->searchObject(['query' => [
+    "searchQuery" => "vélo"
+    "apiKey" => 'XXX',
+    "projetId" => 1,
+]]);
+```
+
 ### Metadata
 
 #### List metadata
@@ -37,11 +66,13 @@ todo
 You can ask for metadata like this:
 
 ```php
+// Only with the mandatory fields
 $metadata = $client->getMetadata([
     'referenceId' => 123457, 
     'nodeId' => 'jolicode'
 ]);
 
+// More detailed search
 $metadata = $client->getMetadata([
     'referenceId' => 123457, 
     'nodeId' => 'jolicode', 
@@ -115,7 +146,7 @@ $client->putMetadata([
 
 ### Exports
 
-*This feature require the PHP ZIP extension.*
+*This feature require the PHP Zip extension and write permission on the filesystem.*
 
 Exports are an asynchronous feature of Sitra allowing you to retrieve a large quantity of data without 
 performing a lot of API calls. When a new export is done via Sitra and ready to take care,
@@ -139,8 +170,8 @@ You **must** store those information and answer Sitra as soon as possible with a
 
 Then, to handle this export, you need to:
 
-1. download the export;
-1. extract the files;
+1. download the export in a memory efficient way;
+1. extract the files locally;
 1. do your own logic about what you need;
 1. and if everything is OK, you must call "urlConfirmation".
 
@@ -178,6 +209,7 @@ foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
 When you have finished your tasks, you must confirm to Sitra that everything went fine.
 
 ```php
+// With the export hash
 $client->confirmExport(['hash' => 'XXX']);
 
 // Or, with the full URL given in the notification
