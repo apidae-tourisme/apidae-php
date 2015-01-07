@@ -3,7 +3,9 @@
 namespace Sitra\ApiClient;
 
 use GuzzleHttp\Client as BaseClient;
+use GuzzleHttp\Command\Exception\CommandClientException;
 use GuzzleHttp\Command\Exception\CommandException;
+use GuzzleHttp\Command\Exception\CommandServerException;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
@@ -150,6 +152,14 @@ class Client extends GuzzleClient
 
     private function handleHttpError(\Exception $e)
     {
+        if ($e instanceof CommandClientException) {
+            throw new SitraException($e);
+        }
+
+        if ($e instanceof CommandServerException) {
+            throw new SitraException($e);
+        }
+
         if ($e instanceof CommandException) {
             throw $e;
         }

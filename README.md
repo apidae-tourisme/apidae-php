@@ -82,6 +82,8 @@ They are represent by `GuzzleHttp\Command\Exception\CommandException`.
 
 The JSON used for metadata editing is complex and come with his own Exception `Sitra\ApiClient\Exception\InvalidMetadataFormatException`.
 
+## API methods
+
 ### Read Touristic Objects
 
 #### Get by Id
@@ -358,17 +360,10 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 
 ### Todo
 
-- How to call any method
 - How to tweak (switch Curl by another client)
-- How to catch errors
-- How to use Exports...
 - How to contribute / report bug
 
 ### Todo implementation
 
-- Sitra error wrapping
 - SSO integration
-- Export
- - Exemple of notification end-point?
- - Call of the confirmation URL
-- Finish all touristic methods
+- Standalone release and usage
