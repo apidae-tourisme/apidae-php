@@ -23,7 +23,7 @@ Todo (make use of https://composer.borreli.com/ ?)
 
 ### Creating a Client
 
-All you need to do then is create a `Client` instance:
+You need to create a `Client` instance:
 
 ```php
 $client = new \Sitra\ApiClient\Client([
@@ -56,7 +56,31 @@ Result is always a decoded PHP Array.
 
 #### Handling errors
 
-// TODO
+We recommend that all API calls are done in a try block.
+
+##### API Errors
+
+Errors from the API are wrapped in `Sitra\ApiClient\Exception\SitraException`.
+
+```php
+try {
+    $cities = $client->getReferenceCity(['query' => '{"codesInsee": ["38534", "69388", "74140"]}']);
+} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+    echo $e->getMessage();
+}
+```
+
+The Exception message is **not** for public display as it may contains credentials.
+
+##### Validation Errors
+
+Validations errors happens before the query and assume you did not respect the defined schema for a method.
+
+They are represent by `GuzzleHttp\Command\Exception\CommandException`.
+
+##### Metadata Errors
+
+The JSON used for metadata editing is complex and come with his own Exception `Sitra\ApiClient\Exception\InvalidMetadataFormatException`.
 
 ### Read Touristic Objects
 

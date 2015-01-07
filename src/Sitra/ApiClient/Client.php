@@ -3,8 +3,11 @@
 namespace Sitra\ApiClient;
 
 use GuzzleHttp\Client as BaseClient;
+use GuzzleHttp\Command\Exception\CommandException;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Utils;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
@@ -14,6 +17,7 @@ use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\Reference;
 use Sitra\ApiClient\Description\Search;
 use Sitra\ApiClient\Description\TouristicObjects;
+use Sitra\ApiClient\Exception\SitraException;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 
 /**
@@ -119,7 +123,12 @@ class Client extends GuzzleClient
         mkdir($exportFullPath);
 
         // Download the ZIP file in temp directory
-        $response = $client->get($params['url'], ['stream' => true]);
+        try {
+            $response = $client->get($params['url'], ['stream' => true]);
+        } catch (\Exception $e) {
+            $this->handleHttpError($e);
+        }
+
         file_put_contents($zipFullPath, $response->getBody());
 
         // Extract the ZIP file
@@ -128,5 +137,27 @@ class Client extends GuzzleClient
         );
 
         return $extractor->extractFromFile($zipFullPath);
+    }
+
+    public function __call($name, array $arguments)
+    {
+        try {
+            return parent::__call($name, $arguments);
+        } catch (\Exception $e) {
+            $this->handleHttpError($e);
+        }
+    }
+
+    private function handleHttpError(\Exception $e)
+    {
+        if ($e instanceof CommandException) {
+            throw $e;
+        }
+
+        if ($e instanceof RequestException) {
+            throw new SitraException($e);
+        }
+
+        throw $e;
     }
 }
