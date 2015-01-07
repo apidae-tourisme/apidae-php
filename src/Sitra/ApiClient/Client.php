@@ -8,6 +8,7 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
+use Sitra\ApiClient\Description\Agenda;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\Search;
@@ -19,6 +20,7 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
  *
  * @todo   complete this list
  * @method array getObjectById() getObjectById(array $params)
+ * @method array getObjectByIdentifier() getObjectByIdentifier(array $params)
  *
  * @method array getMetadata() getMetadata(array $params)
  * @method array deleteMetadata() deleteMetadata(array $params)
@@ -27,6 +29,12 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
  * @method array confirmExport() confirmExport(array $params)
  *
  * @method array searchObject() searchObject(array $params)
+ * @method array searchObjectIdentifier() searchObjectIdentifier(array $params)
+ *
+ * @method array searchAgenda() searchAgenda(array $params)
+ * @method array searchAgendaIdentifier() searchAgendaIdentifier(array $params)
+ * @method array searchDetailedAgenda() searchDetailedAgenda(array $params)
+ * @method array searchDetailedAgendaIdentifier() searchDetailedAgendaIdentifier(array $params)
  */
 class Client extends GuzzleClient
 {
@@ -53,7 +61,8 @@ class Client extends GuzzleClient
             TouristicObjects::$operations,
             Metadata::$operations,
             Exports::$operations,
-            Search::$operations
+            Search::$operations,
+            Agenda::$operations
         );
 
         $descriptionData = [

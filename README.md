@@ -28,7 +28,17 @@ OAuth only need for Metadata.
 
 ### Read Touristic Objects
 
-todo
+#### Get by Id
+
+```php
+$object = $client->getObjectById(['id' => 163512]);
+```
+
+#### Get by Identifier
+
+```php
+$object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
+```
 
 ### Search Touristic Objects
 
@@ -57,6 +67,42 @@ $search = $client->searchObject(['query' => [
     "apiKey" => 'XXX',
     "projetId" => 1,
 ]]);
+```
+
+#### Search with identifier
+
+When you only need the object ids:
+
+```php
+$client->searchObjectIdentifier(['query' => '{"searchQuery": "vélo"}']);
+```
+
+### Agenda
+
+Like normal search, you do not need to provide the API credentials to use those methods.
+
+#### List search agenda results
+
+```php
+$client->searchAgenda(['query' => '{"searchQuery": "vélo"}']);
+```
+
+#### Search agenda with identifier
+
+```php
+$client->searchAgendaIdentifier(['query' => '{"searchQuery": "vélo"}']);
+```
+
+#### List search agenda results with detailed view
+
+```php
+$client->searchDetailedAgenda(['query' => '{"searchQuery": "vélo"}']);
+```
+
+#### Search agenda with identifier with detailed view
+
+```php
+$client->searchDetailedAgendaIdentifier(['query' => '{"searchQuery": "vélo"}']);
 ```
 
 ### Metadata

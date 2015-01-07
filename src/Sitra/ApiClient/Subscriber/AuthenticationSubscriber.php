@@ -50,6 +50,25 @@ class AuthenticationSubscriber implements SubscriberInterface
         if ($operation->hasParam('projetId') && !isset($command['projetId'])) {
             $command['projetId'] = $this->config['projectId'];
         }
+
+        // Search operations use the authentication inside a query string JSON!
+        if (in_array($operation->getName(), [
+            'searchObject',
+            'searchObjectIdentifier',
+            'searchAgenda',
+            'searchAgendaIdentifier',
+            'searchDetailedAgendaIdentifier',
+            'searchDetailedAgenda',
+        ])) {
+            $data = is_array($command['query']) ? $command['query'] : Utils::jsonDecode($command['query'], true);
+
+            if (!isset($data['apiKey']) && !isset($data['projetId'])) {
+                $data['apiKey'] = $this->config['apiKey'];
+                $data['projetId'] = $this->config['projectId'];
+
+                $command['query'] = json_encode($data);
+            }
+        }
     }
 
     /**
@@ -67,18 +86,6 @@ class AuthenticationSubscriber implements SubscriberInterface
             $token = $this->getOAuthToken();
 
             $event->getRequest()->addHeader('Authorization', sprintf('Bearer %s', $token));
-        }
-
-        // searchObject query use the authentication inside a query string JSON!
-        if ($operation->getName() === 'searchObject') {
-            $data = Utils::jsonDecode($event->getRequest()->getQuery()->get('query'), true);
-
-            if (!isset($data['apiKey']) && !isset($data['projetId'])) {
-                $data['apiKey'] = $this->config['apiKey'];
-                $data['projetId'] = $this->config['projectId'];
-
-                $event->getRequest()->getQuery()->set('query', json_encode($data));
-            }
         }
     }
 
