@@ -11,13 +11,24 @@ to [Sitra API Documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_
 
 ## Install
 
-### Via Composer (not yet available)
+### Via Composer
 
     composer require sitra-tourisme/sitra-api-php
     
 ### Standalone (when you can't use Composer)
 
-Todo (make use of https://composer.borreli.com/ ?)
+If you can't use Composer, please follow those steps to install and use the library:
+
+- Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
+```json
+{
+    "require": { "sitra-tourisme/sitra-api-php": "dev-master" }
+}
+```
+- Extract the ZIP file and add the whole "vendor" directory to your project;
+- Include the file `vendor/autoload.php` if you do not have an autoloader already.
+
+However we **strongly** encourage you to [use Composer](https://getcomposer.org/) on all your projets.
 
 ## Usage
 
@@ -358,12 +369,9 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 
 *You may also use the `$exportFiles` iterator to remove files from your server filesystem after usage.*
 
-### Todo
-
-- How to tweak (switch Curl by another client)
-- How to contribute / report bug
-
 ### Todo implementation
 
+- Allow configuration tweak (curl timeout?)
+- Add some documentation about switching the HTTP client?
 - SSO integration
-- Standalone release and usage
+- Tag the first release
