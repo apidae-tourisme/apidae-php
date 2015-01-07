@@ -190,6 +190,42 @@ $client->putMetadata([
 ]);
 ```
 
+### Reference
+
+Like normal search, you do not need to provide the API credentials to use those methods.
+
+#### Cities
+
+```php
+$cities = $client->getReferenceCity([
+    'query' => '{"codesInsee": ["38534", "69388", "74140"]}'
+]);
+```
+
+#### Elements
+
+```php
+$elements = $client->getReferenceElement([
+    'query' => '{"elementReferenceIds": [2, 118, 2338]}'
+]);
+```
+
+#### Internal Criteria
+
+```php
+$criteria = $client->getReferenceInternalCriteria([
+    'query' => '{"critereInterneIds":[1068, 2168]}'
+]);
+```
+
+#### Selections
+
+```php
+$selections = $client->getReferenceSelection([
+    'query' => '{"selectionIds":[  64, 5896 ]}'
+]);
+```
+
 ### Exports
 
 *This feature require the PHP Zip extension and write permission on the filesystem.*
@@ -270,6 +306,7 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 - How to tweak (switch Curl by another client)
 - How to catch errors
 - How to use Exports...
+- How to contribute / report bug
 
 ### Todo implementation
 

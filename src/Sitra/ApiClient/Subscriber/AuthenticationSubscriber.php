@@ -59,6 +59,10 @@ class AuthenticationSubscriber implements SubscriberInterface
             'searchAgendaIdentifier',
             'searchDetailedAgendaIdentifier',
             'searchDetailedAgenda',
+            'getReferenceCity',
+            'getReferenceElement',
+            'getReferenceInternalCriteria',
+            'getReferenceSelection',
         ])) {
             $data = is_array($command['query']) ? $command['query'] : Utils::jsonDecode($command['query'], true);
 

@@ -11,6 +11,7 @@ use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Sitra\ApiClient\Description\Agenda;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
+use Sitra\ApiClient\Description\Reference;
 use Sitra\ApiClient\Description\Search;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
@@ -35,6 +36,11 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
  * @method array searchAgendaIdentifier() searchAgendaIdentifier(array $params)
  * @method array searchDetailedAgenda() searchDetailedAgenda(array $params)
  * @method array searchDetailedAgendaIdentifier() searchDetailedAgendaIdentifier(array $params)
+ *
+ * @method array getReferenceCity() getReferenceCity(array $params)
+ * @method array getReferenceElement() getReferenceElement(array $params)
+ * @method array getReferenceInternalCriteria() getReferenceInternalCriteria(array $params)
+ * @method array getReferenceSelection() getReferenceSelection(array $params)
  */
 class Client extends GuzzleClient
 {
@@ -62,7 +68,8 @@ class Client extends GuzzleClient
             Metadata::$operations,
             Exports::$operations,
             Search::$operations,
-            Agenda::$operations
+            Agenda::$operations,
+            Reference::$operations
         );
 
         $descriptionData = [
