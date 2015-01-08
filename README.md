@@ -386,12 +386,19 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 
 *You may also use the `$exportFiles` iterator to remove files from your server filesystem after usage.*
 
+### Cookbook
+
+#### Make it works without CURL
+
+If you can't install CURL on your servers, [please read this Guzzle FAQ answer and fear not](http://guzzle.readthedocs.org/en/latest/faq.html#does-guzzle-require-curl).
+
+Guzzle provide a `StreamHandler` based on [PHP HTTP wrappers](http://php.net/manual/en/wrappers.http.php),
+and will use it automatically if the CURL extension is not loaded.
+
 ### Todo
 
-- Allow configuration tweak (curl timeout? proxy?)
 - Export download directory should be configurable
 - Fix all @todo
-- Add some documentation about switching the HTTP client?
 - SSO integration
 - Add global responseField & count to config
 - Tag the first release
