@@ -18,7 +18,7 @@ class Search
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'searchObjectIdentifier' => [
@@ -33,7 +33,7 @@ class Search
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
     );

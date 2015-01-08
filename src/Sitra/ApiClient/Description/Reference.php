@@ -18,7 +18,7 @@ class Reference
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'getReferenceElement' => [
@@ -33,7 +33,7 @@ class Reference
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'getReferenceInternalCriteria' => [
@@ -48,7 +48,7 @@ class Reference
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'getReferenceSelection' => [
@@ -63,7 +63,7 @@ class Reference
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
     );

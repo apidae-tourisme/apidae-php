@@ -18,7 +18,7 @@ class Agenda
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'searchAgendaIdentifier' => [
@@ -33,7 +33,7 @@ class Agenda
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'searchDetailedAgenda' => [
@@ -48,7 +48,7 @@ class Agenda
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
         'searchDetailedAgendaIdentifier' => [
@@ -63,7 +63,7 @@ class Agenda
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
                     ],
-                ]
+                ],
             ],
         ],
     );

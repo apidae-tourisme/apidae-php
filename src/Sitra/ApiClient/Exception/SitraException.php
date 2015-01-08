@@ -22,7 +22,7 @@ class SitraException extends \Exception
             try {
                 $decodedJson = Utils::jsonDecode((string) $this->response->getBody(), true);
                 if ($decodedJson && isset($decodedJson['errorType'])) {
-                    $simpleMessage = $decodedJson['errorType'] . ' ' .$decodedJson['message'];
+                    $simpleMessage = $decodedJson['errorType'].' '.$decodedJson['message'];
                 }
             } catch (\InvalidArgumentException $e) {
                 // Not Json

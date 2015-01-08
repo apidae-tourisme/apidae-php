@@ -40,11 +40,14 @@ You need to create a `Client` instance:
 
 ```php
 $client = new \Sitra\ApiClient\Client([
-    'apiKey'        => 'XXX',
-    'projectId'     => 672,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
-    'OAuthClientId' => 'XXX',
-    'OAuthSecret'   => 'XXX',
+    'apiKey'           => 'XXX',
+    'projectId'        => 672,
+    'baseUrl'          => 'http://api.sitra-tourisme.com/',
+    'OAuthClientId'    => 'XXX',
+    'OAuthSecret'      => 'XXX',
+    'timeout'          => 0,
+    'connectTimeout'   => 0,
+    'proxy'            => null,
 ]);
 ```
 
@@ -65,7 +68,10 @@ Result is always a decoded PHP Array.
 - `projectId`: Corresponding projectId;
 - `baseUrl`: Not mandatory, useful if you want to hit pre-production i.e.;
 - `OAuthClientId`: Only for Metadata, a valid OAuth Client Id;
-- `OAuthSecret`: Only for Metadata, the corresponding secret.
+- `OAuthSecret`: Only for Metadata, the corresponding secret;
+- `timeout`: Float describing the timeout of the request in seconds;
+- `connectTimeout`: Float describing the number of seconds to wait while trying to connect to the server;
+- `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`).
 
 #### Handling errors
 

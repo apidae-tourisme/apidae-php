@@ -9,7 +9,6 @@ use GuzzleHttp\Command\Exception\CommandServerException;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Utils;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
@@ -25,7 +24,6 @@ use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 /**
  * Magic operations:
  *
- * @todo   complete this list
  * @method array getObjectById() getObjectById(array $params)
  * @method array getObjectByIdentifier() getObjectByIdentifier(array $params)
  *
@@ -56,6 +54,10 @@ class Client extends GuzzleClient
         'projectId'     => null,
         'OAuthClientId' => null,
         'OAuthSecret'   => null,
+
+        'timeout'           => 0,
+        'connectTimeout'    => 0,
+        'proxy'             => null,
     ];
 
     /**
@@ -67,7 +69,14 @@ class Client extends GuzzleClient
     {
         $this->config = array_merge($this->config, $config);
 
-        $client = new BaseClient(['base_url' => $this->config['baseUrl']]);
+        $client = new BaseClient([
+            'base_url' => $this->config['baseUrl'],
+            'defaults' => array_filter([
+                'timeout'           => $this->config['timeout'],
+                'connect_timeout'   => $this->config['connectTimeout'],
+                'proxy'             => $this->config['proxy'],
+            ]),
+        ]);
 
         $operations = array_merge(
             TouristicObjects::$operations,
@@ -103,7 +112,7 @@ class Client extends GuzzleClient
     /**
      * Download and read zip export
      *
-     * @param array $params
+     * @param  array                            $params
      * @return \Symfony\Component\Finder\Finder
      */
     public function getExportFiles(array $params)
@@ -129,8 +138,10 @@ class Client extends GuzzleClient
             $response = $client->get($params['url'], ['stream' => true]);
         } catch (\Exception $e) {
             $this->handleHttpError($e);
+            return false;
         }
 
+        // Could use save_to too
         file_put_contents($zipFullPath, $response->getBody());
 
         // Extract the ZIP file
@@ -148,6 +159,8 @@ class Client extends GuzzleClient
         } catch (\Exception $e) {
             $this->handleHttpError($e);
         }
+
+        return false;
     }
 
     private function handleHttpError(\Exception $e)
