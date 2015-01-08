@@ -355,6 +355,15 @@ foreach ($exportFiles->files() as $file) {
 foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
     echo $file->getRealpath();
 }
+
+// Decode file contents (XML or JSON, see your Sitra settings)
+foreach ($exportFiles->files() as $file) {
+    // $xml = simplexml_load_string($file->getContents());
+    // print_r($xml);
+
+    $json = \GuzzleHttp\Utils::jsonDecode($file->getContents(), true);
+    print_r($json);
+}
 ```
 
 #### Confirmation
@@ -378,4 +387,9 @@ $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 - Fix all @todo
 - Add some documentation about switching the HTTP client?
 - SSO integration
+- Add global responseField & count to config
 - Tag the first release
+
+#### Optional / Nice to have
+
+- Raml or swagger export?
