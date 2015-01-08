@@ -1,10 +1,12 @@
 # Sitra PHP Api Client
 
-PHP Client for Rhône Alpes Tourisme [Sitra API](http://www.sitra-rhonealpes.com/) based on Guzzle 5.
+PHP Client for Rhône Alpes Tourisme [Sitra API](http://www.sitra-rhonealpes.com/).
 
-- Authentication set automatically (for both credentials and OAuth end points);
 - All API methods exposed with input validation;
+- Authentication set automatically (for both credentials and OAuth end points);
 - Error handling;
+- Handle exports (Zip download and reading);
+- Based on Guzzle 5.
 
 This documentation only handle the PHP implementation, for further questions please refer 
 to [Sitra API Documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_Sitra_2).
