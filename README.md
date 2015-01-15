@@ -15,7 +15,7 @@ to [Sitra API Documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_
 
 ### Via Composer
 
-    composer require sitra-tourisme/sitra-api-php dev-master
+    composer require sitra-tourisme/sitra-api-php
     
 ### Standalone (when you can't use Composer)
 
@@ -24,7 +24,7 @@ If you can't use Composer, please follow those steps to install and use the libr
 - Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
 ```json
 {
-    "require": { "sitra-tourisme/sitra-api-php": "dev-master" }
+    "require": { "sitra-tourisme/sitra-api-php": "~0.1" }
 }
 ```
 - Extract the ZIP file and add the whole "vendor" directory to your project;
@@ -400,8 +400,9 @@ and will use it automatically if the CURL extension is not loaded.
 - Export download directory should be configurable
 - Fix all @todo
 - SSO integration
-- Add global responseField & count to config
-- Tag the first release
+- Add global responseField & locale & count to config for all objects lists
+- Add a way to cleanup the export directory
+- Tag the first stable 1.0 release
 
 #### Optional / Nice to have
 
