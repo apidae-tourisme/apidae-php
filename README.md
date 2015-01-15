@@ -24,7 +24,7 @@ If you can't use Composer, please follow those steps to install and use the libr
 - Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
 ```json
 {
-    "require": { "sitra-tourisme/sitra-api-php": "~0.1" }
+    "require": { "sitra-tourisme/sitra-api-php": "@stable" }
 }
 ```
 - Extract the ZIP file and add the whole "vendor" directory to your project;
