@@ -4,6 +4,7 @@ PHP Client for Rhône Alpes Tourisme [Sitra API](http://www.sitra-rhonealpes.com
 
 - All API methods exposed with input validation;
 - Authentication set automatically (for both credentials and OAuth end points);
+- Sitra SSO helpers;
 - Error handling;
 - Handle exports (Zip download and reading);
 - Based on Guzzle 5.
@@ -56,6 +57,12 @@ $client = new \Sitra\ApiClient\Client([
     'responseFields'   => [],
     'locales'          => ['fr', 'en'],
     'count'            => 20,
+
+    // For SSO
+    'ssoBaseUrl'       => 'http://base.sitra-tourisme.com',
+    'ssoRedirectUrl'   => 'http://localhost/',
+    'ssoClientId'      => 'XXX',
+    'ssoSecret'        => 'XXX',
 ]);
 
 // You can also only use the mandatory parameters (all options have sensible defaults).
@@ -89,7 +96,11 @@ Result is always a decoded PHP Array.
 - `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`);
 - `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_donn.C3.A9es));
 - `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_langues));
-- `count`: Allow to change the number of results globally for all object related queries.
+- `count`: Allow to change the number of results globally for all object related queries;
+- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/Sitra_-_Authentification_OAuth#Autorisation));
+- `ssoRedirectUrl`: The URL where SSO user will be sent back in your application;
+- `ssoClientId`: The SSO OAuth client ID;
+- `ssoSecret`: The SSO OAuth client secret.
 
 #### Handling errors
 
@@ -412,6 +423,51 @@ We provide a method to clean this directory after you have done your business lo
 
 ```php
 $client->cleanExportFiles();
+```
+
+### Using the SSO
+
+You must configure your client with the SSO options ('ssoRedirectUrl', 'ssoClientId' and 'ssoSecret' at least), 
+then forward your user to the Sitra authorization URL. The user can then give your application the permission 
+to access his data and will be redirected on your application with a code. This code is used to get an Access Token.
+
+```php
+$client = new \Sitra\ApiClient\Client([
+    'ssoRedirectUrl' => 'http://example.com/TODO',
+    'ssoClientId'    => 'XXX',
+    'ssoSecret'      => 'XXX',
+]);
+
+<a href="<?php echo $client->getSsoUrl() ?>">Ask for auth code</a>
+```
+
+Your redirect page must listen for a "code" GET parameter:
+
+```php
+if (isset($_GET['code']) && !empty($_GET['code'])) {
+    // The redirect URL get a "code", we use it to ask for a token
+    $token = $client->getSsoToken(['code' => $_GET['code'], 'redirect_uri' => 'http://example.com/TODO']);
+
+    // Store the new token in the client, will be used automatically!
+    $client->setAccessToken($token['scope'], $token['access_token']);
+}
+```
+
+You can persist the "scope" and "access_token" in your application session and set it back on the Client with 
+the `$client->setAccessToken($token['scope'], $token['access_token']);` line.
+
+You can then use API related to the users (`sso` scope).
+
+#### Get profile information
+
+```php
+$profile = $client->getUserProfile();
+```
+
+#### Get touristic object user permissions
+
+```php
+$permissions = $client->getUserPermissionOnObject(['id' => 123457]);
 ```
 
 ### Cookbook

@@ -4,6 +4,7 @@ namespace Sitra\ApiClient\Description;
 
 use GuzzleHttp\Query;
 use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
+use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 
 class Metadata
 {
@@ -38,7 +39,7 @@ class Metadata
                 ],
             ],
             'data' => [
-                'scope' => 'api_metadonnees',
+                'scope' => AuthenticationSubscriber::META_SCOPE,
             ],
         ],
         'deleteMetadata' => [
@@ -68,7 +69,7 @@ class Metadata
                 ],
             ],
             'data' => [
-                'scope' => 'api_metadonnees',
+                'scope' => AuthenticationSubscriber::META_SCOPE,
             ],
         ],
         'putMetadata' => [
@@ -95,7 +96,7 @@ class Metadata
                 ],
             ],
             'data' => [
-                'scope' => 'api_metadonnees',
+                'scope' => AuthenticationSubscriber::META_SCOPE,
             ],
         ],
     );

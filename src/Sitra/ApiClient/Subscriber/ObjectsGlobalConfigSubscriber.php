@@ -12,7 +12,7 @@ class ObjectsGlobalConfigSubscriber implements SubscriberInterface
     private $description;
     private $config;
 
-    public function __construct(DescriptionInterface $description, array $config)
+    public function __construct(DescriptionInterface $description, $config)
     {
         $this->description  = $description;
         $this->config       = $config;

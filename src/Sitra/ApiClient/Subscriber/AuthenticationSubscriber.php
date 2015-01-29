@@ -8,6 +8,7 @@ use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
 use GuzzleHttp\Utils;
+use Sitra\ApiClient\Exception\MissingTokenException;
 
 class AuthenticationSubscriber implements SubscriberInterface
 {
@@ -15,10 +16,10 @@ class AuthenticationSubscriber implements SubscriberInterface
     private $config;
     private $client;
 
-    // @todo Invalidate in case of expiration
-    private $accessToken;
+    const META_SCOPE = 'api_metadonnees';
+    const SSO_SCOPE  = 'sso';
 
-    public function __construct(DescriptionInterface $description, array $config, ClientInterface $client)
+    public function __construct(DescriptionInterface $description, $config, ClientInterface $client)
     {
         $this->description  = $description;
         $this->config       = $config;
@@ -87,36 +88,53 @@ class AuthenticationSubscriber implements SubscriberInterface
 
         // If this operation require an OAuth scope
         if ($operation->getData('scope')) {
-            $token = $this->getOAuthToken();
+            $token = $this->getOAuthToken($operation->getData('scope'));
 
             $event->getRequest()->addHeader('Authorization', sprintf('Bearer %s', $token));
+        }
+
+        // For Sso methods, client ID and secret are passed as basic auth
+        if (in_array($operation->getName(), [
+            'getSsoToken',
+            'refreshSsoToken',
+        ])) {
+            $event->getRequest()->setHeader(
+                'Authorization',
+                'Basic ' . base64_encode(sprintf("%s:%s", $this->config['ssoClientId'], $this->config['ssoSecret']))
+            );
+            $event->getRequest()->setHeader('Accept', 'application/json');
         }
     }
 
     /**
+     * @param string $scope
      * @return string
      */
-    protected function getOAuthToken()
+    protected function getOAuthToken($scope)
     {
-        if ($this->accessToken) {
-            return $this->accessToken;
+        if (isset($this->config['accessTokens'][$scope])) {
+            return $this->config['accessTokens'][$scope];
         }
 
-        $tokenResponse = $this->client->get('/oauth/token', [
-            'auth' => [
-                $this->config['OAuthClientId'],
-                $this->config['OAuthSecret'],
-            ],
-            'query' => [
-                'grant_type' => 'client_credentials',
-            ],
-            'headers' => [
-                'accept' => 'application/json',
-            ],
-        ])->json();
+        if ($scope === self::META_SCOPE) {
+            $tokenResponse = $this->client->get('/oauth/token', [
+                'auth' => [
+                    $this->config['OAuthClientId'],
+                    $this->config['OAuthSecret'],
+                ],
+                'query' => [
+                    'grant_type' => 'client_credentials',
+                ],
+                'headers' => [
+                    'accept' => 'application/json',
+                ],
+            ])->json();
 
-        $this->accessToken = $tokenResponse['access_token'];
+            $this->config['accessTokens'][$tokenResponse['scope']] = $tokenResponse['access_token'];
 
-        return $this->accessToken;
+            return $tokenResponse['access_token'];
+        } else {
+            throw new MissingTokenException();
+        }
     }
 }

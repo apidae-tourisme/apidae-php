@@ -9,6 +9,7 @@ use GuzzleHttp\Command\Exception\CommandServerException;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Url;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Sitra\ApiClient\Description\Agenda;
@@ -16,7 +17,9 @@ use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\Reference;
 use Sitra\ApiClient\Description\Search;
+use Sitra\ApiClient\Description\Sso;
 use Sitra\ApiClient\Description\TouristicObjects;
+use Sitra\ApiClient\Description\User;
 use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 use Sitra\ApiClient\Exception\SitraException;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
@@ -46,6 +49,12 @@ use Sitra\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
  * @method array getReferenceElement() getReferenceElement(array $params)
  * @method array getReferenceInternalCriteria() getReferenceInternalCriteria(array $params)
  * @method array getReferenceSelection() getReferenceSelection(array $params)
+ *
+ * @method array getSsoToken() getSsoToken(array $params)
+ * @method array refreshSsoToken() refreshSsoToken(array $params)
+ *
+ * @method array getUserProfile() getUserProfile()
+ * @method array getUserPermissionOnObject() getUserPermissionOnObject(array $params)
  */
 class Client extends GuzzleClient
 {
@@ -53,8 +62,12 @@ class Client extends GuzzleClient
         'baseUrl'       => 'http://api.sitra-tourisme.com/',
         'apiKey'        => null,
         'projectId'     => null,
+
+        // Auth for metadata
         'OAuthClientId' => null,
         'OAuthSecret'   => null,
+
+        // Export
         'exportDir'     => '/tmp/sitraExports/',
 
         // For object lists
@@ -66,6 +79,15 @@ class Client extends GuzzleClient
         'timeout'           => 0,
         'connectTimeout'    => 0,
         'proxy'             => null,
+
+        // For SSO authentication
+        'ssoBaseUrl'        => 'http://base.sitra-tourisme.com',
+        'ssoRedirectUrl'    => 'http://localhost/',
+        'ssoClientId'       => null,
+        'ssoSecret'         => null,
+
+        // Access tokens by scope
+        'accessTokens'      => [],
     ];
 
     /**
@@ -74,7 +96,7 @@ class Client extends GuzzleClient
      */
     public function __construct(array $config = [])
     {
-        $this->config = array_merge($this->config, $config);
+        $this->config = new \ArrayObject(array_merge($this->config, $config));
 
         $client = new BaseClient([
             'base_url' => $this->config['baseUrl'],
@@ -91,7 +113,9 @@ class Client extends GuzzleClient
             Exports::$operations,
             Search::$operations,
             Agenda::$operations,
-            Reference::$operations
+            Reference::$operations,
+            Sso::$operations,
+            User::$operations
         );
 
         $descriptionData = [
@@ -191,6 +215,27 @@ class Client extends GuzzleClient
         }
 
         return true;
+    }
+
+    public function getSsoUrl()
+    {
+        $params = array(
+            'response_type' => 'code',
+            'client_id'     => $this->config['ssoClientId'],
+            'redirect_uri'  => $this->config['ssoRedirectUrl'],
+            'scope'         => AuthenticationSubscriber::SSO_SCOPE,
+        );
+
+        $url = Url::fromString($this->config['ssoBaseUrl']);
+        $url->setPath('/oauth/authorize');
+        $url->setQuery($params);
+
+        return (string) $url;
+    }
+
+    public function setAccessToken($scope, $token)
+    {
+        $this->config['accessTokens'][$scope] = $token;
     }
 
     public function __call($name, array $arguments)
