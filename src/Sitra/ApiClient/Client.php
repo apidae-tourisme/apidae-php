@@ -20,6 +20,7 @@ use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 use Sitra\ApiClient\Exception\SitraException;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Sitra\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
 
 /**
  * Magic operations:
@@ -56,6 +57,12 @@ class Client extends GuzzleClient
         'OAuthSecret'   => null,
         'exportDir'     => '/tmp/sitraExports/',
 
+        // For object lists
+        'responseFields' => [],
+        'locales'        => [],
+        'count'          => 20,
+
+        // For HTTP Client
         'timeout'           => 0,
         'connectTimeout'    => 0,
         'proxy'             => null,
@@ -106,6 +113,10 @@ class Client extends GuzzleClient
 
         $this->getEmitter()->attach(
             new AuthenticationSubscriber($description, $this->config, $this->getHttpClient())
+        );
+
+        $this->getEmitter()->attach(
+            new ObjectsGlobalConfigSubscriber($description, $this->config)
         );
     }
 

@@ -66,6 +66,5 @@ class TouristicObjects
                 ],
             ],
         ],
-        // @todo Complete with all operations following the example
     );
 }
