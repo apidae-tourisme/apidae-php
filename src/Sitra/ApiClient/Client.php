@@ -11,13 +11,13 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
-use Mmoreram\Extractor\Filesystem\TemporaryDirectory;
 use Sitra\ApiClient\Description\Agenda;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
 use Sitra\ApiClient\Description\Reference;
 use Sitra\ApiClient\Description\Search;
 use Sitra\ApiClient\Description\TouristicObjects;
+use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 use Sitra\ApiClient\Exception\SitraException;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 
@@ -54,6 +54,7 @@ class Client extends GuzzleClient
         'projectId'     => null,
         'OAuthClientId' => null,
         'OAuthSecret'   => null,
+        'exportDir'     => '/tmp/sitraExports/',
 
         'timeout'           => 0,
         'connectTimeout'    => 0,
@@ -61,7 +62,6 @@ class Client extends GuzzleClient
     ];
 
     /**
-     * @todo  expose options for the Guzzle client like timeout
      * @todo  validate $config params
      * @param array $config
      */
@@ -127,10 +127,12 @@ class Client extends GuzzleClient
             throw new \InvalidArgumentException("'url' parameter does not looks good! Must be the 'urlRecuperation' you got from the notification.");
         }
 
-        $temporaryDirectory = new TemporaryDirectory();
-        $zipFullPath        = sprintf('%s/export.zip', $temporaryDirectory->getDirectoryPath());
-        $exportFullPath     = sprintf('%s/export/', $temporaryDirectory->getDirectoryPath());
-        mkdir($temporaryDirectory->getDirectoryPath());
+        $temporaryDirectory = $this->getExportDirectory();
+        $exportPath         = sprintf('%s/%s', $temporaryDirectory->getDirectoryPath(), date('Y-m-d-His'));
+        $zipFullPath        = sprintf('%s/export.zip', $exportPath);
+        $exportFullPath     = sprintf('%s/export/', $exportPath);
+
+        mkdir($exportPath);
         mkdir($exportFullPath);
 
         // Download the ZIP file in temp directory
@@ -150,6 +152,34 @@ class Client extends GuzzleClient
         );
 
         return $extractor->extractFromFile($zipFullPath);
+    }
+
+    /**
+     * Remove all ZIP and exported files from the exportDir (cleanup files we have created)
+     */
+    public function cleanExportFiles()
+    {
+        $exportDirectory = $this->getExportDirectory();
+
+        $iterator = new \RecursiveDirectoryIterator(
+            $exportDirectory->getDirectoryPath(),
+            \RecursiveDirectoryIterator::SKIP_DOTS
+        );
+
+        $files = new \RecursiveIteratorIterator(
+            $iterator,
+            \RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach($files as $file) {
+            if ($file->isDir()){
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+
+        return true;
     }
 
     public function __call($name, array $arguments)
@@ -182,5 +212,20 @@ class Client extends GuzzleClient
         }
 
         throw $e;
+    }
+
+    private function getExportDirectory()
+    {
+        if (!file_exists($this->config['exportDir'])) {
+            mkdir($this->config['exportDir']);
+        }
+
+        $dir = new SpecificDirectory($this->config['exportDir']);
+
+        if (!$dir) {
+            throw new InvalidExportDirectoryException();
+        }
+
+        return $dir;
     }
 }

@@ -45,9 +45,16 @@ $client = new \Sitra\ApiClient\Client([
     'baseUrl'          => 'http://api.sitra-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
+    'exportDir'        => '/tmp/sitraExports',
     'timeout'          => 0,
     'connectTimeout'   => 0,
     'proxy'            => null,
+]);
+
+// You can also only use the mandatory parameters.
+$client = new \Sitra\ApiClient\Client([
+    'apiKey'           => 'XXX',
+    'projectId'        => 672,
 ]);
 ```
 
@@ -69,6 +76,7 @@ Result is always a decoded PHP Array.
 - `baseUrl`: Not mandatory, useful if you want to hit pre-production i.e.;
 - `OAuthClientId`: Only for Metadata, a valid OAuth Client Id;
 - `OAuthSecret`: Only for Metadata, the corresponding secret;
+- `exportDir`: The directory where we store and extract ZIP exports;
 - `timeout`: Float describing the timeout of the request in seconds;
 - `connectTimeout`: Float describing the number of seconds to wait while trying to connect to the server;
 - `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`).
@@ -334,7 +342,7 @@ Then, to handle this export, you need to:
 1. do your own logic about what you need;
 1. and if everything is OK, you must call "urlConfirmation".
 
-The library handle the first two points and the last one.
+The library handle the first two points and the last one for you!
 
 #### Download and extract export
 
@@ -384,7 +392,15 @@ $client->confirmExport(['hash' => 'XXX']);
 $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
 ```
 
-*You may also use the `$exportFiles` iterator to remove files from your server filesystem after usage.*
+#### Cleaning up files
+
+All the files are downloaded and extracted in the `exportDir` directory (see options).
+
+We provide a method to clean this directory after you have done your business logic with the files:
+
+```php
+$client->cleanExportFiles();
+```
 
 ### Cookbook
 
@@ -397,11 +413,9 @@ and will use it automatically if the CURL extension is not loaded.
 
 ### Todo
 
-- Export download directory should be configurable
 - Fix all @todo
 - SSO integration
 - Add global responseField & locale & count to config for all objects lists
-- Add a way to cleanup the export directory
 - Tag the first stable 1.0 release
 
 #### Optional / Nice to have
