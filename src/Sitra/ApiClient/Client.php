@@ -91,7 +91,6 @@ class Client extends GuzzleClient
     ];
 
     /**
-     * @todo  validate $config params
      * @param array $config
      */
     public function __construct(array $config = [])

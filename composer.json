@@ -14,7 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Sitra\\ApiClient\\": "src/Sitra/ApiClient"
+            "Sitra\\ApiClient\\": "src/Sitra/ApiClient",
+            "Sitra\\Tests\\": "tests/"
         }
     }
 }

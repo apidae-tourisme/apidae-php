@@ -15,6 +15,7 @@
  - new `refreshSsoToken` API end point
 - new `getUserProfile` API end point
 - new `getUserPermissionOnObject` API end point
+- add tests for basic client and metadata
 
 ## 2015/01/15 - 0.1.0
 

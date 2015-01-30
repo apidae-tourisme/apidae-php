@@ -481,7 +481,6 @@ and will use it automatically if the CURL extension is not loaded.
 
 ### Todo
 
-- Fix all @todo
 - SSO integration: make sure the scopes are not mixed-up
 - Tag the first stable 1.0 release
 
