@@ -2,6 +2,8 @@
 
 ## Master
 
+## 2015/02/05 - 1.0.0
+
 - add `exportDir` option to set where the Exports files are stored
 - new `cleanExportFiles` method to remove all export files from storage
 - add `responseFields` option, set automatically on object list API
