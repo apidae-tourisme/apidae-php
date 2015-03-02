@@ -115,7 +115,7 @@ class Metadata
 
                 if (is_array($data)) {
                     $metadata[$name] = json_encode($data);
-                } else if (empty($data)) {
+                } elseif (empty($data)) {
                     throw new InvalidMetadataFormatException();
                 }
             }
