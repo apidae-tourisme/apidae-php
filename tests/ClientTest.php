@@ -6,7 +6,8 @@ use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 
-class ClientTest extends Base {
+class ClientTest extends Base
+{
 
     public function testClient()
     {

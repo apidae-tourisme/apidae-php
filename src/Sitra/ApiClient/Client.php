@@ -205,8 +205,8 @@ class Client extends GuzzleClient
             \RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        foreach($files as $file) {
-            if ($file->isDir()){
+        foreach ($files as $file) {
+            if ($file->isDir()) {
                 rmdir($file->getRealPath());
             } else {
                 unlink($file->getRealPath());
