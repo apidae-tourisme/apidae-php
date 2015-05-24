@@ -79,6 +79,7 @@ class Client extends GuzzleClient
         'timeout'           => 0,
         'connectTimeout'    => 0,
         'proxy'             => null,
+        'verify'            => true,
 
         // For SSO authentication
         'ssoBaseUrl'        => 'http://base.sitra-tourisme.com',
@@ -104,6 +105,9 @@ class Client extends GuzzleClient
                 'connect_timeout'   => $this->config['connectTimeout'],
                 'proxy'             => $this->config['proxy'],
             ]),
+            'defaults' => [
+                'verify'            => $this->config['verify']
+            ]
         ]);
 
         $operations = array_merge(
