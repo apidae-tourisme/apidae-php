@@ -52,6 +52,7 @@ $client = new \Sitra\ApiClient\Client([
     'timeout'          => 0,
     'connectTimeout'   => 0,
     'proxy'            => null,
+    'verify'           => true,
 
     // Global settings for touristic objects queries
     'responseFields'   => [],
@@ -94,6 +95,7 @@ Result is always a decoded PHP Array.
 - `timeout`: Float describing the timeout of the request in seconds;
 - `connectTimeout`: Float describing the number of seconds to wait while trying to connect to the server;
 - `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`);
+- `verify`: [Boolean or string to describe](http://guzzle.readthedocs.org/en/v5/request-options.html#verify) the SSL certificate verification behavior of a request;
 - `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_donn.C3.A9es));
 - `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_langues));
 - `count`: Allow to change the number of results globally for all object related queries;
