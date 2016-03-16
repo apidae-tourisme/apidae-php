@@ -5,7 +5,7 @@ namespace Sitra\ApiClient\Description;
 class TouristicObjects
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/API_-_services_-_v002/objet-touristique/get-by-id
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-id
         'getObjectById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-id/{id}',

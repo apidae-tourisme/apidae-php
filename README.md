@@ -1,16 +1,16 @@
-# Sitra PHP Api Client
+# Apidae PHP Api Client (formerly known as Sitra)
 
-PHP Client for Rhône Alpes Tourisme [Sitra API](http://www.sitra-rhonealpes.com/).
+PHP Client for Rhône Alpes Tourisme [Apidae API](http://blog.apidae-tourisme.com/)
 
 - All API methods exposed with input validation;
 - Authentication set automatically (for both credentials and OAuth end points);
-- Sitra SSO helpers;
+- Apidae SSO helpers;
 - Error handling;
 - Handle exports (Zip download and reading);
 - Based on Guzzle 5.
 
 This documentation only handle the PHP implementation, for further questions please refer 
-to [Sitra API Documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_Sitra_2).
+to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 
 ## Install
 
@@ -96,10 +96,10 @@ Result is always a decoded PHP Array.
 - `connectTimeout`: Float describing the number of seconds to wait while trying to connect to the server;
 - `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`);
 - `verify`: [Boolean or string to describe](http://guzzle.readthedocs.org/en/latest/request-options.html#verify) the SSL certificate verification behavior of a request;
-- `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_donn.C3.A9es));
-- `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_objets_touristiques_-_format_JSON#Filtrage_des_langues));
+- `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees));
+- `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-langues));
 - `count`: Allow to change the number of results globally for all object related queries;
-- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](http://www.sitra-rhonealpes.com/wiki/index.php/Sitra_-_Authentification_OAuth#Autorisation));
+- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on));
 - `ssoRedirectUrl`: The URL where SSO user will be sent back in your application;
 - `ssoClientId`: The SSO OAuth client ID;
 - `ssoSecret`: The SSO OAuth client secret.
@@ -138,17 +138,24 @@ The JSON used for metadata editing is complex and come with his own Exception `S
 
 #### Get by Id
 
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-id)
+
 ```php
 $object = $client->getObjectById(['id' => 163512]);
 ```
 
 #### Get by Identifier
 
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-identifier)
+
 ```php
 $object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
 ```
 
 ### Search Touristic Objects
+
+- [Full request documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
+- [Response format documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
 
 Search queries accept a JSON formatted search object that must contain your API credentials, 
 by using this client, you can send only the search related fields in your JSON and we will add automatically the 
@@ -189,6 +196,9 @@ $client->searchObjectIdentifier(['query' => '{"searchQuery": "vélo"}']);
 
 Like normal search, you do not need to provide the API credentials to use those methods.
 
+- [Full request documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
+- [Response format documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
+
 #### List search agenda results
 
 ```php
@@ -216,6 +226,8 @@ $client->searchDetailedAgendaIdentifier(['query' => '{"searchQuery": "vélo"}'])
 ```
 
 ### Metadata
+
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees)
 
 #### List metadata
 
@@ -304,6 +316,8 @@ $client->putMetadata([
 
 Like normal search, you do not need to provide the API credentials to use those methods.
 
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services#referentiel)
+
 #### Cities
 
 ```php
@@ -338,16 +352,18 @@ $selections = $client->getReferenceSelection([
 
 ### Exports
 
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports)
+
 *This feature require the PHP Zip extension and write permission on the filesystem.*
 
-Exports are an asynchronous feature of Sitra allowing you to retrieve a large quantity of data without 
-performing a lot of API calls. When a new export is done via Sitra and ready to take care,
+Exports are an asynchronous feature of Apidae allowing you to retrieve a large quantity of data without 
+performing a lot of API calls. When a new export is done via Apidae and ready to take care,
 your application receive a notification which looks like this:
 
 ```php
 $exportNotification = $_POST;
 
-// What Sitra sends:
+// What Apidae sends:
 array(
     "statut" => "SUCCESS",
     "reinitialisation" => "false",
@@ -358,7 +374,7 @@ array(
 );
 ```
 
-You **must** store those information and answer Sitra as soon as possible with a success response.
+You **must** store those information and answer Apidae as soon as possible with a success response.
 
 Then, to handle this export, you need to:
 
@@ -395,7 +411,7 @@ foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
     echo $file->getRealpath();
 }
 
-// Decode file contents (XML or JSON, see your Sitra settings)
+// Decode file contents (XML or JSON, see your Apidae settings)
 foreach ($exportFiles->files() as $file) {
     // $xml = simplexml_load_string($file->getContents());
     // print_r($xml);
@@ -407,7 +423,7 @@ foreach ($exportFiles->files() as $file) {
 
 #### Confirmation
 
-When you have finished your tasks, you must confirm to Sitra that everything went fine.
+When you have finished your tasks, you must confirm to Apidae that everything went fine.
 
 ```php
 // With the export hash
@@ -429,8 +445,10 @@ $client->cleanExportFiles();
 
 ### Using the SSO
 
+[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth)
+
 You must configure your client with the SSO options ('ssoRedirectUrl', 'ssoClientId' and 'ssoSecret' at least), 
-then forward your user to the Sitra authorization URL. The user can then give your application the permission 
+then forward your user to the Apidae authorization URL. The user can then give your application the permission 
 to access his data and will be redirected on your application with a code. This code is used to get an Access Token.
 
 ```php

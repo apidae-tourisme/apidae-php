@@ -5,7 +5,7 @@ namespace Sitra\ApiClient\Description;
 class Sso
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/Sitra_-_Authentification_OAuth#Single_Sign-On_.28SSO.29
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/authentification-client-credentials
         'getSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',

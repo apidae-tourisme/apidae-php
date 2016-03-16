@@ -1,6 +1,6 @@
 {
     "name": "sitra-tourisme/sitra-api-php",
-    "description": "Sitra API official PHP Client",
+    "description": "Apidae API official PHP Client (formerly known as Sitra)",
     "license": "MIT",
     "authors": [
         {

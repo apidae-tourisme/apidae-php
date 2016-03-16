@@ -5,7 +5,10 @@ namespace Sitra\ApiClient\Description;
 class Reference
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/Sitra2_-_API_V2#R.C3.A9cup.C3.A9ration_d.27.C3.A9l.C3.A9ments_du_r.C3.A9f.C3.A9rentiel
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference
+		// @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes
+		// @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes
+		// @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections
         'getReferenceCity' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/referentiel/communes',

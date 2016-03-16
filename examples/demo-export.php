@@ -15,7 +15,7 @@ try {
      * Export
      */
 
-    // Notifications come from a $_POST from Sitra
+    // Notifications come from a $_POST from Apidae
     $exportNotification = array(
         "statut" => "SUCCESS",
         "reinitialisation" => "false",
@@ -29,7 +29,7 @@ try {
     foreach ($exportFiles->name('objets_lies_modifies-14*') as $file) {
         var_dump($file->getRealpath());
 
-        // If you use XML (Sitra settings)
+        // If you use XML (Apidae settings)
         //$xml = simplexml_load_string($file->getContents());
         //print_r($xml);
 

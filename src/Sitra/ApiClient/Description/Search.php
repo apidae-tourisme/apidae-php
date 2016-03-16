@@ -5,7 +5,7 @@ namespace Sitra\ApiClient\Description;
 class Search
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/API_V2_-_services_-_format_de_la_requete
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
         'searchObject' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/recherche/list-objets-touristiques',

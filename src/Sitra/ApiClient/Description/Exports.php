@@ -5,7 +5,7 @@ namespace Sitra\ApiClient\Description;
 class Exports
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/Sitra2_-_Exports_V2#Confirmation_de_l.27export
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
         'confirmExport' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/export/confirmation',

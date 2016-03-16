@@ -5,7 +5,8 @@ namespace Sitra\ApiClient\Description;
 class Agenda
 {
     public static $operations = array(
-        // @see http://www.sitra-rhonealpes.com/wiki/index.php/Sitra2_-_API_V2#Agenda
+		// @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
+        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse
         'searchAgenda' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/agenda/simple/list-objets-touristiques',

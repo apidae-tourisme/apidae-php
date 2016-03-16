@@ -30,6 +30,6 @@ Examples:
         ]
     }');
 
-See http://www.sitra-rhonealpes.com/wiki/index.php/API_-_services_-_v002/metadata/
+See http://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees
 MESSAGE;
 }
