@@ -20,16 +20,20 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
     
 ### Standalone (when you can't use Composer)
 
-If you can't use Composer, please follow those steps to install and use the library:
+If you can't use Composer:
 
-- Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
+- You can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2015/03/sitra-api-php-1-0.zip)
+  - Extract the ZIP file and add the whole "vendor" directory to your project;
+  - Include the file `vendor/autoload.php` if you do not have an autoloader already.
+
+- Or, if you already use an autoloader, please follow those steps:
+  - Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
 ```json
 {
     "require": { "sitra-tourisme/sitra-api-php": "@stable" }
 }
 ```
-- Extract the ZIP file and add the whole "vendor" directory to your project;
-- Include the file `vendor/autoload.php` if you do not have an autoloader already.
+  - Extract the ZIP file and add the whole "vendor" directory to your project;
 
 However we **strongly** encourage you to [use Composer](https://getcomposer.org/) on all your projects.
 
