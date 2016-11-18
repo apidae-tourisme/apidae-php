@@ -59,6 +59,14 @@ class ObjectsGlobalConfigSubscriber implements SubscriberInterface
             }
 
             $command['query'] = json_encode($data);
-        }
+        } else {
+            if ($operation->hasParam('locales') && !isset($command['locales'])) {
+                $command['locales'] = implode(',', $this->config['locales']);
+            }
+
+            if ($operation->hasParam('responseFields') && !isset($command['responseFields'])) {
+                $command['responseFields'] = implode(',', $this->config['responseFields']);
+            }
+	}
     }
 }
