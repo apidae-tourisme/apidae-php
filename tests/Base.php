@@ -15,6 +15,8 @@ abstract class Base extends \PHPUnit_Framework_TestCase
     ];
 
     protected $defaultExpected = [
+        'responseFields' => '',
+        'locales' => '',
         'apiKey' => 'XXX',
         'projetId' => 'XXX',
     ];
