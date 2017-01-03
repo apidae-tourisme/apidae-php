@@ -2,6 +2,12 @@
 
 ## Master
 
+## 2016/01/03 - 1.0.1
+
+- manage locales and responseFields default conf in by-id requests
+- various documentation updates
+- added configuration for SSL behavior
+
 ## 2015/02/05 - 1.0.0
 
 - add `exportDir` option to set where the Exports files are stored
