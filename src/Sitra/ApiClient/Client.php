@@ -59,7 +59,7 @@ use Sitra\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
 class Client extends GuzzleClient
 {
     protected $config = [
-        'baseUrl'       => 'http://api.sitra-tourisme.com/',
+        'baseUrl'       => 'http://api.apidae-tourisme.com/',
         'apiKey'        => null,
         'projectId'     => null,
 
@@ -82,7 +82,7 @@ class Client extends GuzzleClient
         'verify'            => true,
 
         // For SSO authentication
-        'ssoBaseUrl'        => 'http://base.sitra-tourisme.com',
+        'ssoBaseUrl'        => 'http://base.apidae-tourisme.com',
         'ssoRedirectUrl'    => 'http://localhost/',
         'ssoClientId'       => null,
         'ssoSecret'         => null,
