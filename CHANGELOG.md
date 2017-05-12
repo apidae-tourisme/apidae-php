@@ -2,6 +2,9 @@
 
 ## Master
 
+## 2017/05/12 - 1.0.2
+- change default URLs from "*.sitra-tourisme.com" to "*.apidae-tourisme.com"
+
 ## 2016/01/03 - 1.0.1
 
 - manage locales and responseFields default conf in by-id requests
