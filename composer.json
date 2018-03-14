@@ -8,9 +8,15 @@
             "email": "coucou@jolicode.com"
         }
     ],
+    "repositories": [
+      {
+        "url": "https://github.com/Moustic-Multimedia/extractor",
+        "type": "vcs"
+      }
+    ],
     "require": {
         "guzzlehttp/guzzle-services": "^1.1",
-        "mmoreram/extractor": "~1.1"
+        "mmoreram/extractor": "master-dev"
     },
     "autoload": {
         "psr-4": {
