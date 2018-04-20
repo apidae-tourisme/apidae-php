@@ -87,7 +87,7 @@ class Client extends GuzzleClient
       'verify'            => true,
 
         // For SSO authentication
-      'ssoBaseUrl'        => 'https://base.sitra-tourisme.com',
+      'ssoBaseUrl'        => 'https://base.apidae-tourisme.com',
       'ssoRedirectUrl'    => 'http://localhost/',
       'ssoClientId'       => null,
       'ssoSecret'         => null,
