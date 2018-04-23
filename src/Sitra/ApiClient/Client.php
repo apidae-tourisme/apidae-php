@@ -64,7 +64,7 @@ use Symfony\Component\Finder\Finder;
 class Client extends GuzzleClient
 {
     protected $config = [
-      'baseUri'       => 'https://api.sitra-tourisme.com/',
+      'baseUri'       => 'https://base.apidae-tourisme.com/',
       'apiKey'        => null,
       'projectId'     => null,
 
