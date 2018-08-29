@@ -7,7 +7,7 @@ PHP Client for Rhône Alpes Tourisme [Apidae API](http://blog.apidae-tourisme.co
 - Apidae SSO helpers;
 - Error handling;
 - Handle exports (Zip download and reading);
-- Based on Guzzle 5.
+- Based on Guzzle 6.
 
 This documentation only handle the PHP implementation, for further questions please refer 
 to [Apidae API Documentation](http://dev.apidae-tourisme.com/).

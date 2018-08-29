@@ -2,71 +2,65 @@
 
 namespace Sitra\ApiClient\Subscriber;
 
-use GuzzleHttp\Command\Event\InitEvent;
+use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
-use GuzzleHttp\Event\SubscriberInterface;
-use GuzzleHttp\Utils;
 
-class ObjectsGlobalConfigSubscriber implements SubscriberInterface
+/**
+ * Class ObjectsGlobalConfigHandler
+ *
+ * @package Sitra\ApiClient\Middleware
+ * @author Stefan Kowalke <blueduck@mailbox.org>
+ */
+class ObjectsGlobalConfigSubscriber
 {
+    /** @var DescriptionInterface $description */
     private $description;
-    private $config;
 
-    public function __construct(DescriptionInterface $description, $config)
+    /** @var array $config */
+    private $config = [];
+
+    public function __construct(DescriptionInterface $description, array $config)
     {
         $this->description  = $description;
         $this->config       = $config;
     }
 
-    public function getEvents()
-    {
-        return [
-            'init' => ['onInit', 5],
-        ];
-    }
-
     /**
-     * Automatically set global configuration if provided
-     *
-     * @param InitEvent $event
+     * @param callable $handler
+     * @return \Closure
      */
-    public function onInit(InitEvent $event)
+    public function __invoke(callable $handler) : \Closure
     {
-        $command = $event->getCommand();
-        $operation = $this->description->getOperation($command->getName());
+        return function (CommandInterface $command) use ($handler) {
+            $operation = $this->description->getOperation($command->getName());
 
-        // For touristic object methods only
-        if (in_array($operation->getName(), [
-            'searchObject',
-            'searchObjectIdentifier',
-            'searchAgenda',
-            'searchAgendaIdentifier',
-            'searchDetailedAgendaIdentifier',
-            'searchDetailedAgenda',
-        ])) {
-            $data = is_array($command['query']) ? $command['query'] : Utils::jsonDecode($command['query'], true);
+            // For touristic object methods only
+            if (in_array($operation->getName(), [
+              'searchObject',
+              'searchObjectIdentifier',
+              'searchAgenda',
+              'searchAgendaIdentifier',
+              'searchDetailedAgendaIdentifier',
+              'searchDetailedAgenda',
+            ])) {
+                $data = is_array($command['query']) ? $command['query'] : \GuzzleHttp\json_decode($command['query'], true);
 
-            if (!empty($this->config['responseFields']) && !isset($data['responseFields'])) {
-                $data['responseFields'] = $this->config['responseFields'];
+                if (!empty($this->config['responseFields']) && !isset($data['responseFields'])) {
+                    $data['responseFields'] = $this->config['responseFields'];
+                }
+
+                if (!empty($this->config['locales']) && !isset($data['locales'])) {
+                    $data['locales'] = $this->config['locales'];
+                }
+
+                if (!empty($this->config['count']) && !isset($data['count'])) {
+                    $data['count'] = $this->config['count'];
+                }
+
+                $command['query'] = json_encode($data);
             }
 
-            if (!empty($this->config['locales']) && !isset($data['locales'])) {
-                $data['locales'] = $this->config['locales'];
-            }
-
-            if (!empty($this->config['count']) && !isset($data['count'])) {
-                $data['count'] = $this->config['count'];
-            }
-
-            $command['query'] = json_encode($data);
-        } else {
-            if ($operation->hasParam('locales') && !isset($command['locales'])) {
-                $command['locales'] = implode(',', $this->config['locales']);
-            }
-
-            if ($operation->hasParam('responseFields') && !isset($command['responseFields'])) {
-                $command['responseFields'] = implode(',', $this->config['responseFields']);
-            }
-	}
+            return $handler($command);
+        };
     }
 }
