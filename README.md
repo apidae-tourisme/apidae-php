@@ -47,7 +47,7 @@ You need to create a `Client` instance:
 $client = new \Sitra\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projectId'        => 672,
-    'baseUrl'          => 'http://api.sitra-tourisme.com/',
+    'baseUrl'          => 'https://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
     'exportDir'        => '/tmp/sitraExports',
@@ -64,7 +64,7 @@ $client = new \Sitra\ApiClient\Client([
     'count'            => 20,
 
     // For SSO
-    'ssoBaseUrl'       => 'http://base.sitra-tourisme.com',
+    'ssoBaseUrl'       => 'https://base.apidae-tourisme.com',
     'ssoRedirectUrl'   => 'http://localhost/',
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
