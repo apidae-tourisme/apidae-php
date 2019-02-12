@@ -17,7 +17,7 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 ### Via Composer
 
     composer require sitra-tourisme/sitra-api-php
-    
+
 ### Standalone (when you can't use Composer)
 
 If you can't use Composer:
@@ -47,7 +47,7 @@ You need to create a `Client` instance:
 $client = new \Sitra\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projectId'        => 672,
-    'baseUrl'          => 'http://api.sitra-tourisme.com/',
+    'baseUrl'          => 'https://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
     'exportDir'        => '/tmp/sitraExports',
@@ -64,7 +64,7 @@ $client = new \Sitra\ApiClient\Client([
     'count'            => 20,
 
     // For SSO
-    'ssoBaseUrl'       => 'http://base.sitra-tourisme.com',
+    'ssoBaseUrl'       => 'https://base.apidae-tourisme.com',
     'ssoRedirectUrl'   => 'http://localhost/',
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
@@ -372,9 +372,9 @@ array(
     "statut" => "SUCCESS",
     "reinitialisation" => "false",
     "projetId" => "672",
-    "urlConfirmation" => "http://api.sitra-tourisme.com/api/v002/export/confirmation?hash=XXX",
+    "urlConfirmation" => "https://api.apidae-tourisme.com/api/v002/export/confirmation?hash=XXX",
     "ponctuel" => "true",
-    "urlRecuperation" => "http://export.sitra-tourisme.com/exports/XXX.zip",
+    "urlRecuperation" => "https://export.apidae-tourisme.com/exports/XXX.zip",
 );
 ```
 
@@ -506,7 +506,6 @@ and will use it automatically if the CURL extension is not loaded.
 ### Todo
 
 - SSO integration: make sure the scopes are not mixed-up
-- Tag the first stable 1.0 release
 
 #### Optional / Nice to have
 
