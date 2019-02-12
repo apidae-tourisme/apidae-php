@@ -2,6 +2,10 @@
 
 ## Master
 
+## 2019/02/12 - 1.0.4
+
+* fixed mmoreram version to prevent composer alert.
+
 ## 2019/02/12 - 1.0.3
 
 * update to PHP7 and Guzzle 6
