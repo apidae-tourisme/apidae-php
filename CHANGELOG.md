@@ -4,6 +4,7 @@
 
 ## 2019/02/12 - 1.0.3
 
+* update to PHP7 and Guzzle 6
 * update documentation related to "*.apidae-tourisme.com*" and download archive.
 
 ## 2017/05/12 - 1.0.2
