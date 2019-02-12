@@ -7,7 +7,7 @@ include __DIR__."/../vendor/autoload.php";
 $client = new \Sitra\ApiClient\Client([
     'apiKey'        => 'XXX',
     'projectId'     => 000,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'baseUrl'       => 'https://api.apidae-tourisme.com/',
 ]);
 
 try {
@@ -20,9 +20,9 @@ try {
         "statut" => "SUCCESS",
         "reinitialisation" => "false",
         "projetId" => "672",
-        "urlConfirmation" => "http://api.sitra-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
+        "urlConfirmation" => "https://api.apidae-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
         "ponctuel" => "true",
-        "urlRecuperation" => "http://export.sitra-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
+        "urlRecuperation" => "https://export.apidae-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
     );
 
     $exportFiles = $client->getExportFiles(['url' => $exportNotification['urlRecuperation']]);

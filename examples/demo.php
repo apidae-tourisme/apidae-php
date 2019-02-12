@@ -7,7 +7,7 @@ include __DIR__."/../vendor/autoload.php";
 $client = new \Sitra\ApiClient\Client([
     'apiKey'        => 'XXX',
     'projectId'     => 000,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'baseUrl'       => 'https://api.apidae-tourisme.com/',
 ]);
 
 try {
