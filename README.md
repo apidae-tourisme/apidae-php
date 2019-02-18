@@ -20,7 +20,7 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 
 ### Standalone (when you can't use Composer)
 
-If you can't use Composer, you can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2019/02/sitra-api-php-1-0-4.zip)
+If you can't use Composer, you can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2019/02/sitra-api-php-1-0-5.zip)
 
 - Extract the ZIP file and add the whole "vendor" directory to your project;
 - Include the file `vendor/autoload.php` if you do not have an autoloader already.
