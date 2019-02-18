@@ -1,15 +1,16 @@
 <?php
 
 // Include Composer autoload
-include __DIR__."/../vendor/autoload.php";
+require __DIR__."/../../../autoload.php";
+require __DIR__."/../config.inc.php";
 
 // Create the client
 $client = new \Sitra\ApiClient\Client([
-    'apiKey'        => 'XXX',
-    'projectId'     => 000,
-    'baseUrl'       => 'https://api.apidae-tourisme.com/',
-    'OAuthClientId' => 'XXX',
-    'OAuthSecret'   => 'XXX',
+    'apiKey'        => $config['apiKey'],
+    'projectId'     => $config['projectId'],
+    'baseUrl'       => $config['baseUrl'],
+    'OAuthClientId' => $config['OAuthClientId'],
+    'OAuthSecret'   => $config['OAuthSecret'],
 ]);
 
 try {
