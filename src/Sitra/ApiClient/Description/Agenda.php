@@ -14,7 +14,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
@@ -29,7 +29,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
@@ -44,7 +44,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
@@ -59,7 +59,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
