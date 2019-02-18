@@ -2,6 +2,10 @@
 
 ## Master
 
+## 2019/02/18 - 1.0.5
+
+* fixed Guzzle 1.0 postField > formParam
+
 ## 2019/02/12 - 1.0.4
 
 * fixed mmoreram version to prevent composer alert.
