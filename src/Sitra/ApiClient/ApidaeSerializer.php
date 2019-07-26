@@ -19,7 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Sitra\ApiClient\Exception\MissingTokenException;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
+use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 
 /**
  * Serializes requests for a given command.
@@ -206,7 +206,7 @@ class ApidaeSerializer
             return $this->config['accessTokens'][$scope];
         }
 
-        if ($scope === AuthenticationHandler::META_SCOPE) {
+        if ($scope === AuthenticationSubscriber::META_SCOPE) {
             $tokenResponse = $this->client->get('/oauth/token', [
               'auth' => [
                 $this->config['OAuthClientId'],

@@ -237,7 +237,7 @@ class Client extends GuzzleClient
           'response_type' => 'code',
           'client_id'     => $this->config['ssoClientId'],
           'redirect_uri'  => $this->config['ssoRedirectUrl'],
-          'scope'         => AuthenticationHandler::SSO_SCOPE,
+          'scope'         => AuthenticationSubscriber::SSO_SCOPE,
         );
 
         $query = \GuzzleHttp\Psr7\build_query($params);
