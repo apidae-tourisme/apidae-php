@@ -6,10 +6,6 @@
     
     require __DIR__."/requires.inc.php" ;
 
-    echo '<pre>' ;
-
-    print_r($_SESSION) ;
-
     if ( isset($_GET['logout']) ) unset($_SESSION['ssoToken']) ;
 
     // Create the client
@@ -50,13 +46,11 @@
 
     echo '<hr />' ;
 
-    print_r($client->config('accessTokens')) ;
-
     try {
         // Now you can call SSO only methods:
         echo '<h1>getUserProfile</h1>' ;
         $profile = $client->getUserProfile();
-        var_dump($profile);
+        echo '<pre>'.print_r($profile,true ).'</pre>' ;
     } catch ( \Exception $e ) {
         echo '<pre>' ;
             echo $e->getMessage() ;
@@ -67,7 +61,7 @@
         $id = 5679881 ;
         echo '<h1>getUserPermissionOnObject([id => '.$id.'])</h1>' ;
         $permissions = $client->getUserPermissionOnObject(['id' => $id]);
-        var_dump($permissions);
+        echo '<pre>'.print_r($permissions,true ).'</pre>' ;
     } catch ( \Exception $e ) {
         echo '<pre>' ;
             echo $e->getMessage() ;

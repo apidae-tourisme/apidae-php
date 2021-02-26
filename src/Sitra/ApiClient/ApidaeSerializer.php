@@ -131,9 +131,7 @@ class ApidaeSerializer
         }
         elseif ( $scope && $scope == AuthenticationSubscriber::SSO_SCOPE )
         {
-            echo __METHOD__.':'.__LINE__.':'.$operation->getName()."\n" ;
             $token = $this->clientApi->getAccessToken($scope) ;
-            echo __METHOD__.':'.__LINE__ ;
             $request = $request->withHeader(
                 'Authorization',
                 'Bearer ' . $this->clientApi->getAccessToken($scope)
