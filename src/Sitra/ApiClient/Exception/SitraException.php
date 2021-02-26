@@ -4,13 +4,14 @@ namespace Sitra\ApiClient\Exception;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\GuzzleException;
 
 class SitraException extends \Exception
 {
     protected $request;
     protected $response;
 
-    public function __construct(RequestException $e)
+    public function __construct(GuzzleException $e)
     {
         $this->request  = $e->getRequest();
         $this->response = $e->getResponse();
@@ -30,8 +31,8 @@ class SitraException extends \Exception
             $code = $this->response->getStatusCode();
         }
 
-        $responseDescription = $this->response ? (string) $this->response : 'none';
-        $requestDescription = $this->request ? (string) $this->request : 'none';
+        $responseDescription = $this->response ? (string) $this->response->getBody()->getContents() : 'none';
+        $requestDescription = $this->request ? (string) $this->request->getBody()->getContents() : 'none';
 
         $message = sprintf("%s
 

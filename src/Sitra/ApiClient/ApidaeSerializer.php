@@ -2,7 +2,7 @@
 
 namespace Sitra\ApiClient;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as ClientHttp;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
@@ -19,7 +19,9 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Sitra\ApiClient\Exception\MissingTokenException;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
+use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use GuzzleHttp\UriTemplate\UriTemplate ;
+use Sitra\ApiClient\Client as ClientApi ;
 
 /**
  * Serializes requests for a given command.
@@ -33,21 +35,22 @@ class ApidaeSerializer
     private $description;
 
     /** @var Client */
-    private $client;
+    private $clientHttp ;
 
-    /** @var array */
-    private $config = [];
+
+    private $clientApi ;
 
     /**
      * @param DescriptionInterface $description
      * @param RequestLocationInterface[] $requestLocations Extra request locations
-     * @param Client $client
-     * @param array $config
+     * @param ClientHttp $clientHttp
+     * @param ClientApi $clientApi
      */
     public function __construct(
       DescriptionInterface $description,
-      array $requestLocations = [], Client $client,
-      array $config = []
+      array $requestLocations = [],
+      clientHttp $clientHttp,
+      ClientApi $clientApi
     ) {
         static $defaultRequestLocations;
         if (!$defaultRequestLocations) {
@@ -64,8 +67,8 @@ class ApidaeSerializer
 
         $this->locations = $requestLocations + $defaultRequestLocations;
         $this->description = $description;
-        $this->client = $client;
-        $this->config = $config;
+        $this->clientHttp = $clientHttp;
+        $this->clientApi= $clientApi;
     }
 
     /**
@@ -118,11 +121,27 @@ class ApidaeSerializer
         }
 
         // If this operation require an OAuth scope
-        if ($operation->getData('scope')) {
-            $token = $this->getOAuthToken($operation->getData('scope'));
-
-            $request = $request->withHeader('Authorization', sprintf('Bearer %s', $token));
+        $scope = $operation->getData('scope') ;
+        if ( $scope && $scope == AuthenticationSubscriber::META_SCOPE )
+        {
+            $request = $request->withHeader(
+                'Authorization',
+                sprintf('Bearer %s', $this->getOAuthToken($scope))
+            );
         }
+        elseif ( $scope && $scope == AuthenticationSubscriber::SSO_SCOPE )
+        {
+            echo __METHOD__.':'.__LINE__.':'.$operation->getName()."\n" ;
+            $token = $this->clientApi->getAccessToken($scope) ;
+            echo __METHOD__.':'.__LINE__ ;
+            $request = $request->withHeader(
+                'Authorization',
+                'Bearer ' . $this->clientApi->getAccessToken($scope)
+              );
+            $request = $request->withHeader('Accept', 'application/json');
+        }
+
+        // 
 
         // For Sso methods, client ID and secret are passed as basic auth
         if (in_array($operation->getName(), [
@@ -131,7 +150,7 @@ class ApidaeSerializer
         ])) {
             $request = $request->withHeader(
               'Authorization',
-              'Basic ' . base64_encode(sprintf("%s:%s", $this->config['ssoClientId'], $this->config['ssoSecret']))
+              'Basic ' . base64_encode(sprintf("%s:%s", $this->clientApi->config('ssoClientId'), $this->clientApi->config('ssoSecret')))
             );
 
             $request = $request->withHeader('Accept', 'application/json');
@@ -188,7 +207,7 @@ class ApidaeSerializer
         }
 
         // Expand the URI template.
-        $uri = \GuzzleHttp\uri_template($operation->getUri(), $variables);
+        $uri = UriTemplate::expand($operation->getUri(),$variables) ;
 
         return new Request(
           $operation->getHttpMethod(),
@@ -202,15 +221,15 @@ class ApidaeSerializer
      */
     protected function getOAuthToken($scope) : string
     {
-        if (isset($this->config['accessTokens'][$scope])) {
-            return $this->config['accessTokens'][$scope];
+        if (isset($this->clientApi->config('accessTokens')[$scope])) {
+            return $this->clientApi->config('accessTokens')[$scope];
         }
 
-        if ($scope === AuthenticationHandler::META_SCOPE) {
-            $tokenResponse = $this->client->get('/oauth/token', [
+        if ($scope === AuthenticationSubscriber::META_SCOPE) {
+            $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
               'auth' => [
-                $this->config['OAuthClientId'],
-                $this->config['OAuthSecret'],
+                $this->clientApi->config('OAuthClientId'),
+                $this->clientApi->config('OAuthSecret'),
               ],
               'query' => [
                 'grant_type' => 'client_credentials',
@@ -218,13 +237,16 @@ class ApidaeSerializer
               'headers' => [
                 'accept' => 'application/json',
               ],
-            ])->json();
+            ])->getBody();
 
-            $this->config['accessTokens'][$tokenResponse['scope']] = $tokenResponse['access_token'];
+            $tokenResponse = json_decode($bodyTokenResponse) ;
+
+            $this->clientApi->config('accessTokens')[$tokenResponse['scope']] = $tokenResponse['access_token'];
 
             return $tokenResponse['access_token'];
         } else {
             throw new MissingTokenException();
         }
     }
+
 }

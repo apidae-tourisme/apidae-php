@@ -12,9 +12,6 @@ use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Command\ResultInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Uri;
-use Mmoreram\Extractor\Extractor;
-use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Sitra\ApiClient\Description\Agenda;
 use Sitra\ApiClient\Description\Exports;
 use Sitra\ApiClient\Description\Metadata;
@@ -28,7 +25,9 @@ use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
 use Sitra\ApiClient\Exception\SitraException;
 use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 use Sitra\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
-use Symfony\Component\Finder\Finder;
+use Sitra\ApiClient\Traits\Debug ;
+use Sitra\ApiClient\Traits\Export ;
+use Sitra\ApiClient\Traits\Sso as ApidaeSso ;
 
 /**
  * Magic operations:
@@ -63,8 +62,11 @@ use Symfony\Component\Finder\Finder;
  */
 class Client extends GuzzleClient
 {
+  use Export ;
+  use ApidaeSso ;
+
     protected $config = [
-      'baseUri'       => 'https://base.apidae-tourisme.com/',
+      'baseUri'       => 'https://api.apidae-tourisme.com/',
       'apiKey'        => null,
       'projectId'     => null,
 
@@ -130,6 +132,12 @@ class Client extends GuzzleClient
             $description = new Description($descriptionData);
         }
 
+        if ( isset($config['ssoToken']) )
+        {
+          $config['accessTokens'][AuthenticationSubscriber::SSO_SCOPE] = $config['ssoToken']['access_token'] ;
+          unset($config['ssoToken']) ;
+        }
+
         $this->config = new \ArrayObject(array_merge($this->config, $config));
 
         if (isset($this->config['handler']) === false) {
@@ -148,114 +156,12 @@ class Client extends GuzzleClient
 
         $client = new BaseClient($config);
 
-        parent::__construct($client, $description, new ApidaeSerializer($description, [], $client,  (array) $this->config));
+        parent::__construct($client, $description, new ApidaeSerializer($description, [], $client, $this));
 
         $stack = $this->getHandlerStack();
-        $stack->before('validate_description', new ObjectsGlobalConfigSubscriber($description, (array) $this->config), 'objects_global_config');
-        $stack->before('validate_description', new AuthenticationSubscriber($description, (array) $this->config), 'authentication');
-    }
+        $stack->before('validate_description', new ObjectsGlobalConfigSubscriber($description, $this), 'objects_global_config');
+        $stack->before('validate_description', new AuthenticationSubscriber($description, $this), 'authentication');
 
-    /**
-     * Download and read zip export
-     *
-     * @param  array                            $params
-     * @return \Symfony\Component\Finder\Finder
-     */
-    public function getExportFiles(array $params) : Finder
-    {
-        $client = $this->getHttpClient();
-
-        if (empty($params['url'])) {
-            throw new \InvalidArgumentException("Missing 'url' parameter! Must be the 'urlRecuperation' you got from the notification.");
-        }
-
-        if (preg_match('/\.zip$/i', $params['url']) !== 1) {
-            throw new \InvalidArgumentException("'url' parameter does not looks good! Must be the 'urlRecuperation' you got from the notification.");
-        }
-
-        $temporaryDirectory = $this->getExportDirectory();
-        $exportPath         = sprintf('%s/%s', $temporaryDirectory->getDirectoryPath(), date('Y-m-d-His'));
-        $zipFullPath        = sprintf('%s/export.zip', $exportPath);
-        $exportFullPath     = sprintf('%s/export/', $exportPath);
-
-        mkdir($exportPath);
-        mkdir($exportFullPath);
-
-        $resource = fopen($zipFullPath, 'w');
-
-        // Download the ZIP file in temp directory
-        try {
-            $client->get($params['url'], ['sink' => $resource]);
-        } catch (\Exception $e) {
-            $this->handleHttpError($e);
-        }
-
-        // Extract the ZIP file
-        $extractor = new Extractor(
-          new SpecificDirectory($exportFullPath)
-        );
-
-        return $extractor->extractFromFile($zipFullPath);
-    }
-
-    /**
-     * Remove all ZIP and exported files from the exportDir (cleanup files we have created)
-     *
-     * @return bool
-     */
-    public function cleanExportFiles() : bool
-    {
-        $exportDirectory = $this->getExportDirectory();
-
-        $iterator = new \RecursiveDirectoryIterator(
-          $exportDirectory->getDirectoryPath(),
-          \RecursiveDirectoryIterator::SKIP_DOTS
-        );
-
-        $files = new \RecursiveIteratorIterator(
-          $iterator,
-          \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getRealPath());
-            } else {
-                unlink($file->getRealPath());
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSsoUrl() : string
-    {
-        $params = array(
-          'response_type' => 'code',
-          'client_id'     => $this->config['ssoClientId'],
-          'redirect_uri'  => $this->config['ssoRedirectUrl'],
-          'scope'         => AuthenticationHandler::SSO_SCOPE,
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($params);
-
-        $uri = new Uri($this->config['ssoBaseUrl']);
-        $uri = $uri->withPath('/oauth/authorize');
-        $uri = $uri->withQuery($query);
-
-        return (string) $uri;
-    }
-
-    /**
-     * @param $scope
-     * @param $token
-     */
-    public function setAccessToken($scope, $token)
-    {
-        $this->config['accessTokens'][$scope] = $token;
     }
 
     /**
@@ -320,5 +226,18 @@ class Client extends GuzzleClient
         }
 
         return $dir;
+    }
+
+    /**
+     * @todo n'autoriser la récupération que des clés utiles ailleurs pour éviter toute erreur
+     * @todo  Voir s'il vaut mieux lancer une erreur au lieu du return false... ?
+     * @param string  nom de la variable de conf recherchée (ex: ssoBaseUrl)
+     * @return  string|array  Valeur de la variable de conf (ex: https://base.apidae-tourisme.co)
+     */
+    public function config(string $var) {
+      if ( isset($this->config[$var]) )
+        return $this->config[$var] ;
+      else
+        return false ;
     }
 }

@@ -5,12 +5,13 @@
      */
 
     $config = Array(
-        'apiKey'        => 'XXX',
+        // Nécessaire pour la consultation
         'projectId'     => 0,
-        'baseUrl'       => 'https://api.apidae-tourisme.com/',
+        'apiKey'        => 'XXX',
+        // Nécessaire pour les API d'écriture
         'OAuthClientId' => 'XXX',
         'OAuthSecret'   => 'XXX',
-        'ssoBaseUrl'       => 'https://base.apidae-tourisme.com/',
+        // Nécessaire pour le SSO
 		'ssoRedirectUrl'   => '[...]/vendor/sitra-tourisme/sitra-api-php/examples/sso.php', // Remplacer [...] par l'url de votre projet (https:.....)
 		'ssoClientId'      => 'XXX',
         'ssoSecret'        => 'XXX',

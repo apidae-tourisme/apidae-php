@@ -4,6 +4,7 @@ namespace Sitra\ApiClient\Subscriber;
 
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
+use Sitra\ApiClient\Client as ClientApi ;
 
 /**
  * Class AuthenticationHandler
@@ -14,13 +15,13 @@ use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 class AuthenticationSubscriber
 {
     private $description;
-    private $config;
+    private $clientApi;
     const META_SCOPE = 'api_metadonnees';
     const SSO_SCOPE  = 'sso';
-    public function __construct(DescriptionInterface $description, $config)
+    public function __construct(DescriptionInterface $description, ClientApi $clientApi)
     {
         $this->description  = $description;
-        $this->config       = $config;
+        $this->clientApi       = $clientApi;
     }
     /**
      * @param callable $handler
@@ -31,10 +32,10 @@ class AuthenticationSubscriber
         return function (CommandInterface $command) use ($handler) {
             $operation = $this->description->getOperation($command->getName());
             if ($operation->hasParam('apiKey') && !isset($command['apiKey'])) {
-                $command['apiKey'] = $this->config['apiKey'];
+                $command['apiKey'] = $this->clientApi->config('apiKey');
             }
             if ($operation->hasParam('projetId') && !isset($command['projetId'])) {
-                $command['projetId'] = $this->config['projectId'];
+                $command['projetId'] = $this->clientApi->config('projectId');
             }
             // Search operations use the authentication inside a query string JSON!
             if (in_array($operation->getName(), [
@@ -51,8 +52,8 @@ class AuthenticationSubscriber
             ])) {
                 $data = is_array($command['query']) ? $command['query'] : \GuzzleHttp\json_decode($command['query'], true);
                 if (!isset($data['apiKey']) && !isset($data['projetId'])) {
-                    $data['apiKey'] = $this->config['apiKey'];
-                    $data['projetId'] = $this->config['projectId'];
+                    $data['apiKey'] = $this->clientApi->config('apiKey');
+                    $data['projetId'] = $this->clientApi->config('projectId');
                     $command['query'] = json_encode($data);
                 }
             }

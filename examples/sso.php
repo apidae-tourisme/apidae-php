@@ -1,51 +1,75 @@
 <?php
 
-ini_set('display_errors',1) ;
-error_reporting(E_ALL) ;
+    ini_set('display_errors',1) ;
+    error_reporting(E_ALL) ;
+    session_start() ;
+    
+    require __DIR__."/requires.inc.php" ;
 
-/**
- * @TODO
- * au 20/02/2019, sur la 1.0.5, l'auth SSO ne fonctionne pas.
- * Se référer au ticket https://github.com/apidae-tourisme/sitra-api-php/issues/12
- */
+    echo '<pre>' ;
 
-// Include Composer autoload
-require __DIR__."/../../../autoload.php";
-require __DIR__."/../config.inc.php";
+    print_r($_SESSION) ;
 
-// Create the client
-$client = new \Sitra\ApiClient\Client([
-    'ssoRedirectUrl' => $config['ssoRedirectUrl'],
-    'ssoClientId'    => $config['ssoClientId'],
-    'ssoSecret'      => $config['ssoSecret'],
-]);
+    if ( isset($_GET['logout']) ) unset($_SESSION['ssoToken']) ;
 
-$ssourl = $client->getSsoUrl() ;
+    // Create the client
+    $client = new \Sitra\ApiClient\Client([
+        'ssoRedirectUrl' => $config['ssoRedirectUrl'],
+        'ssoClientId'    => $config['ssoClientId'],
+        'ssoSecret'      => $config['ssoSecret'],
+        'debug'          => true,
+        'ssoToken'       => @$_SESSION['ssoToken']
+    ]);
 
-// Display SSO url to the client (or redirect to it):
-?>
+    if (isset($_GET['code']) && !empty($_GET['code']) && ! isset($_SESSION['ssoToken'])) {
+        try {
+            // The redirect URL get a "code", we use it to ask for a token
+            $token = $client->getSsoToken(['code' => $_GET['code'], 'redirect_uri' => $config['ssoRedirectUrl']]);
+            // Store the new token in the client, will be used automatically!
+            $client->setAccessToken($token['scope'], $token['access_token']);
+            $_SESSION['ssoToken'] = Array(
+                'access_token' => $token['access_token'],
+                'refresh_token' => $token['refresh_token']
+            ) ;
+        } catch (\Sitra\Exception\SitraException $e) {
+            echo $e->getMessage();
+            echo "\n";
+            echo $e->getPrevious()->getMessage();
+        }
+    }
 
-<a href="<?php echo $ssourl ?>">Ask for auth code</a>
+    if ( ! isset($_SESSION['ssoToken']) )
+    {
 
-<?php
+        $ssourl = $client->getSsoUrl() ;
+        echo '<a href="'.$ssourl.'">Ask for auth code</a><br />' ;
+        die('Not authentificated') ;
+    }
 
-try {
-    if (isset($_GET['code']) && !empty($_GET['code'])) {
-        // The redirect URL get a "code", we use it to ask for a token
-        $token = $client->getSsoToken(['code' => $_GET['code'], 'redirect_uri' => $config['ssoRedirectUrl']]);
+    echo '<a href="?logout">Logout</a>' ;
 
-        // Store the new token in the client, will be used automatically!
-        $client->setAccessToken($token['scope'], $token['access_token']);
+    echo '<hr />' ;
 
+    print_r($client->config('accessTokens')) ;
+
+    try {
         // Now you can call SSO only methods:
+        echo '<h1>getUserProfile</h1>' ;
         $profile = $client->getUserProfile();
         var_dump($profile);
-
-        $permissions = $client->getUserPermissionOnObject(['id' => 123457]);
-        var_dump($permissions);
+    } catch ( \Exception $e ) {
+        echo '<pre>' ;
+            echo $e->getMessage() ;
+        echo '</pre>' ;
     }
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
-    echo $e->getMessage();
-    echo "\n";
-    echo $e->getPrevious()->getMessage();
-}
+
+    try {
+        $id = 5679881 ;
+        echo '<h1>getUserPermissionOnObject([id => '.$id.'])</h1>' ;
+        $permissions = $client->getUserPermissionOnObject(['id' => $id]);
+        var_dump($permissions);
+    } catch ( \Exception $e ) {
+        echo '<pre>' ;
+            echo $e->getMessage() ;
+        echo '</pre>' ;
+    }
