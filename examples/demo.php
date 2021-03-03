@@ -3,61 +3,108 @@
 ini_set('display_errors',1) ;
 error_reporting(E_ALL) ;
 
-// Include Composer autoload
-require __DIR__."/../../../autoload.php";
-require __DIR__."/../config.inc.php";
+require __DIR__."/requires.inc.php";
 
-// Create the client
-$client = new \Sitra\ApiClient\Client([
-    'apiKey'        => $config['apiKey'],
-    'projectId'     => $config['projectId'],
-    'baseUrl'       => $config['baseUrl']
-]);
-
-try {
-    /*
-     * Reference
-     */
-    $cities = $client->getReferenceCity(['query' => [ 'codesInsee' => ["38534", "69388", "74140"] ]]);
-    var_dump(count($cities));
-
-    $elements = $client->getReferenceElement(['query' => [ "elementReferenceIds" => [2, 118, 2338] ]]);
-    var_dump(count($elements));
-
-    $elements = $client->getReferenceInternalCriteria(['query' => [ "critereInterneIds" => [ 1068, 2168 ] ]]);
-    var_dump(count($elements));
-
-    $elements = $client->getReferenceSelection(['query' => [ "selectionIds" => [  64, 5896 ] ]]);
-    var_dump(count($elements));
+$client = new \Sitra\ApiClient\Client($config);
 
 
-    /*
-     * Object API's
-     */
-    $search = $client->searchObject(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
+    $operations = Array() ;
+    echo '<table>' ;
+    foreach ( $client->operations as $k => $o ) {
+        echo '<tr><td>'.$k.'</td><td>'.$o['httpMethod'].'</td><td>'.$o['uri'].'</td></tr>' ;
+    }
+    echo '</table>' ;
 
-    $search = $client->searchObjectIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
 
-    $search = $client->searchAgendaIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
-    $search = $client->searchAgenda(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
+    function showResult($r) {
+        if ( isset($r['numFound']) ) echo '<h3>'.$r['numFound'].' results (numFound)</h3>' ;
+        else echo '<h3>'.count($r).' results (count)</h3>' ;
+        echo '<pre style="background:green;max-height:200px;overflow:scroll;color:white;padding:10px;font-size:.8em;">' ;
+            print_r($r) ;
+        echo '</pre>' ;
+    }
 
-    $search = $client->searchDetailedAgendaIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
+    echo "\n".'<h1>Simple object</h1>'."\n" ;
 
-    $search = $client->searchDetailedAgenda(['query' => [ "searchQuery" => "vélo" ]]);
-    var_dump($search['numFound']);
+    echo "\n".'<h2>getObjectById ('.$client->operations['getObjectById']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getObjectById(['id' => 163512]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+    
+    echo "\n".'<h2>getObjectByIdentifier ('.$client->operations['getObjectByIdentifier']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
 
-    $object = $client->getObjectById(['id' => 163512]);
-    var_dump($object['id']);
 
-    $object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
-    var_dump($object['id']);
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
-    echo $e->getMessage();
-    echo "\n";
-    echo $e->getPrevious()->getMessage();
-}
+
+
+
+    echo "\n".'<h1>References</h1>'."\n" ;
+
+    echo "\n".'<h2>getReferenceCity ('.$client->operations['getReferenceCity']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getReferenceCity(['query' => [ 'codesInsee' => ["38534", "69388", "74140"] ]]) ;
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>getReferenceElement ('.$client->operations['getReferenceElement']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getReferenceElement(['query' => [ "elementReferenceIds" => [2, 118, 2338] ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>getReferenceInternalCriteria ('.$client->operations['getReferenceInternalCriteria']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getReferenceInternalCriteria(['query' => [ "critereInterneIds" => [ 1068, 2168 ] ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>getReferenceSelection ('.$client->operations['getReferenceSelection']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->getReferenceSelection(['query' => [ "selectionIds" => [  64, 5896 ] ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+
+
+    echo "\n".'<h1>Searchs</h1>'."\n" ;
+
+    echo "\n".'<h2>searchObject ('.$client->operations['searchObject']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchObject(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>searchObjectIdentifier ('.$client->operations['searchObjectIdentifier']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchObjectIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>searchAgendaIdentifier ('.$client->operations['searchAgendaIdentifier']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchAgendaIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>searchAgenda ('.$client->operations['searchAgenda']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchAgenda(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>searchDetailedAgendaIdentifier ('.$client->operations['searchDetailedAgendaIdentifier']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchDetailedAgendaIdentifier(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+
+    echo "\n".'<h2>searchDetailedAgenda ('.$client->operations['searchDetailedAgenda']['uri'].')</h2>'."\n" ;
+    try {
+        $res = $client->searchDetailedAgenda(['query' => [ "searchQuery" => "vélo" ]]);
+        showResult($res) ;
+    } catch ( Exception $e ) { echo $e ; }
+    

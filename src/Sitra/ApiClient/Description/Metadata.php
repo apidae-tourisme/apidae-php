@@ -4,7 +4,7 @@ namespace Sitra\ApiClient\Description;
 
 use GuzzleHttp\Query;
 use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Sitra\ApiClient\Client as ClientApi ;
 
 class Metadata
 {
@@ -39,7 +39,7 @@ class Metadata
                 ],
             ],
             'data' => [
-                'scope' => AuthenticationSubscriber::META_SCOPE,
+                'scope' => ClientApi::META_SCOPE,
             ],
         ],
         'deleteMetadata' => [
@@ -69,12 +69,12 @@ class Metadata
                 ],
             ],
             'data' => [
-                'scope' => AuthenticationSubscriber::META_SCOPE,
+                'scope' => ClientApi::META_SCOPE,
             ],
         ],
         'putMetadata' => [
             'httpMethod' => 'PUT',
-            'uri' => '/api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}',
+            'uri' => '/api/v002/metadata/{referenceId}/{nodeId}',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -87,6 +87,7 @@ class Metadata
                     'location' => 'uri',
                     'required' => true,
                 ],
+                /*
                 'metadata' => [
                     'required' => true,
                     'location' => 'body',
@@ -94,9 +95,34 @@ class Metadata
                         '\Sitra\ApiClient\Description\Metadata::validateMetadata',
                     ],
                 ],
+                */
+                'general' => [
+                    'location' => 'body',
+                    'filters' => [
+                        '\Sitra\ApiClient\Description\Metadata::validateMetadata',
+                    ],
+                ],
+                'membres' => [
+                    'location' => 'body',
+                    'filters' => [
+                        '\Sitra\ApiClient\Description\Metadata::validateMetadata',
+                    ],
+                ],
+                'projets' => [
+                    'location' => 'body',
+                    'filters' => [
+                        '\Sitra\ApiClient\Description\Metadata::validateMetadata',
+                    ],
+                ],
+                'node' => [
+                    'location' => 'body',
+                    'filters' => [
+                        '\Sitra\ApiClient\Description\Metadata::validateMetadata',
+                    ],
+                ],
             ],
             'data' => [
-                'scope' => AuthenticationSubscriber::META_SCOPE,
+                'scope' => ClientApi::META_SCOPE,
             ],
         ],
     );
@@ -121,7 +147,6 @@ class Metadata
             }
         }
 
-        // Force "form style" format
-        return new Query($metadata);
+        return $metadata ;
     }
 }

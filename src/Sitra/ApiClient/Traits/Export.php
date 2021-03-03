@@ -82,5 +82,22 @@
             return true;
         }
 
+        /**
+         * @return SpecificDirectory
+         */
+        private function getExportDirectory() : SpecificDirectory
+        {
+            if (!file_exists($this->config['exportDir'])) {
+                mkdir($this->config['exportDir']);
+            }
 
+            $dir = new SpecificDirectory($this->config['exportDir']);
+
+            if (!$dir) {
+                throw new InvalidExportDirectoryException();
+            }
+
+            return $dir;
+        }
+        
     }

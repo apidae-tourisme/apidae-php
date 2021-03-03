@@ -2,7 +2,7 @@
 
     namespace Sitra\ApiClient\Traits ;
 
-    use Sitra\ApiClient\Subscriber\AuthenticationSubscriber ;
+    use Sitra\ApiClient\Client as ClientApi ;
     use Sitra\ApiClient\Exception\MissingTokenException ;
     use GuzzleHttp\Psr7\Uri;
 
@@ -17,7 +17,7 @@
             'response_type' => 'code',
             'client_id'     => $this->config['ssoClientId'],
             'redirect_uri'  => $ssoRedirectUrl != null ? $ssoRedirectUrl : $this->config['ssoRedirectUrl'],
-            'scope'         => AuthenticationSubscriber::SSO_SCOPE,
+            'scope'         => ClientApi::SSO_SCOPE,
             );
 
             $query = \GuzzleHttp\Psr7\build_query($params);

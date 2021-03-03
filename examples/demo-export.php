@@ -1,15 +1,8 @@
 <?php
 
-// Include Composer autoload
-require __DIR__."/../../../autoload.php";
-require __DIR__."/../config.inc.php";
+require __DIR__."/requires.inc.php";
 
-// Create the client
-$client = new \Sitra\ApiClient\Client([
-    'apiKey'        => $config['apiKey'],
-    'projectId'     => $config['projectId'],
-    'baseUrl'       => $config['baseUrl']
-]);
+$client = new \Sitra\ApiClient\Client($config);
 
 try {
     /*

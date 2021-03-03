@@ -19,7 +19,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Sitra\ApiClient\Exception\MissingTokenException;
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
 use GuzzleHttp\UriTemplate\UriTemplate ;
 use Sitra\ApiClient\Client as ClientApi ;
 
@@ -122,16 +121,15 @@ class ApidaeSerializer
 
         // If this operation require an OAuth scope
         $scope = $operation->getData('scope') ;
-        if ( $scope && $scope == AuthenticationSubscriber::META_SCOPE )
+        if ( $scope && $scope == ClientApi::META_SCOPE )
         {
             $request = $request->withHeader(
                 'Authorization',
                 sprintf('Bearer %s', $this->getOAuthToken($scope))
             );
         }
-        elseif ( $scope && $scope == AuthenticationSubscriber::SSO_SCOPE )
+        elseif ( $scope && $scope == ClientApi::SSO_SCOPE )
         {
-            $token = $this->clientApi->getAccessToken($scope) ;
             $request = $request->withHeader(
                 'Authorization',
                 'Bearer ' . $this->clientApi->getAccessToken($scope)
@@ -223,7 +221,7 @@ class ApidaeSerializer
             return $this->clientApi->config('accessTokens')[$scope];
         }
 
-        if ($scope === AuthenticationSubscriber::META_SCOPE) {
+        if ($scope === ClientApi::META_SCOPE) {
             $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
               'auth' => [
                 $this->clientApi->config('OAuthClientId'),
@@ -238,10 +236,10 @@ class ApidaeSerializer
             ])->getBody();
 
             $tokenResponse = json_decode($bodyTokenResponse) ;
+            
+            $this->clientApi->setAccessToken($tokenResponse->scope,$tokenResponse->access_token) ;
 
-            $this->clientApi->config('accessTokens')[$tokenResponse['scope']] = $tokenResponse['access_token'];
-
-            return $tokenResponse['access_token'];
+            return $tokenResponse->access_token;
         } else {
             throw new MissingTokenException();
         }

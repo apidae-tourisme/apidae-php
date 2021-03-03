@@ -6,7 +6,7 @@
 
     $config = Array(
         // Nécessaire pour la consultation
-        'projectId'     => 0,
+        'projetId'     => 0, // Anciennement projectId mais incohérent avec le paramètre Apidae. L'ancien projectId est encore accepté
         'apiKey'        => 'XXX',
         // Nécessaire pour les API d'écriture
         'OAuthClientId' => 'XXX',

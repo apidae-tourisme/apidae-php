@@ -20,11 +20,11 @@ use Sitra\ApiClient\Description\Search;
 use Sitra\ApiClient\Description\Sso;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Description\User;
+use Sitra\ApiClient\Description\Member;
 use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
 use Sitra\ApiClient\Exception\SitraException;
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
-use Sitra\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
+use Sitra\ApiClient\Subscriber\ApidaeSubscriber;
 use Sitra\ApiClient\Traits\Debug ;
 use Sitra\ApiClient\Traits\Export ;
 use Sitra\ApiClient\Traits\Sso as ApidaeSso ;
@@ -38,7 +38,7 @@ use Sitra\ApiClient\Traits\Sso as ApidaeSso ;
  * @method array getMetadata() getMetadata(array $params)
  * @method array deleteMetadata() deleteMetadata(array $params)
  * @method array putMetadata() putMetadata(array $params)
- *
+ * 
  * @method array confirmExport() confirmExport(array $params)
  *
  * @method array searchObject() searchObject(array $params)
@@ -59,16 +59,27 @@ use Sitra\ApiClient\Traits\Sso as ApidaeSso ;
  *
  * @method array getUserProfile() getUserProfile()
  * @method array getUserPermissionOnObject() getUserPermissionOnObject(array $params)
+ * 
+ * @method array getMemberById() getMemberById(array $params)
+ * @method array getMembers() getMembers(array $params)
+ * @method array getUserById() getUserById(array $params)
+ * @method array getUserByMail() getUserByMail(array $params)
+ * @method array getUserByMember() getUserByMember(array $params)
+ * @method array getAllUsers() getAllUsers(array $params)
+ *
  */
 class Client extends GuzzleClient
 {
   use Export ;
   use ApidaeSso ;
 
+  const META_SCOPE = 'api_metadonnees';
+  const SSO_SCOPE  = 'sso';
+
     protected $config = [
       'baseUri'       => 'https://api.apidae-tourisme.com/',
       'apiKey'        => null,
-      'projectId'     => null,
+      'projetId'      => null,
 
         // Auth for metadata
       'OAuthClientId' => null,
@@ -98,6 +109,8 @@ class Client extends GuzzleClient
       'accessTokens'      => [],
     ];
 
+    public $operations ;
+
     /**
      * @param array $config
      * @param Description $description
@@ -113,9 +126,10 @@ class Client extends GuzzleClient
               Agenda::$operations,
               Reference::$operations,
               Sso::$operations,
-              User::$operations
+              User::$operations,
+              Member::$operations
             );
-
+            
             $descriptionData = [
               'baseUri' => $this->config['baseUri'],
               'operations' => $operations,
@@ -123,18 +137,31 @@ class Client extends GuzzleClient
                 'getResponse' => [
                   'type' => 'object',
                   'additionalProperties' => [
-                    'location' => 'json',
-                  ],
+                    'location' => 'json'
+                  ]
                 ],
-              ],
+                'getResponseBody' => [
+                  'type' => 'object',
+                  'properties' => [
+                      'response' => [
+                        'location' => 'body',
+                        'type' => 'string'
+                      ]
+                    ]
+                ]
+              ]
             ];
 
             $description = new Description($descriptionData);
         }
 
+        $this->operations = $operations ;
+
+        if ( isset($config['projectId']) ) $config['projetId'] = $config['projectId'] ;
+
         if ( isset($config['ssoToken']) )
         {
-          $config['accessTokens'][AuthenticationSubscriber::SSO_SCOPE] = $config['ssoToken']['access_token'] ;
+          $config['accessTokens'][self::SSO_SCOPE] = $config['ssoToken']['access_token'] ;
           unset($config['ssoToken']) ;
         }
 
@@ -159,8 +186,7 @@ class Client extends GuzzleClient
         parent::__construct($client, $description, new ApidaeSerializer($description, [], $client, $this));
 
         $stack = $this->getHandlerStack();
-        $stack->before('validate_description', new ObjectsGlobalConfigSubscriber($description, $this), 'objects_global_config');
-        $stack->before('validate_description', new AuthenticationSubscriber($description, $this), 'authentication');
+        $stack->before('validate_description', new ApidaeSubscriber($description, $this));
 
     }
 
@@ -211,28 +237,10 @@ class Client extends GuzzleClient
     }
 
     /**
-     * @return SpecificDirectory
-     */
-    private function getExportDirectory() : SpecificDirectory
-    {
-        if (!file_exists($this->config['exportDir'])) {
-            mkdir($this->config['exportDir']);
-        }
-
-        $dir = new SpecificDirectory($this->config['exportDir']);
-
-        if (!$dir) {
-            throw new InvalidExportDirectoryException();
-        }
-
-        return $dir;
-    }
-
-    /**
      * @todo n'autoriser la récupération que des clés utiles ailleurs pour éviter toute erreur
      * @todo  Voir s'il vaut mieux lancer une erreur au lieu du return false... ?
      * @param string  nom de la variable de conf recherchée (ex: ssoBaseUrl)
-     * @return  string|array  Valeur de la variable de conf (ex: https://base.apidae-tourisme.co)
+     * @return  string|array  Valeur de la variable de conf (ex: https://base.apidae-tourisme.com)
      */
     public function config(string $var) {
       if ( isset($this->config[$var]) )
@@ -240,4 +248,5 @@ class Client extends GuzzleClient
       else
         return false ;
     }
+
 }

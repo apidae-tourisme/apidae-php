@@ -36,7 +36,7 @@ You need to create a `Client` instance:
 ```php
 $client = new \Sitra\ApiClient\Client([
     'apiKey'           => 'XXX',
-    'projectId'        => 672,
+    'projetId'        => 672,
     'baseUrl'          => 'https://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
@@ -63,7 +63,7 @@ $client = new \Sitra\ApiClient\Client([
 // You can also only use the mandatory parameters (all options have sensible defaults).
 $client = new \Sitra\ApiClient\Client([
     'apiKey'           => 'XXX',
-    'projectId'        => 672,
+    'projetId'        => 672,
 ]);
 ```
 
@@ -81,7 +81,7 @@ Result is always a decoded PHP Array.
 #### Options
 
 - `apiKey`: Project API Key;
-- `projectId`: Corresponding projectId;
+- `projetId`: Corresponding projetId;
 - `baseUrl`: Not mandatory, useful if you want to hit pre-production i.e.;
 - `OAuthClientId`: Only for Metadata, a valid OAuth Client Id;
 - `OAuthSecret`: Only for Metadata, the corresponding secret;

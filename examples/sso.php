@@ -6,6 +6,15 @@
     
     require __DIR__."/requires.inc.php" ;
 
+    echo '<pre>' ;
+
+    /**
+     * This URL need to be registered in your SSO project on Apidae,
+     * or you will have a 404 error,
+     * Apidae refusing to redirect and give the code to this page.
+     */ 
+    $config['ssoRedirectUrl'] = 'http'.(($_SERVER['SERVER_PORT']=='80')?'':'s').'://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'] ;
+
     if ( isset($_GET['logout']) ) unset($_SESSION['ssoToken']) ;
 
     // Create the client
@@ -17,6 +26,11 @@
         'ssoToken'       => @$_SESSION['ssoToken']
     ]);
 
+    /**
+     * This is the second step.
+     * After user identify himself on Apidae, he's redirected here (to ssoRedirectUrl) with a GET['code']
+     * This code 
+     */
     if (isset($_GET['code']) && !empty($_GET['code']) && ! isset($_SESSION['ssoToken'])) {
         try {
             // The redirect URL get a "code", we use it to ask for a token
@@ -60,8 +74,8 @@
     try {
         $id = 5679881 ;
         echo '<h1>getUserPermissionOnObject([id => '.$id.'])</h1>' ;
-        $permissions = $client->getUserPermissionOnObject(['id' => $id]);
-        echo '<pre>'.print_r($permissions,true ).'</pre>' ;
+        $permissions = $client->getUserPermissionOnObject(['id' => $id]) ;  
+        echo $permissions['response']->getContents() ;
     } catch ( \Exception $e ) {
         echo '<pre>' ;
             echo $e->getMessage() ;
