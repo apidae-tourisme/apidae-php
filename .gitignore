@@ -3,3 +3,5 @@
 composer.lock
 config.inc.php
 .vscode
+/recette/
+.phpunit.result.cache

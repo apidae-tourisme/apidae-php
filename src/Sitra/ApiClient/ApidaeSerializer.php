@@ -19,8 +19,8 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Sitra\ApiClient\Exception\MissingTokenException;
-use GuzzleHttp\UriTemplate\UriTemplate ;
-use Sitra\ApiClient\Client as ClientApi ;
+use GuzzleHttp\UriTemplate\UriTemplate;
+use Sitra\ApiClient\Client as ClientApi;
 
 /**
  * Serializes requests for a given command.
@@ -34,10 +34,10 @@ class ApidaeSerializer
     private $description;
 
     /** @var Client */
-    private $clientHttp ;
+    private $clientHttp;
 
 
-    private $clientApi ;
+    private $clientApi;
 
     /**
      * @param DescriptionInterface $description
@@ -46,35 +46,35 @@ class ApidaeSerializer
      * @param ClientApi $clientApi
      */
     public function __construct(
-      DescriptionInterface $description,
-      array $requestLocations = [],
-      clientHttp $clientHttp,
-      ClientApi $clientApi
+        DescriptionInterface $description,
+        clientHttp $clientHttp,
+        ClientApi $clientApi,
+        array $requestLocations = []
     ) {
         static $defaultRequestLocations;
         if (!$defaultRequestLocations) {
             $defaultRequestLocations = [
-              'body'      => new BodyLocation(),
-              'query'     => new QueryLocation(),
-              'header'    => new HeaderLocation(),
-              'json'      => new JsonLocation(),
-              'xml'       => new XmlLocation(),
-              'formParam' => new FormParamLocation(),
-              'multipart' => new MultiPartLocation(),
+                'body'      => new BodyLocation(),
+                'query'     => new QueryLocation(),
+                'header'    => new HeaderLocation(),
+                'json'      => new JsonLocation(),
+                'xml'       => new XmlLocation(),
+                'formParam' => new FormParamLocation(),
+                'multipart' => new MultiPartLocation(),
             ];
         }
 
         $this->locations = $requestLocations + $defaultRequestLocations;
         $this->description = $description;
         $this->clientHttp = $clientHttp;
-        $this->clientApi= $clientApi;
+        $this->clientApi = $clientApi;
     }
 
     /**
      * @param CommandInterface $command
      * @return RequestInterface
      */
-    public function __invoke(CommandInterface $command) : RequestInterface
+    public function __invoke(CommandInterface $command): RequestInterface
     {
         $request = $this->createRequest($command);
         return $this->prepareRequest($command, $request);
@@ -88,7 +88,7 @@ class ApidaeSerializer
      * @return RequestInterface
      * @throws \RuntimeException If a location cannot be handled
      */
-    protected function prepareRequest(CommandInterface $command, RequestInterface $request) : RequestInterface
+    protected function prepareRequest(CommandInterface $command, RequestInterface $request): RequestInterface
     {
         $visitedLocations = [];
         $operation = $this->description->getOperation($command->getName());
@@ -120,20 +120,17 @@ class ApidaeSerializer
         }
 
         // If this operation require an OAuth scope
-        $scope = $operation->getData('scope') ;
-        if ( $scope && $scope == ClientApi::META_SCOPE )
-        {
+        $scope = $operation->getData('scope');
+        if ($scope && ($scope == ClientApi::META_SCOPE)) {
             $request = $request->withHeader(
                 'Authorization',
                 sprintf('Bearer %s', $this->getOAuthToken($scope))
             );
-        }
-        elseif ( $scope && $scope == ClientApi::SSO_SCOPE )
-        {
+        } elseif ($scope && $scope == ClientApi::SSO_SCOPE) {
             $request = $request->withHeader(
                 'Authorization',
                 'Bearer ' . $this->clientApi->getAccessToken($scope)
-              );
+            );
             $request = $request->withHeader('Accept', 'application/json');
         }
 
@@ -141,12 +138,12 @@ class ApidaeSerializer
 
         // For Sso methods, client ID and secret are passed as basic auth
         if (in_array($operation->getName(), [
-          'getSsoToken',
-          'refreshSsoToken',
+            'getSsoToken',
+            'refreshSsoToken',
         ])) {
             $request = $request->withHeader(
-              'Authorization',
-              'Basic ' . base64_encode(sprintf("%s:%s", $this->clientApi->config('ssoClientId'), $this->clientApi->config('ssoSecret')))
+                'Authorization',
+                'Basic ' . base64_encode(sprintf("%s:%s", $this->clientApi->config('ssoClientId'), $this->clientApi->config('ssoSecret')))
             );
 
             $request = $request->withHeader('Accept', 'application/json');
@@ -163,15 +160,15 @@ class ApidaeSerializer
      * @return RequestInterface
      * @throws \RuntimeException
      */
-    protected function createRequest(CommandInterface $command) : RequestInterface
+    protected function createRequest(CommandInterface $command): RequestInterface
     {
         $operation = $this->description->getOperation($command->getName());
 
         // If command does not specify a template, assume the client's base URL.
         if (null === $operation->getUri()) {
             return new Request(
-              $operation->getHttpMethod(),
-              $this->description->getBaseUri()
+                $operation->getHttpMethod(),
+                $this->description->getBaseUri()
             );
         }
 
@@ -186,7 +183,7 @@ class ApidaeSerializer
      *
      * @return RequestInterface
      */
-    private function createCommandWithUri(Operation $operation, CommandInterface $command) : RequestInterface
+    private function createCommandWithUri(Operation $operation, CommandInterface $command): RequestInterface
     {
         // Get the path values and use the client config settings
         $variables = [];
@@ -203,11 +200,11 @@ class ApidaeSerializer
         }
 
         // Expand the URI template.
-        $uri = UriTemplate::expand($operation->getUri(),$variables) ;
+        $uri = UriTemplate::expand($operation->getUri(), $variables);
 
         return new Request(
-          $operation->getHttpMethod(),
-          Uri::resolve($this->description->getBaseUri(), $uri)
+            $operation->getHttpMethod(),
+            Uri::resolve($this->description->getBaseUri(), $uri)
         );
     }
 
@@ -215,34 +212,39 @@ class ApidaeSerializer
      * @param string $scope
      * @return string
      */
-    protected function getOAuthToken($scope) : string
+    protected function getOAuthToken($scope): string
     {
         if (isset($this->clientApi->config('accessTokens')[$scope])) {
             return $this->clientApi->config('accessTokens')[$scope];
         }
 
+        $auth = null;
+
         if ($scope === ClientApi::META_SCOPE) {
-            $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
-              'auth' => [
+            $auth = [
                 $this->clientApi->config('OAuthClientId'),
                 $this->clientApi->config('OAuthSecret'),
-              ],
-              'query' => [
-                'grant_type' => 'client_credentials',
-              ],
-              'headers' => [
-                'accept' => 'application/json',
-              ],
+            ];
+        }
+
+        if (is_array($auth)) {
+            $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
+                'auth' => $auth,
+                'query' => [
+                    'grant_type' => 'client_credentials',
+                ],
+                'headers' => [
+                    'accept' => 'application/json',
+                ],
             ])->getBody();
 
-            $tokenResponse = json_decode($bodyTokenResponse) ;
-            
-            $this->clientApi->setAccessToken($tokenResponse->scope,$tokenResponse->access_token) ;
+            $tokenResponse = json_decode($bodyTokenResponse);
+
+            $this->clientApi->setAccessToken($tokenResponse->scope, $tokenResponse->access_token);
 
             return $tokenResponse->access_token;
         } else {
             throw new MissingTokenException();
         }
     }
-
 }

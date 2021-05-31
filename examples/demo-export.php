@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__."/requires.inc.php";
+require __DIR__ . "/requires.inc.php";
 
 $client = new \Sitra\ApiClient\Client($config);
 
@@ -38,16 +38,16 @@ try {
     /*
      * Reference
      */
-    $cities = $client->getReferenceCity(['query' => [ 'codesInsee' => ["38534", "69388", "74140"] ]]);
+    $cities = $client->getReferenceCity(['query' => ['codesInsee' => ["38534", "69388", "74140"]]]);
     var_dump(count($cities));
 
-    $elements = $client->getReferenceElement(['query' => [ "elementReferenceIds" => [2, 118, 2338] ]]);
+    $elements = $client->getReferenceElement(['query' => ["elementReferenceIds" => [2, 118, 2338]]]);
     var_dump(count($elements));
 
-    $elements = $client->getReferenceInternalCriteria(['query' => [ "critereInterneIds" => [ 1068, 2168 ] ]]);
+    $elements = $client->getReferenceInternalCriteria(['query' => ["critereInterneIds" => [1068, 2168]]]);
     var_dump(count($elements));
 
-    $elements = $client->getReferenceSelection(['query' => [ "selectionIds" => [  64, 5896 ] ]]);
+    $elements = $client->getReferenceSelection(['query' => ["selectionIds" => [64, 5896]]]);
     var_dump(count($elements));
 } catch (\Sitra\ApiClient\Exception\SitraException $e) {
     echo $e->getMessage();

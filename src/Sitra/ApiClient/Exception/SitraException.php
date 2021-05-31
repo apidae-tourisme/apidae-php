@@ -2,8 +2,6 @@
 
 namespace Sitra\ApiClient\Exception;
 
-use Exception;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SitraException extends \Exception
@@ -22,7 +20,7 @@ class SitraException extends \Exception
             try {
                 $decodedJson = json_decode((string) $this->response->getBody(), true);
                 if ($decodedJson && isset($decodedJson['errorType'])) {
-                    $simpleMessage = $decodedJson['errorType'].' '.$decodedJson['message'];
+                    $simpleMessage = $decodedJson['errorType'] . ' ' . $decodedJson['message'];
                 }
             } catch (\InvalidArgumentException $e) {
                 // Not Json

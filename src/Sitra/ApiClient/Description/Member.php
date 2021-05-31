@@ -5,7 +5,7 @@ namespace Sitra\ApiClient\Description;
 class Member
 {
     public static $operations = array(
-        
+
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres
 
