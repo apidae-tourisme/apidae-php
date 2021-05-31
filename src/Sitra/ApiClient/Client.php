@@ -21,6 +21,7 @@ use Sitra\ApiClient\Description\Sso;
 use Sitra\ApiClient\Description\TouristicObjects;
 use Sitra\ApiClient\Description\User;
 use Sitra\ApiClient\Description\Member;
+use Sitra\ApiClient\Description\Edit;
 use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
 use Sitra\ApiClient\Exception\SitraException;
@@ -67,6 +68,8 @@ use Sitra\ApiClient\Traits\Sso as ApidaeSso;
  * @method array getUserByMember() getUserByMember(array $params)
  * @method array getAllUsers() getAllUsers(array $params)
  *
+ * @method array getEditAutorisation() getEditAutorisation(array $params)
+ *
  */
 class Client extends GuzzleClient
 {
@@ -75,6 +78,7 @@ class Client extends GuzzleClient
 
   const META_SCOPE = 'api_metadonnees';
   const SSO_SCOPE  = 'sso';
+  const EDIT_SCOPE  = 'api_ecriture';
 
   protected $config = [
     'baseUri'       => 'https://api.apidae-tourisme.com/',
@@ -127,7 +131,8 @@ class Client extends GuzzleClient
         Reference::$operations,
         Sso::$operations,
         User::$operations,
-        Member::$operations
+        Member::$operations,
+        Edit::$operations
       );
 
       $descriptionData = [

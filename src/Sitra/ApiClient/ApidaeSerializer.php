@@ -121,7 +121,7 @@ class ApidaeSerializer
 
         // If this operation require an OAuth scope
         $scope = $operation->getData('scope');
-        if ($scope && ($scope == ClientApi::META_SCOPE)) {
+        if ($scope && ($scope == ClientApi::META_SCOPE || $scope == ClientApi::EDIT_SCOPE)) {
             $request = $request->withHeader(
                 'Authorization',
                 sprintf('Bearer %s', $this->getOAuthToken($scope))
@@ -224,6 +224,11 @@ class ApidaeSerializer
             $auth = [
                 $this->clientApi->config('OAuthClientId'),
                 $this->clientApi->config('OAuthSecret'),
+            ];
+        } elseif ($scope === ClientApi::EDIT_SCOPE) {
+            $auth = [
+                $this->clientApi->config('editClientId'),
+                $this->clientApi->config('editSecret'),
             ];
         }
 
