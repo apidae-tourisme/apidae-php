@@ -2,9 +2,9 @@
 
 namespace Sitra\ApiClient\Traits;
 
-use Mmoreram\Extractor\Extractor;
+use Exception;
+use ZipArchive;
 use Symfony\Component\Finder\Finder;
-use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
 
 trait Export
@@ -30,7 +30,7 @@ trait Export
         }
 
         $temporaryDirectory = $this->getExportDirectory();
-        $exportPath         = sprintf('%s/%s', $temporaryDirectory->getDirectoryPath(), date('Y-m-d-His'));
+        $exportPath         = sprintf('%s/%s', $temporaryDirectory, date('Y-m-d-His'));
         $zipFullPath        = sprintf('%s/export.zip', $exportPath);
         $exportFullPath     = sprintf('%s/export/', $exportPath);
 
@@ -46,12 +46,17 @@ trait Export
             $this->handleHttpError($e);
         }
 
-        // Extract the ZIP file
-        $extractor = new Extractor(
-            new SpecificDirectory($exportFullPath)
-        );
+        $zip = new ZipArchive;
+        $res = $zip->open($zipFullPath);
+        if ($res !== true)
+            throw new Exception('Invalid zip file');
 
-        return $extractor->extractFromFile($zipFullPath);
+        $zip->extractTo($exportFullPath);
+        $zip->close();
+
+        $finder = new Finder();
+        $finder->in($exportFullPath);
+        return $finder;
     }
 
     /**
@@ -64,7 +69,7 @@ trait Export
         $exportDirectory = $this->getExportDirectory();
 
         $iterator = new \RecursiveDirectoryIterator(
-            $exportDirectory->getDirectoryPath(),
+            $exportDirectory,
             \RecursiveDirectoryIterator::SKIP_DOTS
         );
 
@@ -85,17 +90,17 @@ trait Export
     }
 
     /**
-     * @return SpecificDirectory
+     * @return string
      */
-    private function getExportDirectory(): SpecificDirectory
+    private function getExportDirectory(): string
     {
         if (!file_exists($this->config['exportDir'])) {
             mkdir($this->config['exportDir']);
         }
 
-        $dir = new SpecificDirectory($this->config['exportDir']);
+        $dir = $this->config['exportDir'];
 
-        if (!$dir) {
+        if (!is_dir($dir) || !is_writeable($dir)) {
             throw new InvalidExportDirectoryException();
         }
 
