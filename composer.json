@@ -9,8 +9,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle-services": "^1.1",
-        "mmoreram/extractor": "^1.2.1"
+        "guzzlehttp/guzzle-services": "^1.1"
     },
     "autoload": {
         "psr-4": {
