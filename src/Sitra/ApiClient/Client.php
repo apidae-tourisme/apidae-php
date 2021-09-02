@@ -121,23 +121,32 @@ class Client extends GuzzleClient
    */
   public function __construct(array $config = [], Description $description = null)
   {
-    if ($description === null) {
-      $operations = array_merge(
-        TouristicObjects::$operations,
-        Metadata::$operations,
-        Exports::$operations,
-        Search::$operations,
-        Agenda::$operations,
-        Reference::$operations,
-        Sso::$operations,
-        User::$operations,
-        Member::$operations,
-        Edit::$operations
-      );
+    if (isset($config['projectId'])) $config['projetId'] = $config['projectId'];
 
+    if (isset($config['ssoToken'])) {
+      $config['accessTokens'][self::SSO_SCOPE] = $config['ssoToken']['access_token'];
+      unset($config['ssoToken']);
+    }
+
+    $this->config = new \ArrayObject(array_merge($this->config, $config));
+    
+    $this->operations = array_merge(
+      TouristicObjects::$operations,
+      Metadata::$operations,
+      Exports::$operations,
+      Search::$operations,
+      Agenda::$operations,
+      Reference::$operations,
+      Sso::$operations,
+      User::$operations,
+      Member::$operations,
+      Edit::$operations
+    );
+    
+    if ($description === null) {
       $descriptionData = [
         'baseUri' => $this->config['baseUri'],
-        'operations' => $operations,
+        'operations' => $this->operations,
         'models' => [
           'getResponse' => [
             'type' => 'object',
@@ -159,17 +168,6 @@ class Client extends GuzzleClient
 
       $description = new Description($descriptionData);
     }
-
-    $this->operations = $operations;
-
-    if (isset($config['projectId'])) $config['projetId'] = $config['projectId'];
-
-    if (isset($config['ssoToken'])) {
-      $config['accessTokens'][self::SSO_SCOPE] = $config['ssoToken']['access_token'];
-      unset($config['ssoToken']);
-    }
-
-    $this->config = new \ArrayObject(array_merge($this->config, $config));
 
     if (isset($this->config['handler']) === false) {
       $this->config['handler'] = HandlerStack::create();
