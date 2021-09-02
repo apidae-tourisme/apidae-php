@@ -2,25 +2,26 @@
 
 namespace Sitra\ApiClient;
 
+use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\UriResolver;
 use GuzzleHttp\Client as ClientHttp;
+use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\UriTemplate\UriTemplate;
 use GuzzleHttp\Command\CommandInterface;
-use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Command\Guzzle\Parameter;
-use GuzzleHttp\Command\Guzzle\RequestLocation\BodyLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\FormParamLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\HeaderLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\JsonLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\MultiPartLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\QueryLocation;
-use GuzzleHttp\Command\Guzzle\RequestLocation\RequestLocationInterface;
-use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
-use Sitra\ApiClient\Exception\MissingTokenException;
-use GuzzleHttp\UriTemplate\UriTemplate;
 use Sitra\ApiClient\Client as ClientApi;
+use GuzzleHttp\Command\Guzzle\DescriptionInterface;
+use Sitra\ApiClient\Exception\MissingTokenException;
+use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\BodyLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\JsonLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\QueryLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\HeaderLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\FormParamLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\MultiPartLocation;
+use GuzzleHttp\Command\Guzzle\RequestLocation\RequestLocationInterface;
 
 /**
  * Serializes requests for a given command.
@@ -204,7 +205,10 @@ class ApidaeSerializer
 
         return new Request(
             $operation->getHttpMethod(),
-            Uri::resolve($this->description->getBaseUri(), $uri)
+            UriResolver::resolve(
+                $this->description->getBaseUri(),
+                new Uri($uri)
+            )
         );
     }
 
