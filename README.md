@@ -37,7 +37,6 @@ You need to create a `Client` instance:
 $client = new \Sitra\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projetId'        => 672,
-    'baseUrl'          => 'https://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
     'exportDir'        => '/tmp/sitraExports',
@@ -54,7 +53,6 @@ $client = new \Sitra\ApiClient\Client([
     'count'            => 20,
 
     // For SSO
-    'ssoBaseUrl'       => 'https://base.apidae-tourisme.com',
     'ssoRedirectUrl'   => 'http://localhost/',
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
@@ -82,7 +80,7 @@ Result is always a decoded PHP Array.
 
 - `apiKey`: Project API Key;
 - `projetId`: Corresponding projetId;
-- `baseUrl`: Not mandatory, useful if you want to hit pre-production i.e.;
+- `baseUri`: Not mandatory, useful if you want to hit test environment i.e. https://api.apidae-tourisme.cooking/;
 - `OAuthClientId`: Only for Metadata, a valid OAuth Client Id;
 - `OAuthSecret`: Only for Metadata, the corresponding secret;
 - `exportDir`: The directory where we store and extract ZIP exports;
@@ -93,7 +91,7 @@ Result is always a decoded PHP Array.
 - `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees));
 - `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-langues));
 - `count`: Allow to change the number of results globally for all object related queries;
-- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on));
+- `ssoBaseUrl`: Not mandatory : Base URL for SSO authentication ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on)); Default is https://base.apidae-tourisme.com (production). Test environment : https://base.apidae-tourisme.cooking
 - `ssoRedirectUrl`: The URL where SSO user will be sent back in your application;
 - `ssoClientId`: The SSO OAuth client ID;
 - `ssoSecret`: The SSO OAuth client secret.
