@@ -1,11 +1,8 @@
 <?php
 
-use Sitra\ApiClient\Exception\SitraException;
+use ApidaePHP\Exception\ApidaeException;
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-session_start();
-
+$config = [];
 require __DIR__ . "/requires.inc.php";
 
 echo '<pre>';
@@ -20,7 +17,7 @@ $config['ssoRedirectUrl'] = 'http' . (($_SERVER['SERVER_PORT'] == '80') ? '' : '
 if (isset($_GET['logout'])) unset($_SESSION['ssoToken']);
 
 // Create the client
-$client = new \Sitra\ApiClient\Client([
+$client = new \ApidaePHP\Client([
     'ssoRedirectUrl' => $config['ssoRedirectUrl'],
     'ssoClientId'    => $config['ssoClientId'],
     'ssoSecret'      => $config['ssoSecret'],
@@ -43,7 +40,7 @@ if (isset($_GET['code']) && !empty($_GET['code']) && !isset($_SESSION['ssoToken'
             'access_token' => $token['access_token'],
             'refresh_token' => $token['refresh_token']
         );
-    } catch (SitraException $e) {
+    } catch (ApidaeException $e) {
         echo $e->getMessage();
         echo "\n";
         echo $e->getPrevious()->getMessage();

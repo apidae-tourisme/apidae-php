@@ -12,7 +12,7 @@ $config = array(
     'OAuthClientId' => 'XXX',
     'OAuthSecret'   => 'XXX',
     // Nécessaire pour le SSO
-    'ssoRedirectUrl'   => '[...]/vendor/sitra-tourisme/sitra-api-php/examples/sso.php', // Remplacer [...] par l'url de votre projet (https:.....)
+    'ssoRedirectUrl'   => '[...]/examples/sso.php', // Remplacer [...] par l'url de votre projet (https:.....)
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
     'exportDir' => realpath(dirname(__FILE__)) . '/examples/export/'
