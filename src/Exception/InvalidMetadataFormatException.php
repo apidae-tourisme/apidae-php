@@ -30,6 +30,6 @@ Examples:
         ]
     }');
 
-See http://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees
+See https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees
 MESSAGE;
 }

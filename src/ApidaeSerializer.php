@@ -4,15 +4,16 @@ namespace ApidaePHP;
 
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\UriResolver;
+use ApidaePHP\Client as ClientApi;
 use GuzzleHttp\Client as ClientHttp;
 use Psr\Http\Message\RequestInterface;
 use GuzzleHttp\UriTemplate\UriTemplate;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
-use ApidaePHP\Client as ClientApi;
-use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use ApidaePHP\Exception\MissingTokenException;
+use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
 use GuzzleHttp\Command\Guzzle\RequestLocation\BodyLocation;
 use GuzzleHttp\Command\Guzzle\RequestLocation\JsonLocation;
@@ -38,6 +39,9 @@ class ApidaeSerializer
 
     /** @var ClientApi */
     private ClientApi $clientApi;
+
+    private Request $lastRequest;
+    private Response $lastResponse;
 
     /**
      * @param DescriptionInterface $description
@@ -121,7 +125,7 @@ class ApidaeSerializer
 
         // If this operation require an OAuth scope
         $scope = $operation->getData('scope');
-        if ($scope && ($scope == ClientApi::META_SCOPE || $scope == ClientApi::EDIT_SCOPE)) {
+        if ($scope && in_array($scope, [ClientApi::META_SCOPE, ClientApi::EDIT_SCOPE])) {
             $request = $request->withHeader(
                 'Authorization',
                 sprintf('Bearer %s', $this->getOAuthToken($scope))
@@ -166,10 +170,12 @@ class ApidaeSerializer
 
         // If command does not specify a template, assume the client's base URL.
         if (null == $operation->getUri()) {
-            return new Request(
+            $request = new Request(
                 $operation->getHttpMethod(),
                 $this->description->getBaseUri()
             );
+            $this->lastRequest = $request;
+            return $request;
         }
 
         return $this->createCommandWithUri($operation, $command);
@@ -202,38 +208,45 @@ class ApidaeSerializer
         // Expand the URI template.
         $uri = UriTemplate::expand($operation->getUri(), $variables);
 
-        return new Request(
+        $request = new Request(
             $operation->getHttpMethod(),
             UriResolver::resolve(
                 $this->description->getBaseUri(),
                 new Uri($uri)
             )
         );
+
+        $this->lastRequest = $request;
+        return $request;
     }
 
     /**
      * @param string $scope
      * @return string
      */
-    protected function getOAuthToken($scope): string
+    protected function getOAuthToken(string $scope): string
     {
         if (isset($this->clientApi->config('accessTokens')[$scope])) {
             return $this->clientApi->config('accessTokens')[$scope];
         }
 
-        $auth = null;
-
-        if ($scope === ClientApi::META_SCOPE) {
-            $auth = [
-                $this->clientApi->config('OAuthClientId'),
-                $this->clientApi->config('OAuthSecret'),
-            ];
-        } elseif ($scope === ClientApi::EDIT_SCOPE) {
-            $auth = [
-                $this->clientApi->config('editClientId'),
-                $this->clientApi->config('editSecret'),
-            ];
-        }
+        if ($scope == ClientApi::META_SCOPE) {
+            if ($this->clientApi->config('metaClientId') && $this->clientApi->config('metaSecret')) {
+                $auth = [
+                    $this->clientApi->config('metaClientId'),
+                    $this->clientApi->config('metaSecret'),
+                ];
+            } else
+                throw new \Exception('Missing parameters metaClientId or metaSecret');
+        } elseif ($scope == ClientApi::EDIT_SCOPE) {
+            if ($this->clientApi->config('editClientId') && $this->clientApi->config('editSecret')) {
+                $auth = [
+                    $this->clientApi->config('editClientId'),
+                    $this->clientApi->config('editSecret'),
+                ];
+            } else throw new \Exception('Missing parameters editClientId or editSecret');
+        } else
+            throw new \Exception('UNKNOWNED SCOPE : ' . $scope);
 
         if (is_array($auth)) {
             $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
@@ -254,5 +267,10 @@ class ApidaeSerializer
         } else {
             throw new MissingTokenException();
         }
+    }
+
+    public function getLastRequest(): Request
+    {
+        return $this->lastRequest;
     }
 }

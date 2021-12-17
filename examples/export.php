@@ -31,7 +31,7 @@ try {
      * Export
      */
 
-    // Notifications come from a $_POST from Apidae
+    // Notifications comes from a $_POST from Apidae
     // Please note that $exportNotification can be defined in ../config.inc.php for testing this demo
     // Here is an example of what a $_POST could contain
     /*

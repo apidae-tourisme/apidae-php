@@ -4,11 +4,13 @@ namespace ApidaePHP\Description;
 
 class TouristicObjects
 {
-    public static $operations = array(
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-id
         'getObjectById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-id/{id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -40,6 +42,7 @@ class TouristicObjects
         'getObjectByIdentifier' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-identifier/{identifier}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'identifier' => [

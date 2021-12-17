@@ -2,14 +2,14 @@
 
 namespace ApidaePHP;
 
+use ApidaePHP\Client as ClientApi;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
-use ApidaePHP\Client as ClientApi;
 
 class ApidaeSubscriber
 {
-    private $description;
-    private $clientApi;
+    private DescriptionInterface $description;
+    private ClientApi $clientApi;
     public function __construct(DescriptionInterface $description, ClientApi $clientApi)
     {
         $this->description  = $description;
@@ -33,7 +33,7 @@ class ApidaeSubscriber
             }
             // Search operations use the authentication inside a query string JSON!
             if ($operation->hasParam('query')) {
-                $data = is_array($command['query']) ? $command['query'] : \GuzzleHttp\json_decode($command['query'], true);
+                $data = is_array($command['query']) ? $command['query'] : json_decode($command['query'], true);
                 if (!isset($data['apiKey']) && !isset($data['projetId'])) {
                     $data['apiKey'] = $this->clientApi->config('apiKey');
                     $data['projetId'] = $this->clientApi->config('projetId');

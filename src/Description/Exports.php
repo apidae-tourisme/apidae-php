@@ -4,11 +4,13 @@ namespace ApidaePHP\Description;
 
 class Exports
 {
-    public static $operations = array(
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
         'confirmExport' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/export/confirmation',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'hash' => [
@@ -21,6 +23,7 @@ class Exports
                 ],
             ],
         ],
+        'exportConfirmation' => ['extends' => 'confirmExport']
     );
 
     /**

@@ -6,11 +6,12 @@ use ApidaePHP\Client as ClientApi;
 
 class User
 {
-    public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         'getUserProfile' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/profil',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil',
             'responseModel' => 'getResponse',
             'data' => [
                 'scope' => ClientApi::SSO_SCOPE,
@@ -18,10 +19,10 @@ class User
         ],
         'ssoUtilisateurProfil' => ['extends' => 'getUserProfile'],
 
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
         'getUserPermissionOnObject' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification',
             'responseModel' => 'getResponseBody',
             'parameters' => [
                 'id' => [

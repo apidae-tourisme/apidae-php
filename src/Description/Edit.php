@@ -6,11 +6,13 @@ use ApidaePHP\Client as ClientApi;
 
 class Edit
 {
-    public static $operations = array(
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification
         'getEditAutorisation' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/autorisation/objet-touristique/modification/{id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification',
             'responseModel' => 'getResponseBody',
             'parameters' => [
                 'id' => [

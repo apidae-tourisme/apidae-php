@@ -14,23 +14,6 @@ class Base extends TestCase
     protected array $container;
     protected MockHandler $mock;
     protected Client $client;
-    protected static array $config = [
-        'apiKey' => '1',
-        'projetId' => 1
-    ];
-
-    /** @see https://docs.guzzlephp.org/en/5.3/testing.html */
-    public function setUp(): void
-    {
-        $this->container = [];
-
-        $this->mock = new MockHandler([]);
-        $history = Middleware::history($this->container);
-
-        $handlerStack = HandlerStack::create($this->mock);
-        $handlerStack->push($history);
-        $this->client = new Client(array_merge(self::$config, ['handler' => $handlerStack]));
-    }
 
     public function setMock(Response $response): void
     {
@@ -42,9 +25,10 @@ class Base extends TestCase
     {
         $transaction = array_pop($this->container);
         if (($temp = $transaction['request']->getUri()->getQuery()) !== false) {
-            parse_str($transaction['request']->getUri()->getQuery(), $query);
+            parse_str($temp, $query);
             unset($query['apiKey']);
             unset($query['projetId']);
+            unset($query['tokenSSO']);
             $transaction['request']->query = $query;
         }
         return $transaction;

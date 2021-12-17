@@ -13,7 +13,7 @@ trait Sso
     /**
      * @return string
      */
-    public function getSsoUrl($ssoRedirectUrl = null): string
+    public function getSsoUrl(string $ssoRedirectUrl = null): string
     {
         $params = array(
             'response_type' => 'code',
@@ -35,7 +35,7 @@ trait Sso
      * @param string $scope
      * @param string $token
      */
-    public function setAccessToken($scope, $token)
+    public function setAccessToken(string $scope, string $token): void
     {
         $this->config['accessTokens'][$scope] = $token;
     }
@@ -44,7 +44,7 @@ trait Sso
      * @param string $scope
      * @return string
      */
-    public function getAccessToken($scope): string
+    public function getAccessToken(string $scope): string
     {
         if (isset($this->config['accessTokens'][$scope])) {
             return $this->config['accessTokens'][$scope];

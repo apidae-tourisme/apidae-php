@@ -4,11 +4,12 @@ namespace ApidaePHP\Description;
 
 class Sso
 {
-    public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/authentification-client-credentials
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         'getSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'grant_type' => [
@@ -30,9 +31,11 @@ class Sso
                 ],
             ],
         ],
+        'oauthToken' => ['extends' => 'getSsoToken'],
         'refreshSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'grant_type' => [
@@ -53,6 +56,6 @@ class Sso
                     'required' => true,
                 ],
             ],
-        ],
+        ]
     );
 }

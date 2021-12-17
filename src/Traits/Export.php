@@ -13,7 +13,7 @@ trait Export
     /**
      * Download and read zip export
      *
-     * @param  array                            $params
+     * @param  array<string|false|null> $params
      * @return \Symfony\Component\Finder\Finder
      */
     public function getExportFiles(array $params): Finder
@@ -35,13 +35,18 @@ trait Export
 
         mkdir($exportPath);
         mkdir($exportFullPath);
+        /**
+         * @todo vérifier l'existance des dossiers, déclencher une erreur sinon (le mkdir ne déclenche pas d'Exception, juste des warning)
+         * 
+         */
 
         $resource = fopen($zipFullPath, 'w');
 
         // Download the ZIP file in temp directory
         /** @todo Call to an undefined method GuzzleHttp\ClientInterface::get(). */
         try {
-            $client->get($params['url'], ['sink' => $resource]);
+            //$client->get($params['url'], ['sink' => $resource]);
+            $client->request('GET', $params['url'], ['sink' => $resource]);
         } catch (\Exception $e) {
             $this->handleHttpError($e);
         }

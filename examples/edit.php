@@ -1,5 +1,7 @@
 <?php
 
+use ApidaePHP\Exception\ApidaeException;
+
 $config = [];
 require __DIR__ . "/requires.inc.php";
 
@@ -23,9 +25,9 @@ foreach ($offers as $offer => $expected) {
     echo $offer . ' expected : ' . $expected . "\n";
     try {
         $response = $client->getEditAutorisation(['id' => $offer]);
-        echo $response['response']->getContents();
+        echo $response['stream']->getContents();
     } catch (Exception $e) {
-        echo $e;
+        echo $e->getMessage();
     }
     echo "\n" . '<hr />' . "\n";
 }

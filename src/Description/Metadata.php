@@ -10,11 +10,13 @@ class Metadata
 {
     const ALLOWED_KEY_REGEX = '/^(membre(s|$)(\.membre_\d+)?)$|^(projet(s|$)(\.projet_\d+)?)$|^general$|^node$/';
 
-    public static $operations = array(
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees
         'getMetadata' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -45,6 +47,7 @@ class Metadata
         'deleteMetadata' => [
             'httpMethod' => 'DELETE',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -61,6 +64,7 @@ class Metadata
                     'type' => 'string',
                     'location' => 'uri',
                     'required' => false,
+                    'values' => ['general', 'membre', 'projet']
                 ],
                 'targetId' => [
                     'type' => 'integer',
@@ -75,6 +79,7 @@ class Metadata
         'putMetadata' => [
             'httpMethod' => 'PUT',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -86,6 +91,7 @@ class Metadata
                     'type' => 'string',
                     'location' => 'uri',
                     'required' => true,
+                    'values' => ['tripadvisor', 'opensystem', '...']
                 ],
                 /*
                 'metadata' => [
@@ -97,24 +103,28 @@ class Metadata
                 ],
                 */
                 'general' => [
+                    'type' => 'string',
                     'location' => 'body',
                     'filters' => [
                         '\ApidaePHP\Description\Metadata::validateMetadata',
                     ],
                 ],
                 'membres' => [
+                    'type' => 'string',
                     'location' => 'body',
                     'filters' => [
                         '\ApidaePHP\Description\Metadata::validateMetadata',
                     ],
                 ],
                 'projets' => [
+                    'type' => 'string',
                     'location' => 'body',
                     'filters' => [
                         '\ApidaePHP\Description\Metadata::validateMetadata',
                     ],
                 ],
                 'node' => [
+                    'type' => 'string',
                     'location' => 'body',
                     'filters' => [
                         '\ApidaePHP\Description\Metadata::validateMetadata',
@@ -127,7 +137,11 @@ class Metadata
         ],
     );
 
-    public static function validateMetadata($metadata)
+    /** 
+     * @param array<array<mixed>> $metadata
+     * @return array<array<mixed>>
+     */
+    public static function validateMetadata(null|array $metadata): array
     {
         if (empty($metadata)) {
             throw new InvalidMetadataFormatException();

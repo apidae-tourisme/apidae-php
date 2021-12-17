@@ -4,7 +4,8 @@ namespace ApidaePHP\Description;
 
 class Member
 {
-    public static $operations = array(
+    /** @var array<mixed> $operations */
+    public static array $operations = array(
 
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres
@@ -12,6 +13,7 @@ class Member
         'getMemberById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/membre/get-by-id/{id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -36,6 +38,7 @@ class Member
         'getMembers' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/membre/get-membres',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'query' => [
@@ -53,6 +56,7 @@ class Member
         'getUserById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-id/{id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -77,6 +81,7 @@ class Member
         'getUserByMail' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-mail/{eMail}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'eMail' => [
@@ -101,6 +106,7 @@ class Member
         'getUsersByMember' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-membre/{membre_id}',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'membre_id' => [

@@ -73,7 +73,7 @@ try {
     $id = 5679881;
     echo '<h1>getUserPermissionOnObject([id => ' . $id . '])</h1>';
     $permissions = $client->getUserPermissionOnObject(['id' => $id]);
-    echo $permissions['response']->getContents();
+    echo $permissions['stream']->getContents();
 } catch (\Exception $e) {
     echo '<pre>';
     echo $e->getMessage();

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * searchAgenda
- * searchAgendaIdentifier
- * searchDetailedAgenda
- * searchDetailedAgendaIdentifier
- */
-
 namespace ApidaePHP\Tests\Unit;
 
 use ApidaePHP\Tests\Unit\UnitBase;
@@ -59,7 +52,6 @@ class AgendaTest extends UnitBase
             $this->assertEquals('/api/v002/agenda/detaille/list-objets-touristiques', $transaction['request']->getUri()->getPath());
             $this->assertEquals([], $transaction['request']->query);
         }
-        $this->markTestIncomplete();
     }
 
     public function testsearchDetailedAgendaIdentifierr()
