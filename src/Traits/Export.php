@@ -35,10 +35,11 @@ trait Export
 
         mkdir($exportPath);
         mkdir($exportFullPath);
-        /**
-         * @todo vérifier l'existance des dossiers, déclencher une erreur sinon (le mkdir ne déclenche pas d'Exception, juste des warning)
-         * 
-         */
+
+        if (!is_dir($exportFullPath))
+            throw new Exception('Directory does not exists : ' . $exportFullPath);
+        if (!is_writable($exportFullPath))
+            throw new Exception('Directory is not writable : ' . $exportFullPath);
 
         $resource = fopen($zipFullPath, 'w');
 

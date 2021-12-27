@@ -15,18 +15,6 @@ foreach ($client->operations as $k => $o) {
 }
 echo '</table>';
 
-/**
- * Used only for example purpose
- */
-function showResult($r)
-{
-    if (isset($r['numFound'])) echo '<h3>' . $r['numFound'] . ' results (numFound)</h3>';
-    else echo '<h3>' . count($r) . ' results (count)</h3>';
-    echo '<pre style="background:green;max-height:200px;overflow:scroll;color:white;padding:10px;font-size:.8em;">';
-    print_r($r);
-    echo '</pre>';
-}
-
 echo "\n" . '<h1>Simple object</h1>' . "\n";
 
 echo "\n" . '<h2>getObjectById (' . $client->operations['getObjectById']['uri'] . ')</h2>' . "\n";

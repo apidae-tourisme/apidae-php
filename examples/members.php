@@ -5,13 +5,6 @@ require __DIR__ . "/requires.inc.php";
 
 $client = new \ApidaePHP\Client($config);
 
-function showResult($r)
-{
-    echo '<pre style="background:green;max-height:200px;overflow:scroll;color:white;padding:10px;font-size:.8em;">';
-    print_r($r);
-    echo '</pre>';
-}
-
 echo "\n" . '<h2>getMemberById (' . $client->operations['getMemberById']['uri'] . ')</h2>' . "\n";
 try {
     $res = $client->getMemberById(['id' => 1]);
