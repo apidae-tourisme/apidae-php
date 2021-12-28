@@ -63,4 +63,17 @@ class ReferenceTest extends UnitBase
             $this->assertEquals([], $transaction['request']->query);
         }
     }
+    public function testgetReferenceSelectionsByObject()
+    {
+        $methods = ['getReferenceSelectionsByObject', 'referentielSelectionsParObjet'];
+        foreach ($methods as $method) {
+            $this->setMock(new Response(200, [], '{}'));
+            $this->client->$method(['query' => ['referenceIds' => [1234]]]);
+            $transaction = $this->lastTransaction();
+            $this->assertEquals('POST', $transaction['request']->getMethod());
+            $this->assertEquals('/api/v002/referentiel/selections-par-objet', $transaction['request']->getUri()->getPath());
+            $this->assertEquals([], $transaction['request']->query);
+            $this->assertEquals(['referenceIds' => [1234]], $transaction['request']->bodyQuery);
+        }
+    }
 }

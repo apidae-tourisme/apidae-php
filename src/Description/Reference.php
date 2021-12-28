@@ -40,6 +40,12 @@ class Reference
             'uri' => '/api/v002/referentiel/selections',
             'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections'
         ],
-        'referentielSelections' => ['extends' => 'getReferenceSelection']
+        'referentielSelections' => ['extends' => 'getReferenceSelection'],
+        'getReferenceSelectionsByObject' => [
+            'extends' => 'getReferenceCity',
+            'uri' => '/api/v002/referentiel/selections-par-objet',
+            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet'
+        ],
+        'referentielSelectionsParObjet' => ['extends' => 'getReferenceSelectionsByObject']
     );
 }

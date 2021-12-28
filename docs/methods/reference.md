@@ -36,3 +36,11 @@ $selections = $client->getReferenceSelection([
     'query' => '{"selectionIds":[64, 5896]}'
 ]);
 ```
+
+## Selections by object
+
+```php
+$selections = $client->getReferenceSelectionByObject([
+    'query' => '{"referenceIds":[64, 5896]}'
+]);
+```
