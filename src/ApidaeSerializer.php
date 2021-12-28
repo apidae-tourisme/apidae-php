@@ -41,7 +41,6 @@ class ApidaeSerializer
     private ClientApi $clientApi;
 
     private Request $lastRequest;
-    private Response $lastResponse;
 
     /**
      * @param DescriptionInterface $description
@@ -230,6 +229,9 @@ class ApidaeSerializer
             return $this->clientApi->config('accessTokens')[$scope];
         }
 
+        /** @var array $auth */
+        $auth = null;
+
         if ($scope == ClientApi::META_SCOPE) {
             if ($this->clientApi->config('metaClientId') && $this->clientApi->config('metaSecret')) {
                 $auth = [
@@ -248,25 +250,21 @@ class ApidaeSerializer
         } else
             throw new \Exception('UNKNOWNED SCOPE : ' . $scope);
 
-        if (is_array($auth)) {
-            $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
-                'auth' => $auth,
-                'query' => [
-                    'grant_type' => 'client_credentials',
-                ],
-                'headers' => [
-                    'accept' => 'application/json',
-                ],
-            ])->getBody();
+        $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
+            'auth' => $auth,
+            'query' => [
+                'grant_type' => 'client_credentials',
+            ],
+            'headers' => [
+                'accept' => 'application/json',
+            ],
+        ])->getBody();
 
-            $tokenResponse = json_decode($bodyTokenResponse);
+        $tokenResponse = json_decode($bodyTokenResponse);
 
-            $this->clientApi->setAccessToken($tokenResponse->scope, $tokenResponse->access_token);
+        $this->clientApi->setAccessToken($tokenResponse->scope, $tokenResponse->access_token);
 
-            return $tokenResponse->access_token;
-        } else {
-            throw new MissingTokenException();
-        }
+        return $tokenResponse->access_token;
     }
 
     public function getLastRequest(): Request

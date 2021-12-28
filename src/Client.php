@@ -115,6 +115,11 @@ use GuzzleHttp\Command\Exception\CommandServerException;
  * @method array getReferenceSelection() getReferenceSelection([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
  * @method array referentielSelections() referentielSelections([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
  *
+ * /api/v002/referentiel/selections-par-objet
+ * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet
+ * @method array getReferenceSelectionsByObject() getReferenceSelectionsByObject([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array referentielSelectionsParObjet() referentielSelectionsParObjet([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ *
  * /api/v002/recherche/list-objets-touristiques
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-objets-touristiques
  * @method array searchObject() searchObject([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
@@ -198,6 +203,9 @@ class Client extends GuzzleClient
 
   /** @var array<mixed> $operations */
   public array $operations;
+
+  /** @var ApidaeSerializer $serializer */
+  private $serializer;
 
   /**
    * @param array<mixed> $config
