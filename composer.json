@@ -57,16 +57,16 @@
             "php vendor/bin/phpunit tests"
         ],
         "schemaDoc": [
-            "generate-schema-doc --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiObjetsTouristiquesRequete.schema docs/schemas/md/touristicobjects.md",
-            "generate-schema-doc --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCommunesRequete.schema docs/schemas/md/reference/city.md",
-            "generate-schema-doc --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/md/reference/internal_criteria.md",
-            "generate-schema-doc --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/md/reference/criteria.md",
-            "generate-schema-doc --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/md/reference/selections.md",
-            "generate-schema-doc --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiObjetsTouristiquesRequete.schema docs/schemas/html/touristicobjects.html",
-            "generate-schema-doc --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCommunesRequete.schema docs/schemas/html/reference/city.html",
-            "generate-schema-doc --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/html/reference/internal_criteria.html",
-            "generate-schema-doc --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/html/reference/criteria.html",
-            "generate-schema-doc --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/html/reference/selections.html"
+            "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiObjetsTouristiquesRequete.schema docs/schemas/md/touristicobjects.md",
+            "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCommunesRequete.schema docs/schemas/md/reference/city.md",
+            "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/md/reference/internal_criteria.md",
+            "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/md/reference/criteria.md",
+            "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/md/reference/selections.md",
+            "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiObjetsTouristiquesRequete.schema docs/schemas/html/touristicobjects.html",
+            "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCommunesRequete.schema docs/schemas/html/reference/city.html",
+            "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/html/reference/internal_criteria.html",
+            "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/html/reference/criteria.html",
+            "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/html/reference/selections.html"
         ]
     }
 }
