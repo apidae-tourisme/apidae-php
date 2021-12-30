@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class Sso
+class Sso extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(

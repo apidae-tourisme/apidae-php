@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class TouristicObjects
+class TouristicObjects extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(

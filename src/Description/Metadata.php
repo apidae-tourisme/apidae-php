@@ -6,7 +6,7 @@ use GuzzleHttp\Query;
 use ApidaePHP\Exception\InvalidMetadataFormatException;
 use ApidaePHP\Client as ClientApi;
 
-class Metadata
+class Metadata extends AbstractDescriptions
 {
     const ALLOWED_KEY_REGEX = '/^(membre(s|$)(\.membre_\d+)?)$|^(projet(s|$)(\.projet_\d+)?)$|^general$|^node$/';
 

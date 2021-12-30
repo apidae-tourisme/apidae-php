@@ -4,7 +4,7 @@ namespace ApidaePHP\Description;
 
 use ApidaePHP\Client as ClientApi;
 
-class User
+class User extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(

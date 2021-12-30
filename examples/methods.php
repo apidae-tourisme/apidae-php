@@ -14,19 +14,6 @@ function getParam($params, $param): mixed
     } else return false;
 }
 
-/*
-$eol = '<br />' . "\n";
-
-echo '<h1>Methods</h1>';
-foreach ($client->operations as $operation => $params) {
-    echo '<h2>' . $operation . '</h2>';
-    echo getParam($params, 'httpMethod') . ' ' . getParam($params, 'uri') . $eol;
-    if (($summary = getParam($params, 'summary')) != false) echo $summary . $eol;
-    if (($docUrl = getParam($params, 'docUrl')) != false) echo '<a href="' . $docUrl . '">' . $docUrl . '</a>';
-    echo $eol;
-}
-*/
-
 $doc = '';
 $last_uri = '';
 

@@ -18,6 +18,7 @@ class AgendaTest extends UnitBase
             $this->assertEquals('POST', $transaction['request']->getMethod());
             $this->assertEquals('/api/v002/agenda/simple/list-objets-touristiques', $transaction['request']->getUri()->getPath());
             $this->assertEquals([], $transaction['request']->query);
+            $this->assertEquals(['searchQuery' => 'vélo'], $transaction['request']->bodyQuery);
 
             $this->setMock(new Response(200, [], '{}'));
             $this->client->agendaSimpleListObjetsTouristiques(['query' => '{"searchQuery": "vélo", "count": 61, "responseFields": ["nom"]}']);
@@ -25,6 +26,7 @@ class AgendaTest extends UnitBase
             $this->assertEquals('POST', $transaction['request']->getMethod());
             $this->assertEquals('/api/v002/agenda/simple/list-objets-touristiques', $transaction['request']->getUri()->getPath());
             $this->assertEquals([], $transaction['request']->query);
+            $this->assertEquals(['searchQuery' => 'vélo', 'count' => 61, 'responseFields' => ['nom']], $transaction['request']->bodyQuery);
         }
     }
 
@@ -54,7 +56,7 @@ class AgendaTest extends UnitBase
         }
     }
 
-    public function testsearchDetailedAgendaIdentifierr()
+    public function testsearchDetailedAgendaIdentifier()
     {
         $methods = ['searchDetailedAgendaIdentifier', 'agendaDetailleListIdentifiants'];
         foreach ($methods as $method) {
@@ -65,6 +67,5 @@ class AgendaTest extends UnitBase
             $this->assertEquals('/api/v002/agenda/detaille/list-identifiants', $transaction['request']->getUri()->getPath());
             $this->assertEquals([], $transaction['request']->query);
         }
-        $this->markTestIncomplete();
     }
 }

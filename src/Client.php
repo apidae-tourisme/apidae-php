@@ -103,7 +103,7 @@ use GuzzleHttp\Command\Exception\CommandServerException;
  * /api/v002/referentiel/elements-reference
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference
  * @method array getReferenceElement() getReferenceElement([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referencielElementsReference() referencielElementsReference([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array referentielElementsReference() referentielElementsReference([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
  *
  * /api/v002/referentiel/criteres-internes
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes
@@ -205,7 +205,10 @@ class Client extends GuzzleClient
   public array $operations;
 
   /** @var ApidaeSerializer $serializer */
-  private $serializer;
+  private ApidaeSerializer $serializer;
+
+  /** @var Description $description */
+  private Description $description;
 
   /**
    * @param array<mixed> $config
@@ -234,7 +237,7 @@ class Client extends GuzzleClient
       User::$operations,
     );
 
-    $description = new Description([
+    $this->description = new Description([
       'name' => self::NAME,
       'apiVersion' => self::VERSION,
       'description' => 'PHP Helper class for Apidae Tourisme API : see https://dev.apidae-tourisme.com',
@@ -277,10 +280,10 @@ class Client extends GuzzleClient
 
     $client = new GuzzleHttpClient($config);
 
-    $this->serializer = new ApidaeSerializer($description, $client, $this);
-    $subscriber = new ApidaeSubscriber($description, $this);
+    $this->serializer = new ApidaeSerializer($this->description, $client, $this);
+    $subscriber = new ApidaeSubscriber($this->description, $this);
 
-    parent::__construct($client, $description, $this->serializer);
+    parent::__construct($client, $this->description, $this->serializer);
 
     $stack = $this->getHandlerStack();
     $stack->before('validate_description', $subscriber);
@@ -342,5 +345,10 @@ class Client extends GuzzleClient
   public function getLastRequest(): Request
   {
     return $this->serializer->getLastRequest();
+  }
+
+  public function getOperation(string $name)
+  {
+    return $this->description->getOperation($name);
   }
 }

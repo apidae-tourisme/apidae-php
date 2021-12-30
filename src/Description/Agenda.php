@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class Agenda
+class Agenda extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(
@@ -11,13 +11,17 @@ class Agenda
             'uri' => '/api/v002/agenda/simple/list-objets-touristiques',
             'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques',
             'responseModel' => 'getResponse',
+            'schema' => 'apiObjetsTouristiquesRequete',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
                     'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
-                        '\ApidaePHP\Description\Search::encodeSearchQuery',
+                        [
+                            'method' => '\ApidaePHP\Description\Agenda::encodeQuery',
+                            'args' => ['@value', 'searchAgenda']
+                        ]
                     ],
                 ],
             ],

@@ -2,8 +2,6 @@
 
 namespace ApidaePHP\Description;
 
-use ApidaePHP\Description\AbstractDescriptions;
-
 class Reference extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
@@ -48,7 +46,7 @@ class Reference extends AbstractDescriptions
                 ],
             ],
         ],
-        'referencielElementsReference' => ['extends' => 'getReferenceElement'],
+        'referentielElementsReference' => ['extends' => 'getReferenceElement'],
         'getReferenceInternalCriteria' => [
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/criteres-internes',
@@ -61,7 +59,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Descriptions::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
                             'args' => ['@value', 'getReferenceInternalCriteria']
                         ]
                     ],
@@ -81,7 +79,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Descriptions::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
                             'args' => ['@value', 'getReferenceSelection']
                         ]
                     ],
@@ -101,7 +99,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     /*'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Descriptions::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
                             'args' => ['@value', 'apiReferentielCommunesRequete']
                         ]
                     ],*/

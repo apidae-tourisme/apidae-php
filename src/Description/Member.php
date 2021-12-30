@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class Member
+class Member extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(
@@ -46,7 +46,10 @@ class Member
                     'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
-                        '\ApidaePHP\Description\Search::encodeSearchQuery',
+                        [
+                            'method' => '\ApidaePHP\Description\Member::encodeQuery',
+                            'args' => ['@value', 'getMembers']
+                        ]
                     ],
                 ],
             ],

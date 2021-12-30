@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class Exports
+class Exports extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = array(

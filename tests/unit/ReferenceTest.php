@@ -29,7 +29,7 @@ class ReferenceTest extends UnitBase
     }
     public function testgetReferenceElement()
     {
-        $methods = ['getReferenceElement', 'referencielElementsReference'];
+        $methods = ['getReferenceElement', 'referentielElementsReference'];
         foreach ($methods as $method) {
             $this->setMock(new Response(200, [], '{}'));
             $this->client->$method(['referenceId' => 1234, 'nodeId' => 'tripadvisor']);

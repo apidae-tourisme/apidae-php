@@ -12,7 +12,7 @@ class EditTest extends UnitBase
         $methods = ['getEditAutorisation', 'autorisationObjetTouristiqueModification'];
         foreach ($methods as $method) {
             $this->setMock(new Response(200, [], '{}'));
-            $this->client->$method(['id' => 1234]);
+            $this->client->$method(['id' => 1234, 'id2' => 'test']);
             $transaction = $this->lastTransaction();
             $this->assertEquals('GET', $transaction['request']->getMethod());
             $this->assertEquals('/api/v002/autorisation/objet-touristique/modification/1234', $transaction['request']->getUri()->getPath());

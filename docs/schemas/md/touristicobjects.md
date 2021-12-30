@@ -460,4 +460,4 @@ Must be one of:
 |                           |                                                                           |
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-30 at 16:05:33 +0100
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-30 at 17:20:43 +0100

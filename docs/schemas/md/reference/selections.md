@@ -60,4 +60,4 @@
 |                           |                                                                           |
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-30 at 16:05:34 +0100
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-12-30 at 17:20:44 +0100

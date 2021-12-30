@@ -20,7 +20,7 @@ abstract class AbstractDescriptions
             $dataObject = json_decode($dataJson);
         } else {
             $dataJson = $data;
-            $dataObject = json_decode($dataJson);
+            $dataObject = json_decode($data);
             if (json_last_error() !== JSON_ERROR_NONE)
                 throw new \Exception('\'query\' parameter is not a valid json string : ' . $data);
         }
@@ -39,7 +39,7 @@ abstract class AbstractDescriptions
             }
         }
 
-        return json_encode($data);
+        return $dataJson;
     }
 
     private static function loadSchemas()

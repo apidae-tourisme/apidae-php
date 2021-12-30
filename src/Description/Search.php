@@ -2,7 +2,7 @@
 
 namespace ApidaePHP\Description;
 
-class Search
+class Search extends AbstractDescriptions
 {
     /** @var array<mixed> $operations */
     public static array $operations = [
@@ -10,6 +10,7 @@ class Search
             'httpMethod' => 'POST',
             'uri' => '/api/v002/recherche/list-objets-touristiques',
             'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-objets-touristiques',
+            'schema' => 'apiObjetsTouristiquesRequete',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'query' => [
@@ -17,7 +18,10 @@ class Search
                     'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
-                        '\ApidaePHP\Description\Search::encodeSearchQuery',
+                        [
+                            'method' => '\ApidaePHP\Description\Search::encodeQuery',
+                            'args' => ['@value', 'searchObject']
+                        ]
                     ],
                 ],
             ],
@@ -31,33 +35,8 @@ class Search
         'rechercheListIdentifiants' => ['extends' => 'searchObjectIdentifier']
     ];
 
-    public static $queryParams = [
-        'apiKey' => [],
-        'projetId' => [],
-        'identifiants' => [],
-        'identifiers' => [],
-        'listeEnregistreeId' => [],
-        'selectionIds' => [],
-        'center' => [],
-        'radius' => [],
-        'communeCodesInsee' => [],
-        'territoireIds' => [],
-        'searchQuery' => [],
-        'searchFields' => [],
-        'criteresQuery' => [],
-        'dateDebut' => [],
-        'dateFin' => [],
-        'first' => [],
-        'count' => [],
-        'order' => [],
-        'asc' => [],
-        'randomSeed' => [],
-        'locales' => [],
-        'responseFields' => [],
-        'membreProprietaireIds' => []
-    ];
-
     /** @param array<mixed> $query */
+    /*
     public static function encodeSearchQuery(array|string $query): string
     {
         if (!is_array($query)) {
@@ -75,5 +54,5 @@ class Search
         }
 
         return json_encode($query);
-    }
+    }*/
 }
