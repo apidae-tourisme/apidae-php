@@ -11,7 +11,7 @@ class User extends AbstractDescriptions
         'getUserProfile' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/profil',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil',
             'responseModel' => 'getResponse',
             'data' => [
                 'scope' => ClientApi::SSO_SCOPE,
@@ -22,7 +22,7 @@ class User extends AbstractDescriptions
         'getUserPermissionOnObject' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification',
             'responseModel' => 'getResponseBody',
             'parameters' => [
                 'id' => [

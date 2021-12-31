@@ -10,7 +10,7 @@ class Exports extends AbstractDescriptions
         'confirmExport' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/export/confirmation',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'hash' => [

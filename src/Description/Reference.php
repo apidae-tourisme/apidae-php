@@ -9,7 +9,7 @@ class Reference extends AbstractDescriptions
         'getReferenceCity' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/referentiel/communes',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes',
             'schema' => 'apiReferentielCommunesRequete',
             'responseModel' => 'getResponse',
             'parameters' => [
@@ -30,7 +30,7 @@ class Reference extends AbstractDescriptions
         'getReferenceElement' => [
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/elements-reference',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference',
             'schema' => 'apiReferentielElementsReferenceRequete',
             'parameters' => [
                 'query' => [
@@ -50,7 +50,7 @@ class Reference extends AbstractDescriptions
         'getReferenceInternalCriteria' => [
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/criteres-internes',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes',
             'schema' => 'apiReferentielCriteresInternesRequete',
             'parameters' => [
                 'query' => [
@@ -70,7 +70,7 @@ class Reference extends AbstractDescriptions
         'getReferenceSelection' => [
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/selections',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections',
             'schema' => 'apiReferentielSelectionsRequete',
             'parameters' => [
                 'query' => [
@@ -90,7 +90,7 @@ class Reference extends AbstractDescriptions
         'getReferenceSelectionsByObject' => [
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/selections-par-objet',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet',
             //'schema' => '',
             'parameters' => [
                 'query' => [

@@ -20,11 +20,11 @@ $last_uri = '';
 foreach ($client->operations as $operation => $params) {
 
     $uri = getParam($params, 'uri');
-    $docUrl = getParam($params, 'docUrl');
+    $documentationUrl = getParam($params, 'documentationUrl');
     if ($last_uri != $uri) {
         $doc .= '*' . "\n";
         $doc .= '* ' . $uri . "\n";
-        $doc .= '* @see ' . $docUrl . "\n";
+        $doc .= '* @see ' . $documentationUrl . "\n";
     }
     $doc .= '* @method array ' . $operation . '() ' . $operation;
 
@@ -37,12 +37,13 @@ foreach ($client->operations as $operation => $params) {
             $param_doc = $required . '' . @$p['type'] . ' ' . '\'' . $k . '\' => ';
             if ($k == 'responseFields') $param_doc .= "'@all..'";
             elseif ($k == 'identifier') $param_doc .= "'sitra1234..'";
+            elseif (isset($p['enum'])) $param_doc .= "'" . implode('|', $p['enum']) . "'";
+            elseif (isset($p['examples'])) $param_doc .= "'" . implode('|', $p['examples']) . "'";
             elseif ($k == 'locales') $param_doc .= "'fr,en..'";
             elseif ($k == 'query') $param_doc .= '["selectionIds" => [64, 5896,..],..],..]';
             elseif ($k == 'grant_type') $param_doc .= "'client_credentials|authorization_code|refresh_token'";
             elseif ($k == 'eMail') $param_doc .= "'test@test.com'";
             elseif ($k == 'redirect_uri') $param_doc .= "'https://myapp.com/..'";
-            elseif (isset($p['values'])) $param_doc .= "'" . implode('|', $p['values']) . "'";
             elseif ($p['type'] == 'string') $param_doc .= "'...'";
             elseif ($p['type'] == 'integer') $param_doc .= '[0-9]+';
             $parameters_doc[] = $param_doc;

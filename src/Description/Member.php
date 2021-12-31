@@ -13,7 +13,7 @@ class Member extends AbstractDescriptions
         'getMemberById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/membre/get-by-id/{id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -38,7 +38,7 @@ class Member extends AbstractDescriptions
         'getMembers' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/membre/get-membres',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'query' => [
@@ -59,7 +59,7 @@ class Member extends AbstractDescriptions
         'getUserById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-id/{id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -84,7 +84,7 @@ class Member extends AbstractDescriptions
         'getUserByMail' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-mail/{eMail}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'eMail' => [
@@ -109,7 +109,7 @@ class Member extends AbstractDescriptions
         'getUsersByMember' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/utilisateur/get-by-membre/{membre_id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'membre_id' => [

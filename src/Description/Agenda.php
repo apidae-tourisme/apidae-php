@@ -9,7 +9,7 @@ class Agenda extends AbstractDescriptions
         'searchAgenda' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/agenda/simple/list-objets-touristiques',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques',
             'responseModel' => 'getResponse',
             'schema' => 'apiObjetsTouristiquesRequete',
             'parameters' => [
@@ -30,19 +30,19 @@ class Agenda extends AbstractDescriptions
         'searchAgendaIdentifier' => [
             'extends' => 'searchAgenda',
             'uri' => '/api/v002/agenda/simple/list-identifiants',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-identifiants'
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-identifiants'
         ],
         'agendaSimpleListIdentifiants' => ['extends' => 'searchAgendaIdentifier'],
         'searchDetailedAgenda' => [
             'extends' => 'searchAgenda',
             'uri' => '/api/v002/agenda/detaille/list-objets-touristiques',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-objets-touristiques'
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-objets-touristiques'
         ],
         'agendaDetailleListObjetsTouristiques' => ['extends' => 'searchDetailedAgenda'],
         'searchDetailedAgendaIdentifier' => [
             'extends' => 'searchAgenda',
             'uri' => '/api/v002/agenda/detaille/list-identifiants',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-identifiants'
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-identifiants'
         ],
         'agendaDetailleListIdentifiants' => ['extends' => 'searchDetailedAgendaIdentifier'],
     );

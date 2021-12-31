@@ -9,7 +9,7 @@ class Sso extends AbstractDescriptions
         'getSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'grant_type' => [
@@ -18,6 +18,7 @@ class Sso extends AbstractDescriptions
                     'required' => true,
                     'static' => true,
                     'default' => 'authorization_code',
+                    'enum' => ['authorization_code', 'client_credentials', 'refresh_token']
                 ],
                 'code' => [
                     'type' => 'string',
@@ -35,7 +36,7 @@ class Sso extends AbstractDescriptions
         'refreshSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'grant_type' => [
@@ -44,6 +45,7 @@ class Sso extends AbstractDescriptions
                     'required' => true,
                     'static' => true,
                     'default' => 'refresh_token',
+                    'enum' => ['authorization_code', 'client_credentials', 'refresh_token']
                 ],
                 'refresh_token' => [
                     'type' => 'string',

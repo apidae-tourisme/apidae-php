@@ -10,7 +10,7 @@ class TouristicObjects extends AbstractDescriptions
         'getObjectById' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-id/{id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -25,6 +25,7 @@ class TouristicObjects extends AbstractDescriptions
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
+                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja']
                 ],
                 'apiKey' => [
                     'type' => 'string',
@@ -42,7 +43,7 @@ class TouristicObjects extends AbstractDescriptions
         'getObjectByIdentifier' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-identifier/{identifier}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'identifier' => [
@@ -57,6 +58,7 @@ class TouristicObjects extends AbstractDescriptions
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
+                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja']
                 ],
                 'apiKey' => [
                     'type' => 'string',

@@ -12,7 +12,7 @@ class Edit extends AbstractDescriptions
         'getEditAutorisation' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/autorisation/objet-touristique/modification/{id}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification',
             'responseModel' => 'getResponseBody',
             'parameters' => [
                 'id' => [

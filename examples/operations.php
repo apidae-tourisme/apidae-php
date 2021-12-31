@@ -29,11 +29,11 @@ foreach ($group as $uri => $operations) {
     $ops = array_keys($operations);
     $first_op = $operations[array_values($ops)[0]];
     $summary = getParam($first_op, 'summary');
-    $docUrl = getParam($first_op, 'docUrl');
+    $documentationUrl = getParam($first_op, 'documentationUrl');
 
     echo '<h2> ' . $uri . '</h2>';
     echo '<h3>Methods : ' . implode(', ', $ops) . '</h3>';
 
     if ($summary) echo $summary . $eol;
-    if ($docUrl) echo '<a href="' . $docUrl . '">' . $docUrl . '</a>' . $eol;
+    if ($documentationUrl) echo '<a href="' . $documentationUrl . '">' . $documentationUrl . '</a>' . $eol;
 }

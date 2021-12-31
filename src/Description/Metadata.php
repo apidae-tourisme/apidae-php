@@ -16,7 +16,7 @@ class Metadata extends AbstractDescriptions
         'getMetadata' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -33,6 +33,7 @@ class Metadata extends AbstractDescriptions
                     'type' => 'string',
                     'location' => 'uri',
                     'required' => false,
+                    'enum' => ['general', 'membre', 'projet']
                 ],
                 'targetId' => [
                     'type' => 'integer',
@@ -47,7 +48,7 @@ class Metadata extends AbstractDescriptions
         'deleteMetadata' => [
             'httpMethod' => 'DELETE',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -64,7 +65,7 @@ class Metadata extends AbstractDescriptions
                     'type' => 'string',
                     'location' => 'uri',
                     'required' => false,
-                    'values' => ['general', 'membre', 'projet']
+                    'enum' => ['general', 'membre', 'projet']
                 ],
                 'targetId' => [
                     'type' => 'integer',
@@ -79,7 +80,7 @@ class Metadata extends AbstractDescriptions
         'putMetadata' => [
             'httpMethod' => 'PUT',
             'uri' => '/api/v002/metadata/{referenceId}/{nodeId}',
-            'docUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
+            'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'referenceId' => [
@@ -91,7 +92,7 @@ class Metadata extends AbstractDescriptions
                     'type' => 'string',
                     'location' => 'uri',
                     'required' => true,
-                    'values' => ['tripadvisor', 'opensystem', '...']
+                    'examples' => ['tripadvisor', 'opensystem', '...']
                 ],
                 /*
                 'metadata' => [
