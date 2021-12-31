@@ -5,13 +5,6 @@ require __DIR__ . "/requires.inc.php";
 
 $client = new \ApidaePHP\Client($config);
 
-echo json_encode([
-    "searchQuery" => "vélo",
-    "count" => 20,
-    "first" => 10,
-]);
-die();
-
 try {
     $res = $client->referentielCommunes(['query' => ['communeIds' => [36866]]]);
     showResult($res, 'referentielCommunes (' . $client->getOperation('referentielCommunes')->getUri() . ')');
