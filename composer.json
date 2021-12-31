@@ -34,7 +34,7 @@
     "require": {
         "guzzlehttp/guzzle-services": "^1.3",
         "symfony/finder": "^5.4.0",
-        "apidae-tourisme/sit-api-v2-schemas": "^2.0.0",
+        "apidae-tourisme/sit-api-v2-schemas": "dev-main",
         "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
