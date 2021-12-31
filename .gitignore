@@ -6,6 +6,6 @@ config.inc.php
 /recette/
 .phpunit.result.cache
 /examples/export
-docs/api/
-docs/schemas/html/
+/docs/api/
+/docs/schemas/html/
 .phpdoc
