@@ -8,7 +8,7 @@ abstract class AbstractDescriptions
 {
     public static array $operations;
 
-    public static function encodeQuery(string|array $data, string $operation, string|null $schema = null): string
+    public static function filterQuery(string|array $data, string $operation, string|null $schema = null): string
     {
         /** @var Object $dataObject */
         $dataObject = null;

@@ -47,7 +47,7 @@ class Member extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Member::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Member::filterQuery',
                             'args' => ['@value', 'getMembers']
                             /** @todo Note that there is no schema on 31/12/2021 : update when schema is available */
                         ]

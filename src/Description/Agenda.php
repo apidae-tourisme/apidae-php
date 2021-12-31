@@ -18,7 +18,7 @@ class Agenda extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Agenda::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Agenda::filterQuery',
                             'args' => ['@value', 'searchAgenda', 'apiObjetsTouristiquesRequete']
                         ]
                     ],

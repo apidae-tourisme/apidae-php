@@ -33,7 +33,7 @@ foreach ($client->operations as $operationName => $params) {
     foreach ($parameters as $k => $v) {
         /**
          * Particular case for query :
-         * string expected but ApidaePHP\Description\AbstractDescriptions::encodeQuery can take an array, filter and make some checks, and manage to return a string
+         * string expected but ApidaePHP\Description\AbstractDescriptions::filterQuery can take an array, filter and make some checks, and manage to return a string
          * */
         $type = $k == 'query' ? 'array' : $v->getType();
         $paramsDocs[] = $type . ' $' . $k;

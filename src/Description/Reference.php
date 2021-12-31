@@ -18,7 +18,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::filterQuery',
                             'args' => ['@value', 'getReferenceCity', 'apiReferentielCommunesRequete']
                         ]
                     ],
@@ -37,7 +37,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::filterQuery',
                             'args' => ['@value', 'getReferenceElement', 'apiReferentielElementsReferenceRequete']
                         ]
                     ],
@@ -56,7 +56,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::filterQuery',
                             'args' => ['@value', 'getReferenceInternalCriteria', 'apiReferentielCriteresInternesRequete']
                         ]
                     ],
@@ -75,7 +75,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::filterQuery',
                             'args' => ['@value', 'getReferenceSelection', 'apiReferentielSelectionsRequete']
                         ]
                     ],
@@ -94,7 +94,7 @@ class Reference extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Reference::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Reference::filterQuery',
                             'args' => ['@value', 'getReferenceSelectionsByObject']
                             /** @todo Note that there is no schema on 31/12/2021 : update when schema is available */
                         ]

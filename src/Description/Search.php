@@ -18,7 +18,7 @@ class Search extends AbstractDescriptions
                     'required'  => true,
                     'filters' => [
                         [
-                            'method' => '\ApidaePHP\Description\Search::encodeQuery',
+                            'method' => '\ApidaePHP\Description\Search::filterQuery',
                             'args' => ['@value', 'searchObject', 'apiObjetsTouristiquesRequete']
                         ]
                     ],
