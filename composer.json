@@ -67,6 +67,14 @@
             "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/html/reference/internal_criteria.html",
             "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/html/reference/criteria.html",
             "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/html/reference/selections.html"
+        ],
+        "phpDoc": [
+            "phpDocumentor -d src/Client.php -t docs/api"
+        ]
+    },
+    "archive": {
+        "exclude": [
+            "/docs"
         ]
     }
 }

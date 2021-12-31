@@ -12,6 +12,7 @@ use Psr\Http\Message\RequestInterface;
 use GuzzleHttp\UriTemplate\UriTemplate;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
+use GuzzleHttp\Command\Guzzle\Parameter;
 use ApidaePHP\Exception\MissingTokenException;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
@@ -98,7 +99,7 @@ class ApidaeSerializer
 
         // Visit each actual parameter
         foreach ($operation->getParams() as $name => $param) {
-            /* @var Parameter $param */
+            /** @var Parameter $param */
             $location = $param->getLocation();
             // Skip parameters that have not been set or are URI location
             if ($location == 'uri' || !$command->hasParam($name)) {
@@ -183,8 +184,8 @@ class ApidaeSerializer
     /**
      * Create a request for an operation with a uri merged onto a base URI
      *
-     * @param \GuzzleHttp\Command\Guzzle\Operation $operation
-     * @param \GuzzleHttp\Command\CommandInterface $command
+     * @param Operation $operation
+     * @param CommandInterface $command
      *
      * @return RequestInterface
      */
@@ -192,11 +193,12 @@ class ApidaeSerializer
     {
         // Get the path values and use the client config settings
         $variables = [];
-        foreach ($operation->getParams() as $name => $arg) {
-            /* @var Parameter $arg */
-            if ($arg->getLocation() == 'uri') {
+        foreach ($operation->getParams() as $name => $parameter) {
+            /** @var Parameter $parameter */
+            if ($parameter->getLocation() == 'uri') {
                 if (isset($command[$name])) {
-                    $variables[$name] = $arg->filter($command[$name]);
+                    /** @warning 31/12/2021 le filter encodeQuery était trigger 2 fois, il semble qu'il ne soit pas nécessaire ici */
+                    //$variables[$name] = $parameter->filter($command[$name]);
                     if (!is_array($variables[$name])) {
                         $variables[$name] = (string) $variables[$name];
                     }

@@ -8,8 +8,8 @@ require __DIR__ . "/requires.inc.php";
 
 $client = new \ApidaePHP\Client($config);
 
-$doc = '';
-$last_uri = '';
+$doc = [];
+$uri_doc = [];
 
 foreach ($client->operations as $operationName => $params) {
 
@@ -23,12 +23,6 @@ foreach ($client->operations as $operationName => $params) {
     $uri = $operation->getUri();
     $documentationUrl = $operation->getDocumentationUrl();
 
-    if ($last_uri != $uri) {
-        $doc .= '*' . "\n";
-        $doc .= '* ' . $uri . "\n";
-        $doc .= '* @see ' . $documentationUrl . "\n";
-    }
-
     $paramsDocs = [];
     foreach ($parameters as $k => $v) {
         /**
@@ -39,14 +33,16 @@ foreach ($client->operations as $operationName => $params) {
         $paramsDocs[] = $type . ' $' . $k;
     }
 
-    $doc .= '* @method array ' . $operationName;
-    $doc .= '(' . implode(', ', $paramsDocs) . ') ';
+    $operationDoc = [];
+
+    $operationDoc[] = '@method Array ' . $operationName . '(' . implode(', ', $paramsDocs) . ') ';
+    $operationDoc[] = '@return Array';
 
     $parameters_doc = [];
     if ($parameters) {
         foreach ($parameters as $k => $p) {
             if (in_array($k, ['projetId', 'apiKey'])) continue;
-            $type = $k == 'query' ? 'array' : $p->getType();
+            $type = $k == 'query' ? 'Array' : $p->getType();
             $required = (@$p->isRequired() ? '' : '?');
             $param_doc = $required . '';
             //$param_doc .= @$type . ' ';
@@ -68,15 +64,23 @@ foreach ($client->operations as $operationName => $params) {
     }
 
     if (sizeof($parameters_doc)) {
-        $doc .= $operationName;
-        $doc .= '(' . implode(', ', $parameters_doc) . ')';
+        $operationDoc[] = $operationName . '(' . implode(', ', $parameters_doc) . ')';
     }
 
-    $doc .= "\n";
+    $uri_doc[$uri] = $documentationUrl;
 
-    $last_uri = $uri;
+    $doc[$uri][] = $operationDoc;
 }
 
 echo '<pre>';
-echo '/** Generated with examples/methods.php' . "\n" . $doc . ' */';
+echo '/* Generated with examples/methods.php */' . PHP_EOL;
+echo '/** ' . PHP_EOL;
+foreach ($doc as $uri => $methods) {
+    foreach ($methods as $method) {
+        echo PHP_EOL . '* ' . implode(PHP_EOL . '* ', $method);
+        echo PHP_EOL . '* ' . $uri;
+        echo PHP_EOL . '* ';
+    }
+}
+echo ' */';
 echo '</pre>';
