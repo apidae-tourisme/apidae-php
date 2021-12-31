@@ -5,7 +5,7 @@ You can send search in a couple of ways:
 
 ```php
 // As JSON string
-$search = $client->searchObject(['query' => '{"searchQuery": "vélo"}']);
+$search = $client->searchObject(['query' => '{"searchQuery":"v\u00e9lo","count":20,"first":10}']);
 
 // As PHP Array
 $search = $client->searchObject(['query' => [
@@ -27,5 +27,5 @@ $search = $client->searchObject(['query' => [
 When you only need the object ids:
 
 ```php
-$client->searchObjectIdentifier(['query' => '{"searchQuery": "vélo"}']);
+$client->searchObjectIdentifier(['query' => ['searchQuery' => 'vélo']]);
 ```

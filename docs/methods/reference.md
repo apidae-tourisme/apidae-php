@@ -9,7 +9,7 @@ Like normal search, you do not need to provide the API credentials to use those 
 
 ```php
 $cities = $client->getReferenceCity([
-    'query' => '{"codesInsee": ["38534", "69388", "74140"]}'
+    'query' => ['codesInsee' => ["38534", "69388", "74140"]]
 ]);
 ```
 
@@ -17,7 +17,7 @@ $cities = $client->getReferenceCity([
 
 ```php
 $elements = $client->getReferenceElement([
-    'query' => '{"elementReferenceIds": [2, 118, 2338]}'
+    'query' => ['elementReferenceIds' => [2, 118, 2338]]
 ]);
 ```
 
@@ -25,7 +25,7 @@ $elements = $client->getReferenceElement([
 
 ```php
 $criteria = $client->getReferenceInternalCriteria([
-    'query' => '{"critereInterneIds":[1068, 2168]}'
+    'query' => ['critereInterneIds' = [1068, 2168]]
 ]);
 ```
 
@@ -33,7 +33,7 @@ $criteria = $client->getReferenceInternalCriteria([
 
 ```php
 $selections = $client->getReferenceSelection([
-    'query' => '{"selectionIds":[64, 5896]}'
+    'query' => ['selectionIds' => [64, 5896]]
 ]);
 ```
 
@@ -41,6 +41,6 @@ $selections = $client->getReferenceSelection([
 
 ```php
 $selections = $client->getReferenceSelectionByObject([
-    'query' => '{"referenceIds":[64, 5896]}'
+    'query' => ['referenceIds' => [64, 5896]]
 ]);
 ```

@@ -18,8 +18,8 @@ This class is stateless and can be used as a service. You can then call any meth
 
 ```php
 $metadata = $client->getMetadata(['referenceId' => 123457, 'nodeId' => 'jolicode']);
-$search = $client->searchDetailedAgenda(['query' => '{"searchQuery": "vélo"}']);
-$search = $client->searchObject(['query' => '{"searchQuery": "vélo"}']);
+$search = $client->searchDetailedAgenda(['query' => ['searchQuery' => 'vélo']]);
+$search = $client->searchObject(['query' => ['searchQuery'] => 'vélo']]);
 $object = $client->getObjectById(['id' => 163512]);
 ```
 

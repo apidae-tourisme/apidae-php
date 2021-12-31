@@ -9,7 +9,7 @@ Errors from the API are wrapped in `ApidaePHP\Exception\ApidaeException`.
 
 ```php
 try {
-    $cities = $client->getReferenceCity(['query' => '{"codesInsee": ["38534", "69388", "74140"]}']);
+    $cities = $client->getReferenceCity(['query' => ['codesInsee' => ["38534", "69388", "74140"]]]);
 } catch (\ApidaePHP\Exception\ApidaeException $e) {
     echo $e->getMessage();
 }
