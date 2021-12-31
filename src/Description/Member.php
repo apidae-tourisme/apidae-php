@@ -4,7 +4,7 @@ namespace ApidaePHP\Description;
 
 class Member extends AbstractDescriptions
 {
-    /** @var array<mixed> $operations */
+    /** @var static array<mixed> $operations */
     public static array $operations = array(
 
         // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2

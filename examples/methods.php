@@ -67,7 +67,8 @@ foreach ($client->operations as $operationName => $params) {
         $operationDoc[] = $operationName . '(' . implode(', ', $parameters_doc) . ')';
     }
 
-    $uri_doc[$uri] = $documentationUrl;
+    $operationDoc[] = $documentationUrl;
+    $operationDoc[] = $uri;
 
     $doc[$uri][] = $operationDoc;
 }
@@ -77,9 +78,7 @@ echo '/* Generated with examples/methods.php */' . PHP_EOL;
 echo '/** ' . PHP_EOL;
 foreach ($doc as $uri => $methods) {
     foreach ($methods as $method) {
-        echo PHP_EOL . '* ' . implode(PHP_EOL . '* ', $method);
-        echo PHP_EOL . '* ' . $uri;
-        echo PHP_EOL . '* ';
+        echo PHP_EOL . '* ' . implode(PHP_EOL . '* ', $method) . PHP_EOL;
     }
 }
 echo ' */';
