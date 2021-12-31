@@ -37,7 +37,6 @@ foreach ($client->operations as $operationName => $params) {
          * */
         $type = $k == 'query' ? 'array' : $v->getType();
         $paramsDocs[] = $type . ' $' . $k;
-        print_r($v->toArray());
     }
 
     $doc .= '* @method array ' . $operationName;
@@ -47,15 +46,18 @@ foreach ($client->operations as $operationName => $params) {
     if ($parameters) {
         foreach ($parameters as $k => $p) {
             if (in_array($k, ['projetId', 'apiKey'])) continue;
-            $type = $k == 'query' ? 'array' : $v->getType();
+            $type = $k == 'query' ? 'array' : $p->getType();
             $required = (@$p->isRequired() ? '' : '?');
-            $param_doc = $required . '' . @$type . ' ' . '\'' . $k . '\' => ';
+            $param_doc = $required . '';
+            //$param_doc .= @$type . ' ';
+            //$param_doc .= '\'' . $k . '\' => ';
             if ($k == 'responseFields') $param_doc .= "'@all..'";
             elseif ($k == 'identifier') $param_doc .= "'sitra1234..'";
             elseif ($p->getEnum() !== null) $param_doc .= "'" . implode('|', $p->getEnum()) . "'";
             //elseif (isset($p['examples'])) $param_doc .= "'" . implode('|', $p['examples']) . "'";
             elseif ($k == 'locales') $param_doc .= "'fr,en..'";
-            elseif ($k == 'query') $param_doc .= '["selectionIds" => [64, 5896,..],..],..]';
+            /** @todo : remplacer l'exemple par un exemple généré par le schema (query ne prend pas toujours selectionIds, ex: getMembers) */
+            elseif ($k == 'query') $param_doc .= '[\'selectionIds\' => [64, 5896,..],..],..]';
             elseif ($k == 'grant_type') $param_doc .= "'client_credentials|authorization_code|refresh_token'";
             elseif ($k == 'eMail') $param_doc .= "'test@test.com'";
             elseif ($k == 'redirect_uri') $param_doc .= "'https://myapp.com/..'";
@@ -67,9 +69,7 @@ foreach ($client->operations as $operationName => $params) {
 
     if (sizeof($parameters_doc)) {
         $doc .= $operationName;
-        $doc .= '(';
-        $doc .= '[' . implode(', ', $parameters_doc) . ']';
-        $doc .= ')';
+        $doc .= '(' . implode(', ', $parameters_doc) . ')';
     }
 
     $doc .= "\n";

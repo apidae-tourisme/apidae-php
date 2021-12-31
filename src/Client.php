@@ -33,128 +33,128 @@ use GuzzleHttp\Command\Exception\CommandServerException;
  *
  * /api/v002/agenda/simple/list-objets-touristiques
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques
- * @method array searchAgenda() searchAgenda([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array agendaSimpleListObjetsTouristiques() agendaSimpleListObjetsTouristiques([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchAgenda(array $query) searchAgenda(['selectionIds' => [64, 5896,..],..],..])
+ * @method array agendaSimpleListObjetsTouristiques(array $query) agendaSimpleListObjetsTouristiques(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/agenda/simple/list-identifiants
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-identifiants
- * @method array searchAgendaIdentifier() searchAgendaIdentifier([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array agendaSimpleListIdentifiants() agendaSimpleListIdentifiants([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchAgendaIdentifier(array $query) searchAgendaIdentifier(['selectionIds' => [64, 5896,..],..],..])
+ * @method array agendaSimpleListIdentifiants(array $query) agendaSimpleListIdentifiants(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/agenda/detaille/list-objets-touristiques
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-objets-touristiques
- * @method array searchDetailedAgenda() searchDetailedAgenda([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array agendaDetailleListObjetsTouristiques() agendaDetailleListObjetsTouristiques([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchDetailedAgenda(array $query) searchDetailedAgenda(['selectionIds' => [64, 5896,..],..],..])
+ * @method array agendaDetailleListObjetsTouristiques(array $query) agendaDetailleListObjetsTouristiques(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/agenda/detaille/list-identifiants
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-identifiants
- * @method array searchDetailedAgendaIdentifier() searchDetailedAgendaIdentifier([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array agendaDetailleListIdentifiants() agendaDetailleListIdentifiants([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchDetailedAgendaIdentifier(array $query) searchDetailedAgendaIdentifier(['selectionIds' => [64, 5896,..],..],..])
+ * @method array agendaDetailleListIdentifiants(array $query) agendaDetailleListIdentifiants(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/autorisation/objet-touristique/modification/{id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification
- * @method array getEditAutorisation() getEditAutorisation([integer 'id' => [0-9]+, ?string 'tokenSSO' => '...'])
- * @method array autorisationObjetTouristiqueModification() autorisationObjetTouristiqueModification([integer 'id' => [0-9]+, ?string 'tokenSSO' => '...'])
+ * @method array getEditAutorisation(integer $id, string $tokenSSO) getEditAutorisation([0-9]+, ?'...')
+ * @method array autorisationObjetTouristiqueModification(integer $id, string $tokenSSO) autorisationObjetTouristiqueModification([0-9]+, ?'...')
  *
  * /api/v002/export/confirmation
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
- * @method array confirmExport() confirmExport([string 'hash' => '...'])
- * @method array exportConfirmation() exportConfirmation([string 'hash' => '...'])
+ * @method array confirmExport(string $hash) confirmExport('...')
+ * @method array exportConfirmation(string $hash) exportConfirmation('...')
  *
  * /api/v002/membre/get-by-id/{id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2
- * @method array getMemberById() getMemberById([integer 'id' => [0-9]+])
- * @method array membreGetById() membreGetById([integer 'id' => [0-9]+])
+ * @method array getMemberById(integer $id, string $apiKey, string $projetId) getMemberById([0-9]+)
+ * @method array membreGetById(integer $id, string $apiKey, string $projetId) membreGetById([0-9]+)
  *
  * /api/v002/membre/get-membres
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres
- * @method array getMembers() getMembers([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array membreGetMembres() membreGetMembres([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getMembers(array $query) getMembers(['selectionIds' => [64, 5896,..],..],..])
+ * @method array membreGetMembres(array $query) membreGetMembres(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/utilisateur/get-by-id/{id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id
- * @method array getUserById() getUserById([integer 'id' => [0-9]+])
- * @method array utilisateurGetById() utilisateurGetById([integer 'id' => [0-9]+])
+ * @method array getUserById(integer $id, string $apiKey, string $projetId) getUserById([0-9]+)
+ * @method array utilisateurGetById(integer $id, string $apiKey, string $projetId) utilisateurGetById([0-9]+)
  *
  * /api/v002/utilisateur/get-by-mail/{eMail}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail
- * @method array getUserByMail() getUserByMail([string 'eMail' => 'test@test.com'])
- * @method array utilisateurGetByMail() utilisateurGetByMail([string 'eMail' => 'test@test.com'])
+ * @method array getUserByMail(string $eMail, string $apiKey, string $projetId) getUserByMail('test@test.com')
+ * @method array utilisateurGetByMail(string $eMail, string $apiKey, string $projetId) utilisateurGetByMail('test@test.com')
  *
  * /api/v002/utilisateur/get-by-membre/{membre_id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre
- * @method array getUsersByMember() getUsersByMember([integer 'membre_id' => [0-9]+])
- * @method array utilisateurGetByMembre() utilisateurGetByMembre([integer 'membre_id' => [0-9]+])
+ * @method array getUsersByMember(integer $membre_id, string $apiKey, string $projetId) getUsersByMember([0-9]+)
+ * @method array utilisateurGetByMembre(integer $membre_id, string $apiKey, string $projetId) utilisateurGetByMembre([0-9]+)
  *
  * /api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service
- * @method array getMetadata() getMetadata([integer 'referenceId' => [0-9]+, string 'nodeId' => '...', ?string 'targetType' => '...', ?integer 'targetId' => [0-9]+])
- * @method array deleteMetadata() deleteMetadata([integer 'referenceId' => [0-9]+, string 'nodeId' => '...', ?string 'targetType' => 'general|membre|projet', ?integer 'targetId' => [0-9]+])
+ * @method array getMetadata(integer $referenceId, string $nodeId, string $targetType, integer $targetId) getMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+)
+ * @method array deleteMetadata(integer $referenceId, string $nodeId, string $targetType, integer $targetId) deleteMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+)
  *
  * /api/v002/metadata/{referenceId}/{nodeId}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service
- * @method array putMetadata() putMetadata([integer 'referenceId' => [0-9]+, string 'nodeId' => 'tripadvisor|opensystem|...', ?string 'general' => '...', ?string 'membres' => '...', ?string 'projets' => '...', ?string 'node' => '...'])
+ * @method array putMetadata(integer $referenceId, string $nodeId, string $general, string $membres, string $projets, string $node) putMetadata([0-9]+, '...', ?'...', ?'...', ?'...', ?'...')
  *
  * /api/v002/referentiel/communes
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes
- * @method array getReferenceCity() getReferenceCity([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referentielCommunes() referentielCommunes([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getReferenceCity(array $query) getReferenceCity(['selectionIds' => [64, 5896,..],..],..])
+ * @method array referentielCommunes(array $query) referentielCommunes(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/referentiel/elements-reference
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference
- * @method array getReferenceElement() getReferenceElement([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referentielElementsReference() referentielElementsReference([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getReferenceElement(array $query) getReferenceElement(['selectionIds' => [64, 5896,..],..],..])
+ * @method array referentielElementsReference(array $query) referentielElementsReference(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/referentiel/criteres-internes
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes
- * @method array getReferenceInternalCriteria() getReferenceInternalCriteria([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referentielCriteresInternes() referentielCriteresInternes([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getReferenceInternalCriteria(array $query) getReferenceInternalCriteria(['selectionIds' => [64, 5896,..],..],..])
+ * @method array referentielCriteresInternes(array $query) referentielCriteresInternes(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/referentiel/selections
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections
- * @method array getReferenceSelection() getReferenceSelection([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referentielSelections() referentielSelections([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getReferenceSelection(array $query) getReferenceSelection(['selectionIds' => [64, 5896,..],..],..])
+ * @method array referentielSelections(array $query) referentielSelections(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/referentiel/selections-par-objet
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet
- * @method array getReferenceSelectionsByObject() getReferenceSelectionsByObject([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array referentielSelectionsParObjet() referentielSelectionsParObjet([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array getReferenceSelectionsByObject(array $query) getReferenceSelectionsByObject(['selectionIds' => [64, 5896,..],..],..])
+ * @method array referentielSelectionsParObjet(array $query) referentielSelectionsParObjet(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/recherche/list-objets-touristiques
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-objets-touristiques
- * @method array searchObject() searchObject([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array rechercheListObjetsTouristiques() rechercheListObjetsTouristiques([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchObject(array $query) searchObject(['selectionIds' => [64, 5896,..],..],..])
+ * @method array rechercheListObjetsTouristiques(array $query) rechercheListObjetsTouristiques(['selectionIds' => [64, 5896,..],..],..])
  *
  * /api/v002/recherche/list-identifiants
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-identifiants
- * @method array searchObjectIdentifier() searchObjectIdentifier([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
- * @method array rechercheListIdentifiants() rechercheListIdentifiants([string 'query' => ["selectionIds" => [64, 5896,..],..],..]])
+ * @method array searchObjectIdentifier(array $query) searchObjectIdentifier(['selectionIds' => [64, 5896,..],..],..])
+ * @method array rechercheListIdentifiants(array $query) rechercheListIdentifiants(['selectionIds' => [64, 5896,..],..],..])
  *
  * /oauth/token
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on
- * @method array getSsoToken() getSsoToken([string 'grant_type' => 'client_credentials|authorization_code|refresh_token', string 'code' => '...', string 'redirect_uri' => 'https://myapp.com/..'])
- * @method array oauthToken() oauthToken([string 'grant_type' => 'client_credentials|authorization_code|refresh_token', string 'code' => '...', string 'redirect_uri' => 'https://myapp.com/..'])
- * @method array refreshSsoToken() refreshSsoToken([string 'grant_type' => 'client_credentials|authorization_code|refresh_token', string 'refresh_token' => '...', string 'redirect_uri' => 'https://myapp.com/..'])
+ * @method array getSsoToken(string $grant_type, string $code, string $redirect_uri) getSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
+ * @method array oauthToken(string $grant_type, string $code, string $redirect_uri) oauthToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
+ * @method array refreshSsoToken(string $grant_type, string $refresh_token, string $redirect_uri) refreshSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
  *
  * /api/v002/objet-touristique/get-by-id/{id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id
- * @method array getObjectById() getObjectById([integer 'id' => [0-9]+, ?string 'responseFields' => '@all..', ?string 'locales' => 'fr,en..'])
- * @method array objetTouristiqueGetById() objetTouristiqueGetById([integer 'id' => [0-9]+, ?string 'responseFields' => '@all..', ?string 'locales' => 'fr,en..'])
+ * @method array getObjectById(integer $id, string $responseFields, string $locales, string $apiKey, string $projetId) getObjectById([0-9]+, ?'@all..', ?'fr,en..')
+ * @method array objetTouristiqueGetById(integer $id, string $responseFields, string $locales, string $apiKey, string $projetId) objetTouristiqueGetById([0-9]+, ?'@all..', ?'fr,en..')
  *
  * /api/v002/objet-touristique/get-by-identifier/{identifier}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier
- * @method array getObjectByIdentifier() getObjectByIdentifier([string 'identifier' => 'sitra1234..', ?string 'responseFields' => '@all..', ?string 'locales' => 'fr,en..'])
- * @method array objetTouristiqueGetByIdentifier() objetTouristiqueGetByIdentifier([string 'identifier' => 'sitra1234..', ?string 'responseFields' => '@all..', ?string 'locales' => 'fr,en..'])
+ * @method array getObjectByIdentifier(string $identifier, string $responseFields, string $locales, string $apiKey, string $projetId) getObjectByIdentifier('sitra1234..', ?'@all..', ?'fr,en..')
+ * @method array objetTouristiqueGetByIdentifier(string $identifier, string $responseFields, string $locales, string $apiKey, string $projetId) objetTouristiqueGetByIdentifier('sitra1234..', ?'@all..', ?'fr,en..')
  *
  * /api/v002/sso/utilisateur/profil
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
- * @method array getUserProfile() getUserProfile()
- * @method array ssoUtilisateurProfil() ssoUtilisateurProfil()
+ * @method array getUserProfile() 
+ * @method array ssoUtilisateurProfil() 
  *
  * /api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}
  * @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
- * @method array getUserPermissionOnObject() getUserPermissionOnObject([integer 'id' => [0-9]+])
- * @method array ssoUtilisateurAutorisationObjetTouristiqueModification() ssoUtilisateurAutorisationObjetTouristiqueModification([integer 'id' => [0-9]+])
+ * @method array getUserPermissionOnObject(integer $id) getUserPermissionOnObject([0-9]+)
+ * @method array ssoUtilisateurAutorisationObjetTouristiqueModification(integer $id) ssoUtilisateurAutorisationObjetTouristiqueModification([0-9]+)
  */
 class Client extends GuzzleClient
 {
