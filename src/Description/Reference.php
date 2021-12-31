@@ -10,7 +10,6 @@ class Reference extends AbstractDescriptions
             'httpMethod' => 'POST',
             'uri' => '/api/v002/referentiel/communes',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes',
-            'schema' => 'apiReferentielCommunesRequete',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'query' => [
@@ -20,7 +19,7 @@ class Reference extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::encodeQuery',
-                            'args' => ['@value', 'getReferenceCity']
+                            'args' => ['@value', 'getReferenceCity', 'apiReferentielCommunesRequete']
                         ]
                     ],
                 ],
@@ -31,7 +30,6 @@ class Reference extends AbstractDescriptions
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/elements-reference',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference',
-            'schema' => 'apiReferentielElementsReferenceRequete',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
@@ -40,7 +38,7 @@ class Reference extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::encodeQuery',
-                            'args' => ['@value', 'getReferenceElement']
+                            'args' => ['@value', 'getReferenceElement', 'apiReferentielElementsReferenceRequete']
                         ]
                     ],
                 ],
@@ -51,7 +49,6 @@ class Reference extends AbstractDescriptions
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/criteres-internes',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes',
-            'schema' => 'apiReferentielCriteresInternesRequete',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
@@ -60,7 +57,7 @@ class Reference extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::encodeQuery',
-                            'args' => ['@value', 'getReferenceInternalCriteria']
+                            'args' => ['@value', 'getReferenceInternalCriteria', 'apiReferentielCriteresInternesRequete']
                         ]
                     ],
                 ],
@@ -71,7 +68,6 @@ class Reference extends AbstractDescriptions
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/selections',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections',
-            'schema' => 'apiReferentielSelectionsRequete',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
@@ -80,7 +76,7 @@ class Reference extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::encodeQuery',
-                            'args' => ['@value', 'getReferenceSelection']
+                            'args' => ['@value', 'getReferenceSelection', 'apiReferentielSelectionsRequete']
                         ]
                     ],
                 ],
@@ -91,18 +87,18 @@ class Reference extends AbstractDescriptions
             'extends' => 'getReferenceCity',
             'uri' => '/api/v002/referentiel/selections-par-objet',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet',
-            //'schema' => '',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
                     'location'  => 'formParam',
                     'required'  => true,
-                    /*'filters' => [
+                    'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::encodeQuery',
-                            'args' => ['@value', 'apiReferentielCommunesRequete']
+                            'args' => ['@value', 'getReferenceSelectionsByObject']
+                            /** @todo Note that there is no schema on 31/12/2021 : update when schema is available */
                         ]
-                    ],*/
+                    ],
                 ],
             ],
         ],

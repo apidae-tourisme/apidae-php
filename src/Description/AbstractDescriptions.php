@@ -7,12 +7,12 @@ use GuzzleHttp\Command\Guzzle\Parameter;
 abstract class AbstractDescriptions
 {
     public static array $operations;
-    protected static array $schemas;
-    protected  static array $schemasFiles;
 
-    public static function encodeQuery(string|array $data, string $operation): string
+    public static function encodeQuery(string|array $data, string $operation, string|null $schema = null): string
     {
+        /** @var Object $dataObject */
         $dataObject = null;
+        /** @var string $dataJson */
         $dataJson = null;
 
         if (is_array($data)) {
@@ -25,39 +25,21 @@ abstract class AbstractDescriptions
                 throw new \Exception('\'query\' parameter is not a valid json string : ' . $data);
         }
 
-        if (!isset(static::$schemas)) static::loadSchemas();
-
-        if (isset(static::$schemas[$operation]) && isset(static::$schemas[$operation]['properties'])) {
-            $validator = new \JsonSchema\Validator;
-            $validator->validate($dataObject, (object)['$ref' => 'file://' . static::$schemasFiles[$operation]]);
-            if (!$validator->isValid()) {
-                $exceptionMessage = "JSON does not validate. Violations:\n";
-                foreach ($validator->getErrors() as $error) {
-                    $exceptionMessage .= printf("[%s] %s\n", $error['property'], $error['message']);
+        if ($schema !== null && preg_match('#^a-zA-Z0-9+$#', $schema)) {
+            $schemaFile = __DIR__ . '/../../vendor/apidae-tourisme/sit-api-v2-schemas/' . $schema . '.schema';
+            if (file_exists($schemaFile)) {
+                $validator = new \JsonSchema\Validator;
+                $validator->validate($dataObject, (object)['$ref' => 'file://' . $schemaFile]);
+                if (!$validator->isValid()) {
+                    $exceptionMessage = "JSON does not validate. Violations:\n";
+                    foreach ($validator->getErrors() as $error) {
+                        $exceptionMessage .= printf("[%s] %s\n", $error['property'], $error['message']);
+                    }
+                    throw new \Exception($exceptionMessage);
                 }
-                throw new \Exception($exceptionMessage);
             }
         }
 
         return $dataJson;
-    }
-
-    private static function loadSchemas()
-    {
-        static::$schemas = [];
-        foreach (static::$operations as $opname => $operation) {
-
-            if (isset($operation['schema'])) {
-                if (isset($operation['schema'])) {
-                    $schemaFile = __DIR__ . '/../../vendor/apidae-tourisme/sit-api-v2-schemas/' . $operation['schema'] . '.schema';
-                    if (file_exists($schemaFile)) {
-                        static::$schemas[$opname] = json_decode(file_get_contents($schemaFile), true);
-                        static::$schemasFiles[$opname] = $schemaFile;
-                    }
-                }
-            } elseif (isset($operation['extends']) && isset(static::$schemas[$operation['extends']])) {
-                static::$schemas[$opname] = static::$schemas[$operation['extends']];
-            }
-        }
     }
 }

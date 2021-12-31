@@ -11,7 +11,6 @@ class Agenda extends AbstractDescriptions
             'uri' => '/api/v002/agenda/simple/list-objets-touristiques',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques',
             'responseModel' => 'getResponse',
-            'schema' => 'apiObjetsTouristiquesRequete',
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
@@ -20,7 +19,7 @@ class Agenda extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Agenda::encodeQuery',
-                            'args' => ['@value', 'searchAgenda']
+                            'args' => ['@value', 'searchAgenda', 'apiObjetsTouristiquesRequete']
                         ]
                     ],
                 ],
