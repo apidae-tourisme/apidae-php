@@ -39,3 +39,13 @@ Can be installed locally only
 ```bash
 composer run-script schemaDoc
 ```
+
+## Todo
+
+Renommer le package sur packagist :
+https://stackoverflow.com/questions/55378780/how-to-rename-a-php-package-in-packagist
+
+Update the name in composer.json on the main branch
+Resubmitting the package to packagist using the new name
+Mark the old package as "Abandoned" on packagist, and use the new name (apidae-tourisme/apidae-php) in the form so that people get pointed to it when they install with the old name
+And no you can't keep your download stats
