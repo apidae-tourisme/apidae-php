@@ -21,8 +21,13 @@
             "type": "package",
             "packagist.org": false,
             "package": {
+                "type": "component",
                 "name": "apidae-tourisme/sit-api-v2-schemas",
                 "version": "main",
+                "dist": {
+                    "url": "https://github.com/apidae-tourisme/sit-api-v2-schemas/archive/refs/heads/main.zip",
+                    "type": "zip"
+                },
                 "source": {
                     "url": "git@github.com:apidae-tourisme/sit-api-v2-schemas.git",
                     "type": "git",
