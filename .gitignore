@@ -5,4 +5,7 @@ config.inc.php
 .vscode
 /recette/
 .phpunit.result.cache
-/examples/export/
+/examples/export
+/docs/api/
+/docs/schemas/html/
+.phpdoc
