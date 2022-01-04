@@ -16,25 +16,24 @@
             "email": "coucou@jolicode.com"
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "flat-ui": {
             "type": "package",
             "package": {
-                "name": "apidae-tourisme/sit-api-v2-schemas",
-                "type": "package",
-                "version": "2.0.0",
+                "name": "designmodo/Flat-UI",
+                "version": "1.3.0",
                 "source": {
-                    "url": "git@github.com:apidae-tourisme/sit-api-v2-schemas.git",
+                    "url": "https://github.com/designmodo/Flat-UI",
                     "type": "git",
-                    "reference": "main"
+                    "reference": "master"
                 }
             }
         }
-    ],
+    },
     "require": {
         "guzzlehttp/guzzle-services": "^1.3",
         "symfony/finder": "^5.4.0",
-        "apidae-tourisme/sit-api-v2-schemas": "*",
+        "designmodo/Flat-UI": "*",
         "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
@@ -74,7 +73,7 @@
     },
     "archive": {
         "exclude": [
-            "/docs"
+            "/docs/api"
         ]
     }
 }
