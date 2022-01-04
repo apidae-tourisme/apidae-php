@@ -505,7 +505,7 @@ class Client extends GuzzleClient
   public function __call($method, array $args)
   {
     $commandName = $method;
-    /** @var GuzzleHttp\Command\Result $result */
+    /** @var \GuzzleHttp\Command\Result $result */
     $result = parent::__call($commandName, $args);
 
     /** Traitement des retours en string au lieu de json */

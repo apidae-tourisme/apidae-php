@@ -19,7 +19,7 @@ class EditTest extends FuncBase
             $result = $this->client->$method(['id' => 1234]);
             $transaction = $this->lastTransaction();
 
-            $this->assertEquals('GuzzleHttp\Command\Result', get_class($result));
+            $this->assertTrue(is_string($result));
             $this->assertEquals(200, $transaction['response']->getStatusCode());
         }
     }
