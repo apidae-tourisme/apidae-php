@@ -21,10 +21,10 @@
             "type": "package",
             "package": {
                 "name": "apidae-tourisme/sit-api-v2-schemas",
-                "type": "schemas-json",
+                "type": "package",
                 "version": "2.0.0",
                 "source": {
-                    "url": "https://github.com/apidae-tourisme/sit-api-v2-schemas.git",
+                    "url": "git@github.com:apidae-tourisme/sit-api-v2-schemas.git",
                     "type": "git",
                     "reference": "main"
                 }
