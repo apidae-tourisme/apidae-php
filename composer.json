@@ -16,30 +16,9 @@
             "email": "coucou@jolicode.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "package",
-            "packagist.org": false,
-            "package": {
-                "type": "component",
-                "name": "apidae-tourisme/sit-api-v2-schemas",
-                "version": "main",
-                "dist": {
-                    "url": "https://github.com/apidae-tourisme/sit-api-v2-schemas/archive/refs/heads/main.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "git@github.com:apidae-tourisme/sit-api-v2-schemas.git",
-                    "type": "git",
-                    "reference": "main"
-                }
-            }
-        }
-    ],
     "require": {
         "guzzlehttp/guzzle-services": "^1.3",
         "symfony/finder": "^5.4.0",
-        "apidae-tourisme/sit-api-v2-schemas": "*",
         "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
