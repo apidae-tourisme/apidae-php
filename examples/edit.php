@@ -25,7 +25,7 @@ foreach ($offers as $offer => $expected) {
     echo $offer . ' expected : ' . $expected . "\n";
     try {
         $response = $client->getEditAutorisation(['id' => $offer]);
-        echo $response['stream']->getContents();
+        echo $response;
     } catch (Exception $e) {
         echo $e->getMessage();
     }

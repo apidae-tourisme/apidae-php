@@ -33,10 +33,13 @@ foreach ($client->operations as $operationName => $params) {
         $paramsDocs[] = $type . ' $' . $k;
     }
 
-    $operationDoc = [];
+    $return = 'array';
+    if ($operation->getResponseModel() == 'getResponseBody')
+        $return = 'string';
 
-    $operationDoc[] = '@method Array ' . $operationName . '(' . implode(', ', $paramsDocs) . ') ';
-    $operationDoc[] = '@return Array';
+    $operationDoc = [];
+    $operationDoc[] = '@method ' . $return . ' ' . $operationName . '(' . implode(', ', $paramsDocs) . ') ';
+    $operationDoc[] = '@return ' . $return;
 
     $parameters_doc = [];
     if ($parameters) {

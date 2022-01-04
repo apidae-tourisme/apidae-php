@@ -6,6 +6,7 @@
 * **Ajout de vérifications avant envoi basés sur les [schemas JSON officiels](https://github.com/apidae-tourisme/sit-api-v2-schemas)**
 * **Ajout des nouvelles opérations** (getMember*, getUser*, getReferenceSelectionByObject)
 * **Ajout d'une [documentation basée sur les schemas](docs/schemas)**, utile pour le paramètre `query` (.md et .html)
+* Les retours API sous forme de chaînes de caractères (getEditAutorisation, getUserPermissionOnObject) sont renvoyés en `string` et plus en `GuzzleHttp\Command\Result` (plus besoin de `$response['stream']->getContents()`) : voir [examples/edit.php](examples/edit.php)
 * Ajout d'alias sur les endpoints existants, basés sur les [noms officiels des endpoints](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2)
     * /referentiel/communes : getReferenceCity => referentielCommunes
     * /recherche/list-objets-touristiques : searchObject => rechercheListObjetsTouristiques
@@ -24,6 +25,7 @@
 * **add check before sending, based on [official json schemas](https://github.com/apidae-tourisme/sit-api-v2-schemas)**
 * **new endpoints** (getMember*, getUser*, getReferenceSelectionByObject)
 * **new [documentation based on schemas](docs/schemas)**, usefull for `query` parameter (.md and .html)
+* getEditAutorisation and getUserPermissionOnObject now return `string` instead of `GuzzleHttp\Command\Result` : see [examples/edit.php](examples/edit.php)
 * add aliases of existing endpoints, based on [official API endpoints](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2)
 * update in-code documentation for better autocompletion of IDE
 * prefered format in documentation for `query` parameters is now array instead of string (no need to json_encode before calling the operation).

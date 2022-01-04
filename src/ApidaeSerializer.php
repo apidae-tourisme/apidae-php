@@ -197,8 +197,7 @@ class ApidaeSerializer
             /** @var Parameter $parameter */
             if ($parameter->getLocation() == 'uri') {
                 if (isset($command[$name])) {
-                    /** @warning 31/12/2021 le filter encodeQuery était trigger 2 fois, il semble qu'il ne soit pas nécessaire ici */
-                    //$variables[$name] = $parameter->filter($command[$name]);
+                    $variables[$name] = $parameter->filter($command[$name]);
                     if (!is_array($variables[$name])) {
                         $variables[$name] = (string) $variables[$name];
                     }
