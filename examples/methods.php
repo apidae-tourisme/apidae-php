@@ -56,8 +56,42 @@ foreach ($client->operations as $operationName => $params) {
             //elseif (isset($p['examples'])) $param_doc .= "'" . implode('|', $p['examples']) . "'";
             elseif ($k == 'locales') $param_doc .= "'fr,en..'";
             /** @todo : remplacer l'exemple par un exemple généré par le schema (query ne prend pas toujours selectionIds, ex: getMembers) */
-            elseif ($k == 'query') $param_doc .= '[\'selectionIds\' => [64, 5896,..],..],..]';
-            elseif ($k == 'grant_type') $param_doc .= "'client_credentials|authorization_code|refresh_token'";
+            elseif ($k == 'query') {
+                $exampleQuery = '[\'selectionIds\' => [64, 5896,..],..],..]';
+                $filters = $p->getFilters();
+                if (($filter = array_filter($filters, function ($e) {
+                    return isset($e['method']) ? preg_match('#filterQuery#', $e['method']) : false;
+                })) !== false) {
+                    if (isset($filter[0]['args'][2])) {
+                        $schemaFile = __DIR__ . '/../vendor/apidae-tourisme/sit-api-v2-schemas/' . $filter[0]['args'][2] . '.schema';
+                        if (file_exists($schemaFile)) {
+                            $schemaQuery = json_decode(file_get_contents($schemaFile), true);
+                            if (json_last_error() == JSON_ERROR_NONE) {
+                                $examplesQuery = [];
+                                foreach ($schemaQuery['properties'] as $propertyName => $propertyDesc) {
+                                    $tmp = '';
+                                    if (!isset($propertyDesc['required']) || $propertyDesc['required'] == 'false') $tmp .= '?';
+                                    $tmp .= '\'' . $propertyName . '\' => ';
+                                    if ($propertyName == 'responseFields') $tmp .= '[\'@all\',\'informations.moyensCommunication\',\'...\']';
+                                    elseif ($propertyName == 'center') $tmp .= '[\'type\' => \'Point\', \'coordinates\' => [4.8 (lon), 45.3 (lat)]]';
+                                    elseif (isset($propertyDesc['enum'])) $tmp .= "'" . implode('|', $propertyDesc['enum']) . "'";
+                                    elseif ($propertyDesc['type'] == 'array') {
+                                        if (isset($propertyDesc['items']['type'])) {
+                                            if ($propertyDesc['items']['type'] == 'integer') $tmp .= '[0,1,2...]';
+                                            elseif ($propertyDesc['items']['type'] == 'string') $tmp .= '[\'abc\',\'def\',...]';
+                                        }
+                                    } elseif ($propertyDesc['type'] == 'integer') $tmp .= '1234';
+                                    elseif (@$propertyDesc['format'] == 'date') $tmp .= '\'' . date('Y-m-d') . '\'';
+                                    elseif ($propertyDesc['type'] == 'string') $tmp .= '\'abcd...\'';
+                                    $examplesQuery[] = $tmp;
+                                }
+                                $exampleQuery = implode(', ', $examplesQuery);
+                            }
+                        }
+                    }
+                }
+                $param_doc .= $exampleQuery;
+            } elseif ($k == 'grant_type') $param_doc .= "'client_credentials|authorization_code|refresh_token'";
             elseif ($k == 'eMail') $param_doc .= "'test@test.com'";
             elseif ($k == 'redirect_uri') $param_doc .= "'https://myapp.com/..'";
             elseif ($type == 'string') $param_doc .= "'...'";
@@ -66,7 +100,9 @@ foreach ($client->operations as $operationName => $params) {
         }
     }
 
-    if (sizeof($parameters_doc)) {
+    $parameters_doc = array_filter($parameters_doc);
+
+    if (sizeof($parameters_doc) > 0) {
         $operationDoc[] = $operationName . '(' . implode(', ', $parameters_doc) . ')';
     }
 
