@@ -33,7 +33,7 @@
     "require": {
         "guzzlehttp/guzzle-services": "^1.3",
         "symfony/finder": "^5.4.0",
-        "designmodo/Flat-UI": "*",
+        "designmodo/flat-ui": "*",
         "justinrainbow/json-schema": "^5.2"
     },
     "autoload": {
