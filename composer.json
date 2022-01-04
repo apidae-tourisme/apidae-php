@@ -21,7 +21,7 @@
             "type": "package",
             "package": {
                 "name": "apidae-tourisme/sit-api-v2-schemas",
-                "version": "2.0.0",
+                "version": "main",
                 "type": "schemas-json",
                 "dist": {
                     "url": "https://github.com/apidae-tourisme/sit-api-v2-schemas/archive/refs/heads/main.zip",
@@ -39,7 +39,7 @@
         "guzzlehttp/guzzle-services": "^1.3",
         "symfony/finder": "^5.4.0",
         "justinrainbow/json-schema": "^5.2",
-        "apidae-tourisme/sit-api-v2-schemas": "main"
+        "apidae-tourisme/sit-api-v2-schemas": "*"
     },
     "extra": {
         "schemas": [
