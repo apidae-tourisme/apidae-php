@@ -21,7 +21,7 @@
             "type": "package",
             "package": {
                 "name": "apidae-tourisme/sit-api-v2-schemas",
-                "version": "main",
+                "version": "2.0.0",
                 "type": "schemas-json",
                 "dist": {
                     "url": "https://github.com/apidae-tourisme/sit-api-v2-schemas/archive/refs/heads/main.zip",
