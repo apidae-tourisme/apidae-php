@@ -1,0 +1,8 @@
+.phpunit.result.cache
+composer.lock
+config.inc.php
+docs/
+vendor/
+recette/
+.vscode/
+.phpdoc/
