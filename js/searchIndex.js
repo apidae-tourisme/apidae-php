@@ -6,75 +6,255 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/ApidaePHP-Client.html"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchAgenda\u0028\u0029",
+            "name": "searchAgenda",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#method___construct"
+            "url": "classes/ApidaePHP-Client.html#method_searchAgenda"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "Execute\u0020a\u0020single\u0020command.",
-            "url": "classes/ApidaePHP-Client.html#method_execute"
-        },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AhandleHttpError\u0028\u0029",
-            "name": "handleHttpError",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AagendaSimpleListObjetsTouristiques\u0028\u0029",
+            "name": "agendaSimpleListObjetsTouristiques",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#method_handleHttpError"
+            "url": "classes/ApidaePHP-Client.html#method_agendaSimpleListObjetsTouristiques"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003A\u0024config",
-            "name": "config",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchAgendaIdentifier\u0028\u0029",
+            "name": "searchAgendaIdentifier",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#property_config"
+            "url": "classes/ApidaePHP-Client.html#method_searchAgendaIdentifier"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetLastRequest\u0028\u0029",
-            "name": "getLastRequest",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AagendaSimpleListIdentifiants\u0028\u0029",
+            "name": "agendaSimpleListIdentifiants",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#method_getLastRequest"
+            "url": "classes/ApidaePHP-Client.html#method_agendaSimpleListIdentifiants"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetOperation\u0028\u0029",
-            "name": "getOperation",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchDetailedAgenda\u0028\u0029",
+            "name": "searchDetailedAgenda",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#method_getOperation"
+            "url": "classes/ApidaePHP-Client.html#method_searchDetailedAgenda"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003ANAME",
-            "name": "NAME",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AagendaDetailleListObjetsTouristiques\u0028\u0029",
+            "name": "agendaDetailleListObjetsTouristiques",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#constant_NAME"
+            "url": "classes/ApidaePHP-Client.html#method_agendaDetailleListObjetsTouristiques"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AVERSION",
-            "name": "VERSION",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchDetailedAgendaIdentifier\u0028\u0029",
+            "name": "searchDetailedAgendaIdentifier",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#constant_VERSION"
+            "url": "classes/ApidaePHP-Client.html#method_searchDetailedAgendaIdentifier"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AMETA_SCOPE",
-            "name": "META_SCOPE",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AagendaDetailleListIdentifiants\u0028\u0029",
+            "name": "agendaDetailleListIdentifiants",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#constant_META_SCOPE"
+            "url": "classes/ApidaePHP-Client.html#method_agendaDetailleListIdentifiants"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003ASSO_SCOPE",
-            "name": "SSO_SCOPE",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetEditAutorisation\u0028\u0029",
+            "name": "getEditAutorisation",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#constant_SSO_SCOPE"
+            "url": "classes/ApidaePHP-Client.html#method_getEditAutorisation"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003AEDIT_SCOPE",
-            "name": "EDIT_SCOPE",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AautorisationObjetTouristiqueModification\u0028\u0029",
+            "name": "autorisationObjetTouristiqueModification",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#constant_EDIT_SCOPE"
+            "url": "classes/ApidaePHP-Client.html#method_autorisationObjetTouristiqueModification"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003A\u0024operations",
-            "name": "operations",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AconfirmExport\u0028\u0029",
+            "name": "confirmExport",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#property_operations"
+            "url": "classes/ApidaePHP-Client.html#method_confirmExport"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003A\u0024serializer",
-            "name": "serializer",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AexportConfirmation\u0028\u0029",
+            "name": "exportConfirmation",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#property_serializer"
+            "url": "classes/ApidaePHP-Client.html#method_exportConfirmation"
         },                {
-            "fqsen": "\\ApidaePHP\\Client\u003A\u003A\u0024description",
-            "name": "description",
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetMemberById\u0028\u0029",
+            "name": "getMemberById",
             "summary": "",
-            "url": "classes/ApidaePHP-Client.html#property_description"
+            "url": "classes/ApidaePHP-Client.html#method_getMemberById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AmembreGetById\u0028\u0029",
+            "name": "membreGetById",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_membreGetById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetMembers\u0028\u0029",
+            "name": "getMembers",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getMembers"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AmembreGetMembres\u0028\u0029",
+            "name": "membreGetMembres",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_membreGetMembres"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetUserById\u0028\u0029",
+            "name": "getUserById",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getUserById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AutilisateurGetById\u0028\u0029",
+            "name": "utilisateurGetById",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_utilisateurGetById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetUserByMail\u0028\u0029",
+            "name": "getUserByMail",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getUserByMail"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AutilisateurGetByMail\u0028\u0029",
+            "name": "utilisateurGetByMail",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_utilisateurGetByMail"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetUsersByMember\u0028\u0029",
+            "name": "getUsersByMember",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getUsersByMember"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AutilisateurGetByMembre\u0028\u0029",
+            "name": "utilisateurGetByMembre",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_utilisateurGetByMembre"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetMetadata\u0028\u0029",
+            "name": "getMetadata",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getMetadata"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AdeleteMetadata\u0028\u0029",
+            "name": "deleteMetadata",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_deleteMetadata"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AputMetadata\u0028\u0029",
+            "name": "putMetadata",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_putMetadata"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetReferenceCity\u0028\u0029",
+            "name": "getReferenceCity",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getReferenceCity"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AreferentielCommunes\u0028\u0029",
+            "name": "referentielCommunes",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_referentielCommunes"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetReferenceElement\u0028\u0029",
+            "name": "getReferenceElement",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getReferenceElement"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AreferentielElementsReference\u0028\u0029",
+            "name": "referentielElementsReference",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_referentielElementsReference"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetReferenceInternalCriteria\u0028\u0029",
+            "name": "getReferenceInternalCriteria",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getReferenceInternalCriteria"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AreferentielCriteresInternes\u0028\u0029",
+            "name": "referentielCriteresInternes",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_referentielCriteresInternes"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetReferenceSelection\u0028\u0029",
+            "name": "getReferenceSelection",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getReferenceSelection"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AreferentielSelections\u0028\u0029",
+            "name": "referentielSelections",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_referentielSelections"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetReferenceSelectionsByObject\u0028\u0029",
+            "name": "getReferenceSelectionsByObject",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getReferenceSelectionsByObject"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AreferentielSelectionsParObjet\u0028\u0029",
+            "name": "referentielSelectionsParObjet",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_referentielSelectionsParObjet"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchObject\u0028\u0029",
+            "name": "searchObject",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_searchObject"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003ArechercheListObjetsTouristiques\u0028\u0029",
+            "name": "rechercheListObjetsTouristiques",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_rechercheListObjetsTouristiques"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AsearchObjectIdentifier\u0028\u0029",
+            "name": "searchObjectIdentifier",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_searchObjectIdentifier"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003ArechercheListIdentifiants\u0028\u0029",
+            "name": "rechercheListIdentifiants",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_rechercheListIdentifiants"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetSsoToken\u0028\u0029",
+            "name": "getSsoToken",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getSsoToken"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AoauthToken\u0028\u0029",
+            "name": "oauthToken",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_oauthToken"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003ArefreshSsoToken\u0028\u0029",
+            "name": "refreshSsoToken",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_refreshSsoToken"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetObjectById\u0028\u0029",
+            "name": "getObjectById",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getObjectById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AobjetTouristiqueGetById\u0028\u0029",
+            "name": "objetTouristiqueGetById",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_objetTouristiqueGetById"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetObjectByIdentifier\u0028\u0029",
+            "name": "getObjectByIdentifier",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getObjectByIdentifier"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AobjetTouristiqueGetByIdentifier\u0028\u0029",
+            "name": "objetTouristiqueGetByIdentifier",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_objetTouristiqueGetByIdentifier"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetUserProfile\u0028\u0029",
+            "name": "getUserProfile",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getUserProfile"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AssoUtilisateurProfil\u0028\u0029",
+            "name": "ssoUtilisateurProfil",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_ssoUtilisateurProfil"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AgetUserPermissionOnObject\u0028\u0029",
+            "name": "getUserPermissionOnObject",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_getUserPermissionOnObject"
+        },                {
+            "fqsen": "\\ApidaePHP\\Client\u003A\u003AssoUtilisateurAutorisationObjetTouristiqueModification\u0028\u0029",
+            "name": "ssoUtilisateurAutorisationObjetTouristiqueModification",
+            "summary": "",
+            "url": "classes/ApidaePHP-Client.html#method_ssoUtilisateurAutorisationObjetTouristiqueModification"
         },                {
             "fqsen": "\\",
             "name": "\\",
