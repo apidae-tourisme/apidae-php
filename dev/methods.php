@@ -4,7 +4,7 @@ use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Command\Guzzle\Parameter;
 
 $config = [];
-require __DIR__ . "/requires.inc.php";
+require __DIR__ . "/../examples/requires.inc.php";
 
 $client = new \ApidaePHP\Client($config);
 
@@ -39,15 +39,15 @@ foreach ($client->operations as $operationName => $params) {
 
     $operationDoc = [];
     $operationDoc[] = '@method ' . $return . ' ' . $operationName . '(' . implode(', ', $paramsDocs) . ') ';
-    $operationDoc[] = '@return ' . $return;
+    //$operationDoc[] = '@return ' . $return;
 
     $parameters_doc = [];
     if ($parameters) {
         foreach ($parameters as $k => $p) {
             if (in_array($k, ['projetId', 'apiKey'])) continue;
-            $type = $k == 'query' ? 'Array' : $p->getType();
+            $type = $k == 'query' ? 'array' : $p->getType();
             $required = (@$p->isRequired() ? '' : '?');
-            $param_doc = $required . '';
+            $param_doc = "" . $required . '';
             //$param_doc .= @$type . ' ';
             //$param_doc .= '\'' . $k . '\' => ';
             if ($k == 'responseFields') $param_doc .= "'@all..'";
@@ -85,7 +85,7 @@ foreach ($client->operations as $operationName => $params) {
                                     elseif ($propertyDesc['type'] == 'string') $tmp .= '\'abcd...\'';
                                     $examplesQuery[] = $tmp;
                                 }
-                                $exampleQuery = implode(', ', $examplesQuery);
+                                $exampleQuery = "[\t\n*\t " . implode(",\n*\t ", $examplesQuery) . "\n* ]";
                             }
                         }
                     }
@@ -103,17 +103,22 @@ foreach ($client->operations as $operationName => $params) {
     $parameters_doc = array_filter($parameters_doc);
 
     if (sizeof($parameters_doc) > 0) {
-        $operationDoc[] = $operationName . '(' . implode(', ', $parameters_doc) . ')';
+        $operationDoc[] = '$client->' . $operationName . "(" . implode(", ", $parameters_doc) . ") ;";
     }
 
+    $operationDoc[] = '';
     $operationDoc[] = $documentationUrl;
+    $operationDoc[] = '';
     $operationDoc[] = $uri;
 
     $doc[$uri][] = $operationDoc;
 }
 
-echo '<pre>';
-echo '/* Generated with examples/methods.php */' . PHP_EOL;
+$html = php_sapi_name() !== 'cli';
+
+if (!$html) ob_start();
+
+echo '/* Generated with dev/methods.php */' . PHP_EOL;
 echo '/** ' . PHP_EOL;
 foreach ($doc as $uri => $methods) {
     foreach ($methods as $method) {
@@ -122,3 +127,9 @@ foreach ($doc as $uri => $methods) {
 }
 echo ' */';
 echo '</pre>';
+
+if ($html) return;
+
+$content = ob_get_contents();
+ob_clean();
+file_put_contents(__DIR__ . '/methods.txt', $content);

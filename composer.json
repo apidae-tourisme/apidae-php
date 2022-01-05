@@ -46,7 +46,7 @@
         "tests": [
             "php vendor/bin/phpunit tests"
         ],
-        "schemaDoc": [
+        "schemadoc": [
             "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiObjetsTouristiquesRequete.schema docs/schemas/md/touristicobjects.md",
             "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCommunesRequete.schema docs/schemas/md/reference/city.md",
             "generate-schema-doc --config no_footer_show_time --config no_copy_js --config no_copy_css --config template_name=md vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielCriteresInternesRequete.schema docs/schemas/md/reference/internal_criteria.md",
@@ -58,8 +58,17 @@
             "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielElementsReferenceRequete.schema docs/schemas/html/reference/criteria.html",
             "generate-schema-doc --config no_footer_show_time --config expand_buttons vendor/apidae-tourisme/sit-api-v2-schemas/apiReferentielSelectionsRequete.schema docs/schemas/html/reference/selections.html"
         ],
-        "phpDoc": [
-            "phpDocumentor -d src/Client.php -t docs/api"
+        "phpdoc": [
+            "mkdir -p gh-pages",
+            "php dev/phpdoc.php",
+            "phpDocumentor",
+            "cd gh-pages",
+            "git add .",
+            "git commit -m \"Mise à jour documentation\"",
+            "git push origin gh-pages"
+        ],
+        "inlinedoc": [
+            "php dev/methods.php"
         ]
     },
     "archive": {

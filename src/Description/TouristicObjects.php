@@ -11,6 +11,7 @@ class TouristicObjects extends AbstractDescriptions
             'httpMethod' => 'GET',
             'uri' => '/api/v002/objet-touristique/get-by-id/{id}',
             'documentationUrl' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id',
+            'summary' => 'get a touristic object by id',
             'responseModel' => 'getResponse',
             'parameters' => [
                 'id' => [
@@ -21,11 +22,15 @@ class TouristicObjects extends AbstractDescriptions
                 'responseFields' => [
                     'type' => 'string',
                     'location' => 'query',
+                    'description' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees',
+                    'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
                 ],
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
-                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja']
+                    'description' => 'Languages, separated with a comma : fr,en',
+                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja'],
+                    'default' => 'fr'
                 ],
                 'apiKey' => [
                     'type' => 'string',
@@ -54,11 +59,14 @@ class TouristicObjects extends AbstractDescriptions
                 'responseFields' => [
                     'type' => 'string',
                     'location' => 'query',
+                    'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
                 ],
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
-                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja']
+                    'description' => 'Languages, separated with a comma : fr,en',
+                    'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja'],
+                    'default' => 'fr'
                 ],
                 'apiKey' => [
                     'type' => 'string',

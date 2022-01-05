@@ -6,6 +6,7 @@ use ApidaePHP\Traits\Export;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use ApidaePHP\Description\Sso;
+use GuzzleHttp\Command\Result;
 use ApidaePHP\ApidaeSerializer;
 use ApidaePHP\ApidaeSubscriber;
 use ApidaePHP\Description\Edit;
@@ -20,6 +21,7 @@ use ApidaePHP\Traits\Sso as ApidaeSso;
 use GuzzleHttp\Command\ResultInterface;
 use ApidaePHP\Exception\ApidaeException;
 use GuzzleHttp\Command\CommandInterface;
+use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use ApidaePHP\Description\TouristicObjects;
@@ -34,301 +36,685 @@ use GuzzleHttp\Command\Exception\CommandServerException;
 /** 
 
  * @method array searchAgenda(array $query) 
- * @return array
- * searchAgenda(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchAgenda([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques
+ * 
  * /api/v002/agenda/simple/list-objets-touristiques
 
  * @method array agendaSimpleListObjetsTouristiques(array $query) 
- * @return array
- * agendaSimpleListObjetsTouristiques(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->agendaSimpleListObjetsTouristiques([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-objets-touristiques
+ * 
  * /api/v002/agenda/simple/list-objets-touristiques
 
  * @method array searchAgendaIdentifier(array $query) 
- * @return array
- * searchAgendaIdentifier(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchAgendaIdentifier([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-identifiants
+ * 
  * /api/v002/agenda/simple/list-identifiants
 
  * @method array agendaSimpleListIdentifiants(array $query) 
- * @return array
- * agendaSimpleListIdentifiants(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->agendaSimpleListIdentifiants([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendasimplelist-identifiants
+ * 
  * /api/v002/agenda/simple/list-identifiants
 
  * @method array searchDetailedAgenda(array $query) 
- * @return array
- * searchDetailedAgenda(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchDetailedAgenda([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-objets-touristiques
+ * 
  * /api/v002/agenda/detaille/list-objets-touristiques
 
  * @method array agendaDetailleListObjetsTouristiques(array $query) 
- * @return array
- * agendaDetailleListObjetsTouristiques(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->agendaDetailleListObjetsTouristiques([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-objets-touristiques
+ * 
  * /api/v002/agenda/detaille/list-objets-touristiques
 
  * @method array searchDetailedAgendaIdentifier(array $query) 
- * @return array
- * searchDetailedAgendaIdentifier(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchDetailedAgendaIdentifier([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-identifiants
+ * 
  * /api/v002/agenda/detaille/list-identifiants
 
  * @method array agendaDetailleListIdentifiants(array $query) 
- * @return array
- * agendaDetailleListIdentifiants(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->agendaDetailleListIdentifiants([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002agendadetaillelist-identifiants
+ * 
  * /api/v002/agenda/detaille/list-identifiants
 
  * @method string getEditAutorisation(integer $id, string $tokenSSO) 
- * @return string
- * getEditAutorisation([0-9]+, ?'...')
+ * $client->getEditAutorisation([0-9]+, ?'...') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification
+ * 
  * /api/v002/autorisation/objet-touristique/modification/{id}
 
  * @method string autorisationObjetTouristiqueModification(integer $id, string $tokenSSO) 
- * @return string
- * autorisationObjetTouristiqueModification([0-9]+, ?'...')
+ * $client->autorisationObjetTouristiqueModification([0-9]+, ?'...') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-decriture/v002autorisationobjet-touristiquemodification
+ * 
  * /api/v002/autorisation/objet-touristique/modification/{id}
 
  * @method array confirmExport(string $hash) 
- * @return array
- * confirmExport('...')
+ * $client->confirmExport('...') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
+ * 
  * /api/v002/export/confirmation
 
  * @method array exportConfirmation(string $hash) 
- * @return array
- * exportConfirmation('...')
+ * $client->exportConfirmation('...') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
+ * 
  * /api/v002/export/confirmation
 
  * @method array getMemberById(integer $id, string $apiKey, string $projetId) 
- * @return array
- * getMemberById([0-9]+)
+ * $client->getMemberById([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2
+ * 
  * /api/v002/membre/get-by-id/{id}
 
  * @method array membreGetById(integer $id, string $apiKey, string $projetId) 
- * @return array
- * membreGetById([0-9]+)
+ * $client->membreGetById([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-by-id-2
+ * 
  * /api/v002/membre/get-by-id/{id}
 
  * @method array getMembers(array $query) 
- * @return array
- * getMembers(['selectionIds' => [64, 5896,..],..],..])
+ * $client->getMembers(['selectionIds' => [64, 5896,..],..],..]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres
+ * 
  * /api/v002/membre/get-membres
 
  * @method array membreGetMembres(array $query) 
- * @return array
- * membreGetMembres(['selectionIds' => [64, 5896,..],..],..])
+ * $client->membreGetMembres(['selectionIds' => [64, 5896,..],..],..]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002membreget-membres
+ * 
  * /api/v002/membre/get-membres
 
  * @method array getUserById(integer $id, string $apiKey, string $projetId) 
- * @return array
- * getUserById([0-9]+)
+ * $client->getUserById([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id
+ * 
  * /api/v002/utilisateur/get-by-id/{id}
 
  * @method array utilisateurGetById(integer $id, string $apiKey, string $projetId) 
- * @return array
- * utilisateurGetById([0-9]+)
+ * $client->utilisateurGetById([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-id
+ * 
  * /api/v002/utilisateur/get-by-id/{id}
 
  * @method array getUserByMail(string $eMail, string $apiKey, string $projetId) 
- * @return array
- * getUserByMail('test@test.com')
+ * $client->getUserByMail('test@test.com') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail
+ * 
  * /api/v002/utilisateur/get-by-mail/{eMail}
 
  * @method array utilisateurGetByMail(string $eMail, string $apiKey, string $projetId) 
- * @return array
- * utilisateurGetByMail('test@test.com')
+ * $client->utilisateurGetByMail('test@test.com') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-mail
+ * 
  * /api/v002/utilisateur/get-by-mail/{eMail}
 
  * @method array getUsersByMember(integer $membre_id, string $apiKey, string $projetId) 
- * @return array
- * getUsersByMember([0-9]+)
+ * $client->getUsersByMember([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre
+ * 
  * /api/v002/utilisateur/get-by-membre/{membre_id}
 
  * @method array utilisateurGetByMembre(integer $membre_id, string $apiKey, string $projetId) 
- * @return array
- * utilisateurGetByMembre([0-9]+)
+ * $client->utilisateurGetByMembre([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002utilisateurget-by-membre
+ * 
  * /api/v002/utilisateur/get-by-membre/{membre_id}
 
  * @method array getMetadata(integer $referenceId, string $nodeId, string $targetType, integer $targetId) 
- * @return array
- * getMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+)
+ * $client->getMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service
+ * 
  * /api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}
 
  * @method array deleteMetadata(integer $referenceId, string $nodeId, string $targetType, integer $targetId) 
- * @return array
- * deleteMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+)
+ * $client->deleteMetadata([0-9]+, '...', ?'general|membre|projet', ?[0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service
+ * 
  * /api/v002/metadata/{referenceId}/{nodeId}{/targetType}{/targetId}
 
  * @method array putMetadata(integer $referenceId, string $nodeId, string $general, string $membres, string $projets, string $node) 
- * @return array
- * putMetadata([0-9]+, '...', ?'...', ?'...', ?'...', ?'...')
+ * $client->putMetadata([0-9]+, '...', ?'...', ?'...', ?'...', ?'...') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees/web-service
+ * 
  * /api/v002/metadata/{referenceId}/{nodeId}
 
  * @method array getReferenceCity(array $query) 
- * @return array
- * getReferenceCity(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'communeIds' => [0,1,2...], ?'codesInsee' => ['abc','def',...])
+ * $client->getReferenceCity([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'communeIds' => [0,1,2...],
+ *	 ?'codesInsee' => ['abc','def',...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes
+ * 
  * /api/v002/referentiel/communes
 
  * @method array referentielCommunes(array $query) 
- * @return array
- * referentielCommunes(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'communeIds' => [0,1,2...], ?'codesInsee' => ['abc','def',...])
+ * $client->referentielCommunes([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'communeIds' => [0,1,2...],
+ *	 ?'codesInsee' => ['abc','def',...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcommunes
+ * 
  * /api/v002/referentiel/communes
 
  * @method array getReferenceElement(array $query) 
- * @return array
- * getReferenceElement(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'elementReferenceIds' => [0,1,2...])
+ * $client->getReferenceElement([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'elementReferenceIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference
+ * 
  * /api/v002/referentiel/elements-reference
 
  * @method array referentielElementsReference(array $query) 
- * @return array
- * referentielElementsReference(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'elementReferenceIds' => [0,1,2...])
+ * $client->referentielElementsReference([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'elementReferenceIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielelements-reference
+ * 
  * /api/v002/referentiel/elements-reference
 
  * @method array getReferenceInternalCriteria(array $query) 
- * @return array
- * getReferenceInternalCriteria(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'critereInterneIds' => [0,1,2...])
+ * $client->getReferenceInternalCriteria([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'critereInterneIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes
+ * 
  * /api/v002/referentiel/criteres-internes
 
  * @method array referentielCriteresInternes(array $query) 
- * @return array
- * referentielCriteresInternes(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'critereInterneIds' => [0,1,2...])
+ * $client->referentielCriteresInternes([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'critereInterneIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielcriteres-internes
+ * 
  * /api/v002/referentiel/criteres-internes
 
  * @method array getReferenceSelection(array $query) 
- * @return array
- * getReferenceSelection(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'selectionIds' => [0,1,2...])
+ * $client->getReferenceSelection([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections
+ * 
  * /api/v002/referentiel/selections
 
  * @method array referentielSelections(array $query) 
- * @return array
- * referentielSelections(?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'selectionIds' => [0,1,2...])
+ * $client->referentielSelections([	
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...]
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections
+ * 
  * /api/v002/referentiel/selections
 
  * @method array getReferenceSelectionsByObject(array $query) 
- * @return array
- * getReferenceSelectionsByObject(['selectionIds' => [64, 5896,..],..],..])
+ * $client->getReferenceSelectionsByObject(['selectionIds' => [64, 5896,..],..],..]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet
+ * 
  * /api/v002/referentiel/selections-par-objet
 
  * @method array referentielSelectionsParObjet(array $query) 
- * @return array
- * referentielSelectionsParObjet(['selectionIds' => [64, 5896,..],..],..])
+ * $client->referentielSelectionsParObjet(['selectionIds' => [64, 5896,..],..],..]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002referentielselections-par-objet
+ * 
  * /api/v002/referentiel/selections-par-objet
 
  * @method array searchObject(array $query) 
- * @return array
- * searchObject(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchObject([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-objets-touristiques
+ * 
  * /api/v002/recherche/list-objets-touristiques
 
  * @method array rechercheListObjetsTouristiques(array $query) 
- * @return array
- * rechercheListObjetsTouristiques(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->rechercheListObjetsTouristiques([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-objets-touristiques
+ * 
  * /api/v002/recherche/list-objets-touristiques
 
  * @method array searchObjectIdentifier(array $query) 
- * @return array
- * searchObjectIdentifier(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->searchObjectIdentifier([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-identifiants
+ * 
  * /api/v002/recherche/list-identifiants
 
  * @method array rechercheListIdentifiants(array $query) 
- * @return array
- * rechercheListIdentifiants(?'identifiants' => [0,1,2...], ?'identifiers' => ['abc','def',...], ?'listeEnregistreeId' => 1234, ?'selectionIds' => [0,1,2...], ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]], ?'radius' => 1234, ?'communeCodesInsee' => ['abc','def',...], ?'territoireIds' => [0,1,2...], ?'searchQuery' => 'abcd...', ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES', ?'criteresQuery' => 'abcd...', ?'dateDebut' => '2022-01-04', ?'dateFin' => '2022-01-04', ?'first' => 1234, ?'count' => 1234, ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM', ?'asc' => , ?'locales' => ['abc','def',...], ?'responseFields' => ['@all','informations.moyensCommunication','...'], ?'apiKey' => 'abcd...', ?'projetId' => 1234, ?'randomSeed' => 'abcd...', ?'membreProprietaireIds' => [0,1,2...], ?'searchLocale' => 'abcd...')
+ * $client->rechercheListIdentifiants([	
+ *	 ?'identifiants' => [0,1,2...],
+ *	 ?'identifiers' => ['abc','def',...],
+ *	 ?'listeEnregistreeId' => 1234,
+ *	 ?'selectionIds' => [0,1,2...],
+ *	 ?'center' => ['type' => 'Point', 'coordinates' => [4.8 (lon), 45.3 (lat)]],
+ *	 ?'radius' => 1234,
+ *	 ?'communeCodesInsee' => ['abc','def',...],
+ *	 ?'territoireIds' => [0,1,2...],
+ *	 ?'searchQuery' => 'abcd...',
+ *	 ?'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
+ *	 ?'criteresQuery' => 'abcd...',
+ *	 ?'dateDebut' => '2022-01-05',
+ *	 ?'dateFin' => '2022-01-05',
+ *	 ?'first' => 1234,
+ *	 ?'count' => 1234,
+ *	 ?'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
+ *	 ?'asc' => ,
+ *	 ?'locales' => ['abc','def',...],
+ *	 ?'responseFields' => ['@all','informations.moyensCommunication','...'],
+ *	 ?'apiKey' => 'abcd...',
+ *	 ?'projetId' => 1234,
+ *	 ?'randomSeed' => 'abcd...',
+ *	 ?'membreProprietaireIds' => [0,1,2...],
+ *	 ?'searchLocale' => 'abcd...'
+ * ]) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002recherchelist-identifiants
+ * 
  * /api/v002/recherche/list-identifiants
 
  * @method array getSsoToken(string $grant_type, string $code, string $redirect_uri) 
- * @return array
- * getSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
+ * $client->getSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on
+ * 
  * /oauth/token
 
  * @method array oauthToken(string $grant_type, string $code, string $redirect_uri) 
- * @return array
- * oauthToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
+ * $client->oauthToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on
+ * 
  * /oauth/token
 
  * @method array refreshSsoToken(string $grant_type, string $refresh_token, string $redirect_uri) 
- * @return array
- * refreshSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..')
+ * $client->refreshSsoToken('authorization_code|client_credentials|refresh_token', '...', 'https://myapp.com/..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on
+ * 
  * /oauth/token
 
  * @method array getObjectById(integer $id, string $responseFields, string $locales, string $apiKey, string $projetId) 
- * @return array
- * getObjectById([0-9]+, ?'@all..', ?'fr,en..')
+ * $client->getObjectById([0-9]+, ?'@all..', ?'fr,en..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id
+ * 
  * /api/v002/objet-touristique/get-by-id/{id}
 
  * @method array objetTouristiqueGetById(integer $id, string $responseFields, string $locales, string $apiKey, string $projetId) 
- * @return array
- * objetTouristiqueGetById([0-9]+, ?'@all..', ?'fr,en..')
+ * $client->objetTouristiqueGetById([0-9]+, ?'@all..', ?'fr,en..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-id
+ * 
  * /api/v002/objet-touristique/get-by-id/{id}
 
  * @method array getObjectByIdentifier(string $identifier, string $responseFields, string $locales, string $apiKey, string $projetId) 
- * @return array
- * getObjectByIdentifier('sitra1234..', ?'@all..', ?'fr,en..')
+ * $client->getObjectByIdentifier('sitra1234..', ?'@all..', ?'fr,en..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier
+ * 
  * /api/v002/objet-touristique/get-by-identifier/{identifier}
 
  * @method array objetTouristiqueGetByIdentifier(string $identifier, string $responseFields, string $locales, string $apiKey, string $projetId) 
- * @return array
- * objetTouristiqueGetByIdentifier('sitra1234..', ?'@all..', ?'fr,en..')
+ * $client->objetTouristiqueGetByIdentifier('sitra1234..', ?'@all..', ?'fr,en..') ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services-2/v002objet-touristiqueget-by-identifier
+ * 
  * /api/v002/objet-touristique/get-by-identifier/{identifier}
 
  * @method array getUserProfile() 
- * @return array
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
+ * 
  * /api/v002/sso/utilisateur/profil
 
  * @method array ssoUtilisateurProfil() 
- * @return array
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
+ * 
  * /api/v002/sso/utilisateur/profil
 
  * @method string getUserPermissionOnObject(integer $id) 
- * @return string
- * getUserPermissionOnObject([0-9]+)
+ * $client->getUserPermissionOnObject([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
+ * 
  * /api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}
 
  * @method string ssoUtilisateurAutorisationObjetTouristiqueModification(integer $id) 
- * @return string
- * ssoUtilisateurAutorisationObjetTouristiqueModification([0-9]+)
+ * $client->ssoUtilisateurAutorisationObjetTouristiqueModification([0-9]+) ;
+ * 
  * https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
+ * 
  * /api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}
  */
 class Client extends GuzzleClient
@@ -468,7 +854,7 @@ class Client extends GuzzleClient
    *
    * @param CommandInterface $command Command to execute
    *
-   * @return ResultInterface The result of the executed command
+   * @return ResultInterface|false The result of the executed command
    * @throws CommandException
    */
   public function execute(CommandInterface $command): ResultInterface|false
@@ -502,10 +888,10 @@ class Client extends GuzzleClient
     throw $e;
   }
 
-  public function __call($method, array $args)
+  public function __call($method, array $args): Result|string
   {
     $commandName = $method;
-    /** @var \GuzzleHttp\Command\Result $result */
+    /** @var Result $result */
     $result = parent::__call($commandName, $args);
 
     /** Traitement des retours en string au lieu de json */
@@ -537,7 +923,7 @@ class Client extends GuzzleClient
     return $this->serializer->getLastRequest();
   }
 
-  public function getOperation(string $name)
+  public function getOperation(string $name): Operation
   {
     return $this->description->getOperation($name);
   }
