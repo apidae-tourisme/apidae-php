@@ -43,12 +43,15 @@ composer run-script schemadoc
 ## Generate github pages documentation https://apidae-tourisme.github.io/apidae-php/
 
 ```bash
+composer run-script schemadoc
 composer run-script phpdoc
 ```
 
 La génération de la doc se fait en plusieurs étapes :
 
-D'abord un appel à `dev/phpdoc.php` qui génère une "fausse" classe `dev/Client.php` qui permet d'avoir une doc plus élaborée
+L'appel à schemadoc (les schemas sont générés en .md dans docs/schemas, et en .html dans gh-pages/schemas)
+
+Ensuite un appel à `dev/phpdoc.php` qui génère une "fausse" classe `dev/Client.php` qui permet d'avoir une doc plus élaborée
 
 On aurait pu créer la doc à partir des signatures présentes au dessus de `class Client` dans `src/Client.php` mais on est alors obligé d'utiliser @method et on ne peut pas utiliser @param, @return, @example...
 

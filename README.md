@@ -14,6 +14,10 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 
 [docs/INSTALL.md](docs/INSTALL.md)
 
+## Documentation
+
+https://apidae-tourisme.github.io/apidae-php/
+
 ## Usage
 
 [docs/USAGE.md](docs/USAGE.md)
@@ -21,7 +25,3 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 ## Handling errors
 
 [docs/ERRORS.md](docs/ERRORS.md)
-
-## API methods
-
-[docs/METHODS.md](docs/METHODS.md)

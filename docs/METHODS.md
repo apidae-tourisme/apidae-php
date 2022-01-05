@@ -1,15 +1,6 @@
 # Methods
 
-- [methods/agenda.md](methods/agenda.md)
-- [methods/edit.md](methods/edit.md)
-- [methods/exports.md](methods/exports.md)
-- [methods/member.md](methods/member.md)
-- [methods/metadata.md](methods/metadata.md)
-- [methods/reference.md](methods/reference.md)
-- [methods/search.md](methods/search.md)
-- [methods/sso.md](methods/sso.md)
-- [methods/touristicobjects.md](methods/touristicobjects.md)
-- [methods/user.md](methods/user.md)
+https://apidae-tourisme.github.io/apidae-php/
 
 ### Requests & Response formats
 

@@ -6,8 +6,7 @@
         xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
     <paths>
-        <output>gh-pages</output>
-        <cache>gh-pages/cache</cache>
+        <output>gh-pages/api</output>
     </paths>
     <version number="2.0.0">
         <api>
