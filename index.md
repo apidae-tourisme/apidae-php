@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# Apidae PHP Api Client
 
-You can use the [editor on GitHub](https://github.com/apidae-tourisme/apidae-php/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+- All API methods exposed with input validation;
+- Authentication set automatically (for both credentials and OAuth end points);
+- Apidae SSO helpers;
+- Error handling;
+- Handle exports (Zip download and reading);
+- Based on Guzzle 7.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This documentation only handle the PHP implementation, for further questions please refer 
+to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 
-### Markdown
+## Install
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[docs/INSTALL.md](docs/INSTALL.md)
 
-```markdown
-Syntax highlighted code block
+## Usage
 
-# Header 1
-## Header 2
-### Header 3
+[docs/USAGE.md](docs/USAGE.md)
 
-- Bulleted
-- List
+## Handling errors
 
-1. Numbered
-2. List
+[docs/ERRORS.md](docs/ERRORS.md)
 
-**Bold** and _Italic_ and `Code` text
+## API methods
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/apidae-tourisme/apidae-php/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+[docs/METHODS.md](docs/METHODS.md)
