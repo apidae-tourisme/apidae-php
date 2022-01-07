@@ -39,24 +39,24 @@ class TouristicObjectsTest extends UnitBase
     public function testgetObjectByIdentifier()
     {
         $this->setMock(new Response(200, [], '{}'));
-        $this->client->getObjectByIdentifier(['identifier' => 'old1234']);
+        $this->client->getObjectByIdentifier(['identifier' => 'SITRA2_STR_760958']);
         $transaction = $this->lastTransaction();
         $this->assertEquals('GET', $transaction['request']->getMethod());
-        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/old1234', $transaction['request']->getUri()->getPath());
+        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/SITRA2_STR_760958', $transaction['request']->getUri()->getPath());
         $this->assertEquals([], $transaction['request']->query);
 
         $this->setMock(new Response(200, [], '{}'));
-        $this->client->getObjectByIdentifier(['identifier' => 'old1234', 'responseFields' => '@all']);
+        $this->client->getObjectByIdentifier(['identifier' => 'SITRA2_STR_760958', 'responseFields' => '@all']);
         $transaction = $this->lastTransaction();
         $this->assertEquals('GET', $transaction['request']->getMethod());
-        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/old1234', $transaction['request']->getUri()->getPath());
+        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/SITRA2_STR_760958', $transaction['request']->getUri()->getPath());
         $this->assertEquals(['responseFields' => '@all'], $transaction['request']->query);
 
         $this->setMock(new Response(200, [], '{}'));
-        $this->client->getObjectByIdentifier(['identifier' => 'old1234', 'locales' => 'fr,en,de']);
+        $this->client->getObjectByIdentifier(['identifier' => 'SITRA2_STR_760958', 'locales' => 'fr,en,de']);
         $transaction = $this->lastTransaction();
         $this->assertEquals('GET', $transaction['request']->getMethod());
-        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/old1234', $transaction['request']->getUri()->getPath());
+        $this->assertEquals('/api/v002/objet-touristique/get-by-identifier/SITRA2_STR_760958', $transaction['request']->getUri()->getPath());
         $this->assertEquals(['locales' => 'fr,en,de'], $transaction['request']->query);
     }
 }

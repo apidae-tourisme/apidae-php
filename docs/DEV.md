@@ -68,13 +68,9 @@ L'ajout des commentaires @method dans `src/Client.php` permet l'autocomplétion 
 composer run-script inlinedoc
 ```
 
-Le script génère dev/methods.txt
+Le script génère la doc /** ... */ qui va ensuite s'écrire au dessus de `class Client ...` dans `src/Client.php`
 
-Il faut ensuite copier/coller le contenu de dev/methods.txt au dessus de `class Client ...` dans `src/Client.php`
-
-On pourrait sûrement automatiser ce process à terme...
-
-On peut ensuite supprimer dev/methods.txt
+**Attention : ce script écrit bien sur un fichier php (`src/Client.php`) : c'est dangereux et ça mérite relecture après chaque régénération**
 
 ## Todo
 

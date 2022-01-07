@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\UriResolver;
 use ApidaePHP\Client as ClientApi;
 use GuzzleHttp\Client as ClientHttp;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\RequestInterface;
 use GuzzleHttp\UriTemplate\UriTemplate;
 use GuzzleHttp\Command\CommandInterface;
@@ -250,6 +251,7 @@ class ApidaeSerializer
         } else
             throw new \Exception('UNKNOWNED SCOPE : ' . $scope);
 
+        /** @var StreamInterface $bodyTokenResponse */
         $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [
             'auth' => $auth,
             'query' => [

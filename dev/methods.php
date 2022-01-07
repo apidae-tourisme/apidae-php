@@ -5,6 +5,7 @@ use GuzzleHttp\Command\Guzzle\Parameter;
 
 $config = [];
 require __DIR__ . "/../examples/requires.inc.php";
+require __DIR__ . "/const.inc.php";
 
 $client = new \ApidaePHP\Client($config);
 
@@ -37,27 +38,45 @@ foreach ($client->operations as $operationName => $params) {
     if ($operation->getResponseModel() == 'getResponseBody')
         $return = 'string';
 
-    $operationDoc = [];
-    $operationDoc[] = '@method ' . $return . ' ' . $operationName . '(' . implode(', ', $paramsDocs) . ') ';
-    //$operationDoc[] = '@return ' . $return;
+    $lignes = [];
 
-    $parameters_doc = [];
+    $atParameterDoc = [];
+
     if ($parameters) {
+
+        /** @var array $phpStanParameters ['responseFields : string', 'id : int','...'] */
+        $phpStanParameters = [];
+
+        /** @var array $wordpressParameters ['@type string $responseFields @all','...'] */
+        $wordpressParameters = [];
+
+        /** @var array $exampleParameters ["'selectionIds' => [0,1,2...]",""] */
+        $exampleParameters = [];
+
         foreach ($parameters as $k => $p) {
             if (in_array($k, ['projetId', 'apiKey'])) continue;
+
+            $examples = $p->getData('examples');
+            $description = $p->getDescription();
+
             $type = $k == 'query' ? 'array' : $p->getType();
+
             $required = (@$p->isRequired() ? '' : '?');
-            $param_doc = "" . $required . '';
-            //$param_doc .= @$type . ' ';
-            //$param_doc .= '\'' . $k . '\' => ';
-            if ($k == 'responseFields') $param_doc .= "'@all..'";
-            elseif ($k == 'identifier') $param_doc .= "'sitra1234..'";
-            elseif ($p->getEnum() !== null) $param_doc .= "'" . implode('|', $p->getEnum()) . "'";
-            //elseif (isset($p['examples'])) $param_doc .= "'" . implode('|', $p['examples']) . "'";
-            elseif ($k == 'locales') $param_doc .= "'fr,en..'";
-            /** @todo : remplacer l'exemple par un exemple généré par le schema (query ne prend pas toujours selectionIds, ex: getMembers) */
-            elseif ($k == 'query') {
-                $exampleQuery = '[\'selectionIds\' => [64, 5896,..],..],..]';
+
+            /** @var string $wordpressParameter @type string $responseFields @all */
+            $wordpressParameter = null;
+
+            /** @var string $exampleParameter 'selectionIds' => [0,1,2...] */
+            $exampleParameter = null;
+
+            if ($k == 'query') {
+
+                /** @var string $exampleQuery [] */
+                $examplesQuery = ["'selectionsIds =>[1,2,3...] "];
+
+                /** @var array $wpsQuery ['@type string $responseFields "@all"',...] */
+                $wpsQuery = [];
+
                 $filters = $p->getFilters();
                 if (($filter = array_filter($filters, function ($e) {
                     return isset($e['method']) ? preg_match('#filterQuery#', $e['method']) : false;
@@ -67,69 +86,114 @@ foreach ($client->operations as $operationName => $params) {
                         if (file_exists($schemaFile)) {
                             $schemaQuery = json_decode(file_get_contents($schemaFile), true);
                             if (json_last_error() == JSON_ERROR_NONE) {
+
                                 $examplesQuery = [];
+
                                 foreach ($schemaQuery['properties'] as $propertyName => $propertyDesc) {
-                                    $tmp = '';
-                                    if (!isset($propertyDesc['required']) || $propertyDesc['required'] == 'false') $tmp .= '?';
-                                    $tmp .= '\'' . $propertyName . '\' => ';
-                                    if ($propertyName == 'responseFields') $tmp .= '[\'@all\',\'informations.moyensCommunication\',\'...\']';
-                                    elseif ($propertyName == 'center') $tmp .= '[\'type\' => \'Point\', \'coordinates\' => [4.8 (lon), 45.3 (lat)]]';
-                                    elseif (isset($propertyDesc['enum'])) $tmp .= "'" . implode('|', $propertyDesc['enum']) . "'";
+
+                                    $exampleQuery = '';
+                                    $wpQuery = '';
+
+                                    $exampleQuery .= '\'' . $propertyName . '\' => ';
+
+                                    $valuesQuery = '';
+
+                                    if ($propertyName == 'responseFields') $valuesQuery .= '[\'@all\',\'informations.moyensCommunication\',\'...\']';
+                                    elseif ($propertyName == 'center') $valuesQuery .= '[\'type\' => \'Point\', \'coordinates\' => [4.8 (lon), 45.3 (lat)]]';
+                                    elseif (isset($propertyDesc['enum'])) $valuesQuery .= "'" . implode('|', $propertyDesc['enum']) . "'";
                                     elseif ($propertyDesc['type'] == 'array') {
                                         if (isset($propertyDesc['items']['type'])) {
-                                            if ($propertyDesc['items']['type'] == 'integer') $tmp .= '[0,1,2...]';
-                                            elseif ($propertyDesc['items']['type'] == 'string') $tmp .= '[\'abc\',\'def\',...]';
+                                            if ($propertyDesc['items']['type'] == 'integer') $valuesQuery .= '[0,1,2...]';
+                                            elseif ($propertyDesc['items']['type'] == 'string') $valuesQuery .= '[\'abc\',\'def\',...]';
                                         }
-                                    } elseif ($propertyDesc['type'] == 'integer') $tmp .= '1234';
-                                    elseif (@$propertyDesc['format'] == 'date') $tmp .= '\'' . date('Y-m-d') . '\'';
-                                    elseif ($propertyDesc['type'] == 'string') $tmp .= '\'abcd...\'';
-                                    $examplesQuery[] = $tmp;
+                                    } elseif ($propertyDesc['type'] == 'integer') $valuesQuery .= '1234';
+                                    elseif (@$propertyDesc['format'] == 'date') $valuesQuery .= '\'' . date('Y-m-d') . '\'';
+                                    elseif ($propertyDesc['type'] == 'string') $valuesQuery .= '\'abcd...\'';
+
+                                    $exampleQuery .= $valuesQuery;
+                                    $wpQuery = '@type ' . $propertyDesc['type'] . ' $' . $propertyName . ' ' . $valuesQuery;
+
+                                    $examplesQuery[] = $exampleQuery;
+                                    $wpsQuery[] = $wpQuery;
                                 }
-                                $exampleQuery = "[\t\n*\t " . implode(",\n*\t ", $examplesQuery) . "\n* ]";
                             }
                         }
                     }
                 }
-                $param_doc .= $exampleQuery;
-            } elseif ($k == 'grant_type') $param_doc .= "'client_credentials|authorization_code|refresh_token'";
-            elseif ($k == 'eMail') $param_doc .= "'test@test.com'";
-            elseif ($k == 'redirect_uri') $param_doc .= "'https://myapp.com/..'";
-            elseif ($type == 'string') $param_doc .= "'...'";
-            elseif ($type == 'integer') $param_doc .= '[0-9]+';
-            $parameters_doc[] = $param_doc;
+                $exampleParameter .= '[' . "\n *\t\t\t\t" . implode(",\n *\t\t\t\t", $examplesQuery) . "\n *\t\t\t" . ']';
+                $wordpressParameter .= '{' . "\n *\t\t\t\t" . implode("\n *\t\t\t\t", $wpsQuery) . "\n *\t\t\t" . '}';
+            } elseif (isset(KEYS_EXAMPLES[$k])) {
+                $exampleParameter .= KEYS_EXAMPLES[$k];
+                $wordpressParameter .= KEYS_EXAMPLES[$k];
+            } elseif (isset(TYPES_EXAMPLES[$type])) {
+                $exampleParameter .= TYPES_EXAMPLES[$type];
+                $wordpressParameter .= TYPES_EXAMPLES[$type];
+            } elseif (isset(FORMATS_EXAMPLES[$k])) {
+                $exampleParameter .= FORMATS_EXAMPLES[$k];
+                $wordpressParameter .= FORMATS_EXAMPLES[$k];
+            }
+
+            if ($p->getEnum() !== null) $exampleParameter .= " Available values : '" . implode('|', $p->getEnum()) . "'";
+            elseif (isset($examples)) $exampleParameter .= " Values (examples) : '" . implode('|', $examples) . "'";
+
+            $exampleParameters[] = "'" . $k . "' => " . $exampleParameter;
+
+            $phpStanParameter = $k . ': ' . $type;
+            $wordpressParameter = '@type ' . $type . ' $' . $k . ' ' . $wordpressParameter;
+
+            $phpStanParameters[] = $phpStanParameter;
+            $wordpressParameters[] = $wordpressParameter;
         }
     }
 
-    $parameters_doc = array_filter($parameters_doc);
+    $exampleParameters = array_filter($exampleParameters);
 
-    if (sizeof($parameters_doc) > 0) {
-        $operationDoc[] = '$client->' . $operationName . "(" . implode(", ", $parameters_doc) . ") ;";
+    /** @see https://stackoverflow.com/a/61369750/2846837 */
+    $lignes[] = '@method ' . $return . ' ' . $operationName . '(array $parameters) ';
+    $lignes[] = '@param array{' . implode(', ', $phpStanParameters) . '} $parameters {' . "\n *\t\t" . implode("\n *\t\t", $wordpressParameters) . "\n *\t" . '}';
+
+    if (sizeof($exampleParameters) > 0) {
+        $lignes[] = '@example $client->' . $operationName . "([\n *\t\t" . implode(", \n *\t\t", $exampleParameters) . "\n *\t]) ;";
     }
 
-    $operationDoc[] = '';
-    $operationDoc[] = $documentationUrl;
-    $operationDoc[] = '';
-    $operationDoc[] = $uri;
+    $lignes[] = '';
+    $lignes[] = $documentationUrl;
+    $lignes[] = '';
+    $lignes[] = $uri;
 
-    $doc[$uri][] = $operationDoc;
+    $doc[$uri][] = $lignes;
 }
 
-$html = php_sapi_name() !== 'cli';
+$html = php_sapi_name() !== 'cli' && !isset($_GET['cmd']);
 
 if (!$html) ob_start();
 
-echo '/* Generated with dev/methods.php */' . PHP_EOL;
+$startMethodDoc = '/** Magic Methods Doc */';
+$startMethodDocPreg = '/\*\* Magic Methods Doc \*/';
+
+echo $startMethodDoc . PHP_EOL;
 echo '/** ' . PHP_EOL;
 foreach ($doc as $uri => $methods) {
     foreach ($methods as $method) {
-        echo PHP_EOL . '* ' . implode(PHP_EOL . '* ', $method) . PHP_EOL;
+        echo PHP_EOL . " *\t" . implode(PHP_EOL . " *\t", $method) . PHP_EOL;
     }
 }
 echo ' */';
-echo '</pre>';
 
 if ($html) return;
 
 $content = ob_get_contents();
 ob_clean();
-file_put_contents(__DIR__ . '/methods.txt', $content);
+@file_put_contents(__DIR__ . '/methods.txt', $content);
+
+/**
+ * Suppression des anciens commentaires methods sur src/Client.php
+ */
+
+$srcClientFile = __DIR__ . '/../src/Client.php';
+
+$srcClient = file_get_contents($srcClientFile);
+if (!$srcClient) die('Can\'t get src/Client.php content');
+
+$srcClient = preg_replace('#(' . $startMethodDocPreg . '(.*))\nclass Client#s', $content . "\nclass Client", $srcClient);
+file_put_contents($srcClientFile, $srcClient);

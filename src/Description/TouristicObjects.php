@@ -23,14 +23,14 @@ class TouristicObjects extends AbstractDescriptions
                     'type' => 'string',
                     'location' => 'query',
                     'description' => 'https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees',
-                    'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
+                    //'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
                 ],
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
                     'description' => 'Languages, separated with a comma : fr,en',
                     'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja'],
-                    'default' => 'fr'
+                    //'default' => 'fr'
                 ],
                 'apiKey' => [
                     'type' => 'string',
@@ -59,14 +59,14 @@ class TouristicObjects extends AbstractDescriptions
                 'responseFields' => [
                     'type' => 'string',
                     'location' => 'query',
-                    'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
+                    //'default' => 'id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations'
                 ],
                 'locales' => [
                     'type' => 'string',
                     'location' => 'query',
                     'description' => 'Languages, separated with a comma : fr,en',
                     'examples' => ['fr', 'en', 'de', 'nl', 'it', 'es', 'ru', 'zh', 'pt-br', 'ja'],
-                    'default' => 'fr'
+                    //'default' => 'fr'
                 ],
                 'apiKey' => [
                     'type' => 'string',

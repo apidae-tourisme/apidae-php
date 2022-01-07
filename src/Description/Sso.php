@@ -17,7 +17,7 @@ class Sso extends AbstractDescriptions
                     'location' => 'query',
                     'required' => true,
                     'static' => true,
-                    'default' => 'authorization_code',
+                    //'default' => 'authorization_code',
                     'enum' => ['authorization_code', 'client_credentials', 'refresh_token']
                 ],
                 'code' => [
@@ -44,7 +44,7 @@ class Sso extends AbstractDescriptions
                     'location' => 'query',
                     'required' => true,
                     'static' => true,
-                    'default' => 'refresh_token',
+                    //'default' => 'refresh_token',
                     'enum' => ['authorization_code', 'client_credentials', 'refresh_token']
                 ],
                 'refresh_token' => [

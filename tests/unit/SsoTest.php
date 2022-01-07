@@ -23,7 +23,7 @@ class SsoTest extends UnitBase
             $this->assertEquals('GET', $transaction['request']->getMethod());
             $this->assertEquals('/oauth/token', $transaction['request']->getUri()->getPath());
             $this->assertEquals([
-                'grant_type' => 'authorization_code',
+                //'grant_type' => 'authorization_code',
                 'code' => 'uuid',
                 'redirect_uri' => 'https://www.test.com/'
             ], $transaction['request']->query);
@@ -39,7 +39,7 @@ class SsoTest extends UnitBase
             $this->assertEquals('GET', $transaction['request']->getMethod());
             $this->assertEquals('/oauth/token', $transaction['request']->getUri()->getPath());
             $this->assertEquals([
-                'grant_type' => 'refresh_token',
+                //'grant_type' => 'refresh_token',
                 'refresh_token' => 'uuid',
                 'redirect_uri' => 'https://www.test.com/'
             ], $transaction['request']->query);
