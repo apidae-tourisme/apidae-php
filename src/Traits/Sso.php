@@ -5,7 +5,6 @@ namespace ApidaePHP\Traits;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\Query;
 use ApidaePHP\Client as ClientApi;
-use ApidaePHP\Exception\MissingTokenException;
 
 trait Sso
 {
@@ -49,7 +48,7 @@ trait Sso
         if (isset($this->config['accessTokens'][$scope])) {
             return $this->config['accessTokens'][$scope];
         } else {
-            throw new MissingTokenException();
+            throw new \InvalidArgumentException('Please provide an access token for the scope you are requesting.');
         }
     }
 }

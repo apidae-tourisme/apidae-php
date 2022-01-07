@@ -13,7 +13,6 @@ use GuzzleHttp\UriTemplate\UriTemplate;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Command\Guzzle\Parameter;
-use ApidaePHP\Exception\MissingTokenException;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
 use GuzzleHttp\Command\Guzzle\RequestLocation\BodyLocation;

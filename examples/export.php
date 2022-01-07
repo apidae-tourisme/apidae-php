@@ -1,5 +1,8 @@
 <?php
 
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
+
 $config = [];
 require __DIR__ . "/requires.inc.php";
 
@@ -26,15 +29,14 @@ $client = new \ApidaePHP\Client($config);
  * 
  */
 
-try {
-    /*
+/*
      * Export
      */
 
-    // Notifications comes from a $_POST from Apidae
-    // Please note that $exportNotification can be defined in ../config.inc.php for testing this demo
-    // Here is an example of what a $_POST could contain
-    /*
+// Notifications comes from a $_POST from Apidae
+// Please note that $exportNotification can be defined in ../config.inc.php for testing this demo
+// Here is an example of what a $_POST could contain
+/*
         $exportNotification = array(
             "statut" => "SUCCESS",
             "reinitialisation" => "false",
@@ -46,32 +48,70 @@ try {
      */
 
 
-    if (!isset($exportNotification)) {
-        die('Please fill $exportNotification in examples/demo-export.php or config.inc.php');
-    }
-
-    /**
-     * First we clean older tests
-     */
-    $client->cleanExportFiles();
-
-    $exportFiles = $client->getExportFiles(['url' => $exportNotification['urlRecuperation']]);
-
-    foreach ($exportFiles->name('objets_modifies-*') as $file) {
-        echo $file->getRealpath() . "\n";
-
-        // If you use XML (Apidae settings)
-        //$xml = simplexml_load_string($file->getContents());
-        //print_r($xml);
-
-        // If you use JSON
-        // $json = \GuzzleHttp\Utils::jsonDecode($file->getContents(), true);
-        // print_r($json);
-    }
-
-    $confirmation = $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);
-} catch (\ApidaePHP\Exception\ApidaeException $e) {
-    echo $e->getMessage();
-    echo "\n";
-    echo $e->getPrevious()->getMessage();
+if (!isset($exportNotification)) {
+    die('Please fill $exportNotification in examples/demo-export.php or config.inc.php');
 }
+
+/*
+    if ($exportNotification['projetId'] != $projetId)
+        die('It\'s a good practice to check if the notification is really meant for your current project, especially if you have multiple projects');
+    */
+
+/**
+ * First we clean older tests
+ */
+/** @var bool $clean */
+$clean = false;
+try {
+    $clean = $client->cleanExportFiles();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+
+if (!$clean) {
+    echo 'Clean operation failed : process stopped';
+    die();
+}
+
+/**
+ * Download and extract zip to temp directory ($config['exportDir'] in config.inc.php)
+ */
+/** @var Finder $exportFiles */
+$exportFiles = false;
+try {
+    $exportFiles = $client->getExportFiles(['url' => $exportNotification['urlRecuperation']]);
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+if (!$exportFiles instanceof Finder) {
+    '$exportFiles is not an instance of Finder : process stopped';
+    die();
+}
+
+/**
+ * Indexation process : we have all data we need in $exportFiles
+ */
+foreach ($exportFiles->name('objets_modifies-*') as $file) {
+
+    /** @var SplFileInfo $file */
+    echo $file->getRealpath() . "\n";
+
+    /** @var array $json */
+    $json = json_decode($file->getContents(), true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        echo 'File content is not a valid JSON String' . "\n";
+        continue;
+    }
+    /**
+     * Do whatever you need to do with the datas (store in DB...)
+     * In this example we only display json content
+     */
+    echo json_encode($json, JSON_PRETTY_PRINT) . "\n";
+}
+
+/**
+ * After everything is done, you can confirmExport to change the export message of the project on Apidae from "Généré" to "Généré et intégré"
+ * This is usefull for your client to know if you have correctly integrated every export, or is some of them has not been treated.
+ */
+$confirmation = $client->confirmExport(['hash' => $exportNotification['urlConfirmation']]);

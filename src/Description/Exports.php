@@ -4,9 +4,8 @@ namespace ApidaePHP\Description;
 
 class Exports extends AbstractDescriptions
 {
-    /** @var array<mixed> $operations */
+    /** @var array<string,mixed> $operations */
     public static array $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
         'confirmExport' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/export/confirmation',
