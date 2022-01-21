@@ -30,6 +30,7 @@ use GuzzleHttp\Command\Exception\CommandException;
 use ApidaePHP\Exception\InvalidMetadataFormatException;
 use GuzzleHttp\Command\Exception\CommandClientException;
 use GuzzleHttp\Command\Exception\CommandServerException;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 /** Magic Methods Doc */
 /** 
@@ -1392,6 +1393,21 @@ class Client extends GuzzleClient
   const SSO_SCOPE  = 'sso';
   const EDIT_SCOPE  = 'api_ecriture';
 
+  const ENVIRONMENTS = [
+    'prod' => [
+      'baseUri' => 'https://api.apidae-tourisme.com/',
+      'ssoBaseUrl' => 'https://base.apidae-tourisme.com'
+    ],
+    'cooking' => [
+      'baseUri' => 'https://api.apidae-tourisme.cooking/',
+      'ssoBaseUrl' => 'https://base.apidae-tourisme.cooking'
+    ],
+    'dev' => [
+      'baseUri' => 'https://api.apidae-tourisme.dev/',
+      'ssoBaseUrl' => 'https://base.apidae-tourisme.dev'
+    ]
+  ];
+
   /** @var array<mixed> $config */
   protected array $config = [
     'baseUri'       => 'https://api.apidae-tourisme.com/',
@@ -1447,6 +1463,16 @@ class Client extends GuzzleClient
     }
 
     $this->config = array_merge($this->config, $config);
+
+    if (isset($config['env'])) {
+      if (isset(self::ENVIRONMENTS[$config['env']]))
+        $this->config = array_merge($this->config, self::ENVIRONMENTS[$config['env']]);
+      else {
+        $allowed_env = array_keys(self::ENVIRONMENTS);
+        throw new InvalidParameterException('Invalid env "' . $config['env'] . '", should be one of ' . implode(',', $allowed_env));
+      }
+    }
+
 
     $this->operations = array_merge(
       Agenda::$operations,
