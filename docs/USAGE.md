@@ -9,7 +9,7 @@ You need to create a `Client` instance:
 // You can use only the mandatory parameters for reading projects (all other options have sensible defaults).
 $client = new \ApidaePHP\Client([
     'apiKey'           => 'XXX',
-    'projetId'        => 672,
+    'projetId'        => 672
 ]);
 
 ```
@@ -29,6 +29,7 @@ Result is always a decoded PHP Array.
 
 - `apiKey`: REQUIRED : Project API Key;
 - `projetId`: REQUIRED : Corresponding projetId;
+- `env`: prod (default), cooking or dev : shortcut for baseUrl and ssoBaseUrl;
 - `baseUri`: Not mandatory, useful if you want to hit test environment i.e. https://api.apidae-tourisme.cooking/;
 - `metaClientId`: Only for Metadata, a valid OAuth Client Id;
 - `metaSecret`: Only for Metadata, the corresponding secret;
