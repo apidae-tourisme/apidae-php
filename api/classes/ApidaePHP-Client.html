@@ -529,8 +529,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -598,8 +598,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -667,8 +667,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -736,8 +736,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -903,7 +903,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">418</span>
+    <span class="phpdocumentor-element-found-in__line">428</span>
 
     </aside>
 
@@ -1175,7 +1175,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">332</span>
+    <span class="phpdocumentor-element-found-in__line">337</span>
 
     </aside>
 
@@ -1192,7 +1192,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>['selectionIds' =&gt; [64, 5896,..],..],..]</p>
+                    <section class="phpdocumentor-description"><p>[
+?'apiKey' =&gt; 'abcd...',
+?'projetId' =&gt; 1234,
+?'responseFields' =&gt; ['@all','informations.moyensCommunication','...'],
+?'filter' =&gt;
+]</p>
 </section>
 
             </dd>
@@ -1219,7 +1224,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">406</span>
+    <span class="phpdocumentor-element-found-in__line">416</span>
 
     </aside>
 
@@ -1305,14 +1310,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">722</span>
+    <span class="phpdocumentor-element-found-in__line">742</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getObjectById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getObjectById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1329,7 +1334,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$responseFields</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees</p>
 </section>
@@ -1338,7 +1343,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$locales</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) Languages, separated with a comma : fr,en Available values : <code class="prettyprint">fr,en,de,nl,it,es,ru,zh,pt-br,ja</code></p>
 </section>
@@ -1382,14 +1387,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">744</span>
+    <span class="phpdocumentor-element-found-in__line">764</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getObjectByIdentifier</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$identifier</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getObjectByIdentifier</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$identifier</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1406,7 +1411,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$responseFields</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) '@all..'</p>
 </section>
@@ -1415,7 +1420,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$locales</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) Languages, separated with a comma : fr,en Available values : <code class="prettyprint">fr,en,de,nl,it,es,ru,zh,pt-br,ja</code></p>
 </section>
@@ -1459,7 +1464,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">445</span>
+    <span class="phpdocumentor-element-found-in__line">455</span>
 
     </aside>
 
@@ -1508,7 +1513,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">470</span>
+    <span class="phpdocumentor-element-found-in__line">480</span>
 
     </aside>
 
@@ -1556,7 +1561,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">494</span>
+    <span class="phpdocumentor-element-found-in__line">504</span>
 
     </aside>
 
@@ -1604,7 +1609,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">518</span>
+    <span class="phpdocumentor-element-found-in__line">528</span>
 
     </aside>
 
@@ -1652,7 +1657,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">538</span>
+    <span class="phpdocumentor-element-found-in__line">553</span>
 
     </aside>
 
@@ -1669,7 +1674,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>['selectionIds' =&gt; [64, 5896,..],..],..]</p>
+                    <section class="phpdocumentor-description"><p>[
+?'apiKey' =&gt; 'abcd...',
+?'projetId' =&gt; 1234,
+?'selectionIds' =&gt; [0,1,2...],
+?'referenceIds' =&gt; [0,1,2...]
+]</p>
 </section>
 
             </dd>
@@ -1696,7 +1706,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">689</span>
+    <span class="phpdocumentor-element-found-in__line">709</span>
 
     </aside>
 
@@ -1773,7 +1783,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">349</span>
+    <span class="phpdocumentor-element-found-in__line">359</span>
 
     </aside>
 
@@ -1832,7 +1842,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">367</span>
+    <span class="phpdocumentor-element-found-in__line">377</span>
 
     </aside>
 
@@ -1891,7 +1901,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">778</span>
+    <span class="phpdocumentor-element-found-in__line">798</span>
 
     </aside>
 
@@ -1950,7 +1960,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">762</span>
+    <span class="phpdocumentor-element-found-in__line">782</span>
 
     </aside>
 
@@ -1982,7 +1992,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">385</span>
+    <span class="phpdocumentor-element-found-in__line">395</span>
 
     </aside>
 
@@ -2100,7 +2110,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">340</span>
+    <span class="phpdocumentor-element-found-in__line">350</span>
 
     </aside>
 
@@ -2117,7 +2127,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>['selectionIds' =&gt; [64, 5896,..],..],..]</p>
+                    <section class="phpdocumentor-description"><p>[
+?'apiKey' =&gt; 'abcd...',
+?'projetId' =&gt; 1234,
+?'responseFields' =&gt; ['@all','informations.moyensCommunication','...'],
+?'filter' =&gt;
+]</p>
 </section>
 
             </dd>
@@ -2144,7 +2159,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">700</span>
+    <span class="phpdocumentor-element-found-in__line">720</span>
 
     </aside>
 
@@ -2221,14 +2236,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">733</span>
+    <span class="phpdocumentor-element-found-in__line">753</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">objetTouristiqueGetById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">objetTouristiqueGetById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -2245,7 +2260,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$responseFields</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees</p>
 </section>
@@ -2254,7 +2269,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$locales</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) Languages, separated with a comma : fr,en Available values : <code class="prettyprint">fr,en,de,nl,it,es,ru,zh,pt-br,ja</code></p>
 </section>
@@ -2298,14 +2313,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">755</span>
+    <span class="phpdocumentor-element-found-in__line">775</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">objetTouristiqueGetByIdentifier</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$identifier</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">objetTouristiqueGetByIdentifier</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$identifier</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locales</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -2322,7 +2337,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$responseFields</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;id,identifier,nom,informations.moyensCommunication,presentation.descriptifCourt,localisation.adresse,localisation.geolocalisation,illustrations&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) '@all..'</p>
 </section>
@@ -2331,7 +2346,7 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$locales</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;fr&#039;</span>            </dt>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>(Optional) Languages, separated with a comma : fr,en Available values : <code class="prettyprint">fr,en,de,nl,it,es,ru,zh,pt-br,ja</code></p>
 </section>
@@ -2375,7 +2390,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">432</span>
+    <span class="phpdocumentor-element-found-in__line">442</span>
 
     </aside>
 
@@ -2479,7 +2494,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">678</span>
+    <span class="phpdocumentor-element-found-in__line">698</span>
 
     </aside>
 
@@ -2508,8 +2523,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -2548,7 +2563,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">612</span>
+    <span class="phpdocumentor-element-found-in__line">632</span>
 
     </aside>
 
@@ -2577,8 +2592,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -2617,7 +2632,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">458</span>
+    <span class="phpdocumentor-element-found-in__line">468</span>
 
     </aside>
 
@@ -2666,7 +2681,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">506</span>
+    <span class="phpdocumentor-element-found-in__line">516</span>
 
     </aside>
 
@@ -2714,7 +2729,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">482</span>
+    <span class="phpdocumentor-element-found-in__line">492</span>
 
     </aside>
 
@@ -2762,7 +2777,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">530</span>
+    <span class="phpdocumentor-element-found-in__line">540</span>
 
     </aside>
 
@@ -2810,7 +2825,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">546</span>
+    <span class="phpdocumentor-element-found-in__line">566</span>
 
     </aside>
 
@@ -2827,7 +2842,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>['selectionIds' =&gt; [64, 5896,..],..],..]</p>
+                    <section class="phpdocumentor-description"><p>[
+?'apiKey' =&gt; 'abcd...',
+?'projetId' =&gt; 1234,
+?'selectionIds' =&gt; [0,1,2...],
+?'referenceIds' =&gt; [0,1,2...]
+]</p>
 </section>
 
             </dd>
@@ -2854,7 +2874,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">711</span>
+    <span class="phpdocumentor-element-found-in__line">731</span>
 
     </aside>
 
@@ -2960,8 +2980,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3029,8 +3049,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3098,8 +3118,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3167,8 +3187,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3207,7 +3227,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">579</span>
+    <span class="phpdocumentor-element-found-in__line">599</span>
 
     </aside>
 
@@ -3236,8 +3256,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3276,7 +3296,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">645</span>
+    <span class="phpdocumentor-element-found-in__line">665</span>
 
     </aside>
 
@@ -3305,8 +3325,8 @@
 ?'searchQuery' =&gt; 'abcd...',
 ?'searchFields' =&gt; 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
 ?'criteresQuery' =&gt; 'abcd...',
-?'dateDebut' =&gt; '2022-01-05',
-?'dateFin' =&gt; '2022-01-05',
+?'dateDebut' =&gt; '2022-02-01',
+?'dateFin' =&gt; '2022-02-01',
 ?'first' =&gt; 1234,
 ?'count' =&gt; 1234,
 ?'order' =&gt; 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -3345,7 +3365,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">787</span>
+    <span class="phpdocumentor-element-found-in__line">807</span>
 
     </aside>
 
@@ -3404,7 +3424,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">769</span>
+    <span class="phpdocumentor-element-found-in__line">789</span>
 
     </aside>
 
@@ -3436,7 +3456,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">358</span>
+    <span class="phpdocumentor-element-found-in__line">368</span>
 
     </aside>
 
@@ -3495,7 +3515,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">376</span>
+    <span class="phpdocumentor-element-found-in__line">386</span>
 
     </aside>
 
@@ -3554,7 +3574,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="dev/Client.php"><a href="files/dev-client.html"><abbr title="dev/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">394</span>
+    <span class="phpdocumentor-element-found-in__line">404</span>
 
     </aside>
 
