@@ -95,8 +95,7 @@ class Reference extends AbstractDescriptions
                     'filters' => [
                         [
                             'method' => '\ApidaePHP\Description\Reference::filterQuery',
-                            'args' => ['@value', 'getReferenceSelectionsByObject']
-                            /** @todo Note that there is no schema on 31/12/2021 : update when schema is available */
+                            'args' => ['@value', 'getReferenceSelectionsByObject', 'apiReferentielSelectionsObjetsRequete']
                         ]
                     ],
                 ],
