@@ -26,7 +26,7 @@ abstract class AbstractDescriptions
         }
 
         if ($schema !== null && preg_match('#^a-zA-Z0-9+$#', $schema)) {
-            $schemaFile = __DIR__ . '/../../vendor/apidae-tourisme/sit-api-v2-schemas/' . $schema . '.schema';
+            $schemaFile = __DIR__ . '/../../vendor/apidae-tourisme/apidae-sit-schemas/api/v002/output/' . $schema . '.schema';
             if (file_exists($schemaFile)) {
                 $validator = new \JsonSchema\Validator;
                 $validator->validate($dataObject, (object)['$ref' => 'file://' . $schemaFile]);

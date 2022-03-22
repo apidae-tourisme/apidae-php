@@ -8,7 +8,6 @@
 namespace ApidaePHP\Tests\Functional;
 
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Command\Result;
 use ApidaePHP\Tests\Functional\FuncBase;
 
 class TouristicObjectsTest extends FuncBase
@@ -19,10 +18,10 @@ class TouristicObjectsTest extends FuncBase
      */
     public function testObjetSimple()
     {
-        /** @var Result $objetDemo */
+        /** @var array $objetDemo */
         $objetDemo = $this->client->objetTouristiqueGetById(['id' => 868850, 'responseFields' => 'nom', 'locales' => 'fr,en']); //  __ TEST Commerces et Services
-        $this->assertArrayHasKey('libelleEn', $objetDemo['nom']);
-        $this->assertFalse(isset($objetDemo['localisation']));
+        $this->assertArrayHasKey('libelleEn', $objetDemo['nom'],'868850 has a nom.libelleEn');
+        $this->assertFalse(isset($objetDemo['localisation']),'868850 has no localisation');
     }
 
     /**
@@ -31,7 +30,7 @@ class TouristicObjectsTest extends FuncBase
      */
     public function testObjetComplet()
     {
-        /** @var Result $objetDemo */
+        /** @var array $objetDemo */
         $objetDemo = $this->client->objetTouristiqueGetById(['id' => 868850, 'responseFields' => '@all', 'locales' => 'fr,en']); //  __ TEST Commerces et Services
 
         $this->assertArrayHasKey('aspects', $objetDemo);

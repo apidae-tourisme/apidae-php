@@ -1601,7 +1601,7 @@ class Client extends GuzzleClient
     throw $e;
   }
 
-  public function __call($method, array $args): Result|string
+  public function __call($method, array $args): array|string
   {
     $commandName = $method;
     /** @var Result $result */
@@ -1613,6 +1613,8 @@ class Client extends GuzzleClient
       if (is_string($content) && preg_match('#^"(.*)"$#', $content, $match))
         return $match[1];
     }
+    
+    if ( ! is_array($result) && preg_match('#^Guzzle.*Result$#',get_class($result)) ) return $result->toArray() ;
 
     return $result;
   }

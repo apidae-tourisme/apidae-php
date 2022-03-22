@@ -5,20 +5,21 @@
  */
 
 $config = [
+    'env'               =>  'prod', // prod (default), cooking, dev
     // Nécessaire pour la consultation
-    'projetId'     => 0, // Anciennement projectId mais incohérent avec le paramètre Apidae. L'ancien projectId est encore accepté
-    'apiKey'        => 'XXX',
+    'projetId'          => 0,
+    'apiKey'            => 'XXX',
     // Nécessaire pour les API d'écriture metadata
-    'metaClientId' => 'XXX',
-    'metaSecret'   => 'XXX',
+    'metaClientId'      => 'XXX',
+    'metaSecret'        => 'XXX',
     // Nécessaire pour les API d'écriture d'objets touristiques
-    'editClientId' => 'XXX',
-    'editSecret'   => 'XXX',
+    'editClientId'      => 'XXX',
+    'editSecret'        => 'XXX',
     // Nécessaire pour le SSO
     'ssoRedirectUrl'   => '[...]/examples/sso.php', // Remplacer [...] par l'url de votre projet (https:.....)
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
-    'exportDir' => realpath(dirname(__FILE__)) . '/examples/export/'
+    'exportDir'         => realpath(dirname(__FILE__)) . '/examples/export/'
 ];
 
 // For examples/export.php purpose

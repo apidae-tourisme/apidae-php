@@ -6,7 +6,6 @@
 
 namespace ApidaePHP\Tests\Functional;
 
-use GuzzleHttp\Command\Result;
 use ApidaePHP\Tests\Functional\FuncBase;
 
 class EditTest extends FuncBase
@@ -15,7 +14,7 @@ class EditTest extends FuncBase
     {
         $methods = ['getEditAutorisation', 'autorisationObjetTouristiqueModification'];
         foreach ($methods as $method) {
-            /** @var Result $result */
+            /** @var string $result */
             $result = $this->client->$method(['id' => 1234]);
             $transaction = $this->lastTransaction();
 
