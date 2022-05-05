@@ -22,7 +22,6 @@ class ApidaeSubscriber
     public function __invoke(callable $handler): \Closure
     {
         return function (CommandInterface $command) use ($handler) {
-
             $operation = $this->description->getOperation($command->getName());
 
             if ($operation->hasParam('apiKey') && !isset($command['apiKey'])) {

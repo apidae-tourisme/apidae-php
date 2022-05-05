@@ -13,16 +13,21 @@ class ApidaeException extends \Exception
 
     public function __construct(CommandException $e)
     {
-        if (method_exists($e, 'getRequest')) $this->request  = $e->getRequest();
-        if (method_exists($e, 'getResponse')) $this->response  = $e->getResponse();
+        if (method_exists($e, 'getRequest')) {
+            $this->request  = $e->getRequest();
+        }
+        if (method_exists($e, 'getResponse')) {
+            $this->response  = $e->getResponse();
+        }
         $message  = $e->getMessage();
         $code    = 0;
 
         if (isset($this->response)) {
             $decodedJson = json_decode((string) $this->response->getBody(), true);
             if (json_last_error() !== JSON_ERROR_NONE && is_array($decodedJson)) {
-                if (isset($decodedJson['errorType']))
+                if (isset($decodedJson['errorType'])) {
                     $message = $decodedJson['errorType'] . ' ' . $decodedJson['message'];
+                }
             }
 
             $code = $this->response->getStatusCode();

@@ -20,8 +20,8 @@ class TouristicObjectsTest extends FuncBase
     {
         /** @var array $objetDemo */
         $objetDemo = $this->client->objetTouristiqueGetById(['id' => 868850, 'responseFields' => 'nom', 'locales' => 'fr,en']); //  __ TEST Commerces et Services
-        $this->assertArrayHasKey('libelleEn', $objetDemo['nom'],'868850 has a nom.libelleEn');
-        $this->assertFalse(isset($objetDemo['localisation']),'868850 has no localisation');
+        $this->assertArrayHasKey('libelleEn', $objetDemo['nom'], '868850 has a nom.libelleEn');
+        $this->assertFalse(isset($objetDemo['localisation']), '868850 has no localisation');
     }
 
     /**

@@ -21,9 +21,11 @@ trait Export
         $client = $this->getHttpClient();
 
         if (empty($params['url'])) {
-            if (isset($params['urlRecuperation'])) $params['url'] = $params['urlRecuperation'];
-            else
+            if (isset($params['urlRecuperation'])) {
+                $params['url'] = $params['urlRecuperation'];
+            } else {
                 throw new \InvalidArgumentException("Missing 'url' parameter! Must be the 'urlRecuperation' you got from the notification.");
+            }
         }
 
         if (preg_match('/\.zip$/i', $params['url']) !== 1) {
@@ -38,10 +40,12 @@ trait Export
         mkdir($exportPath);
         mkdir($exportFullPath);
 
-        if (!is_dir($exportFullPath))
+        if (!is_dir($exportFullPath)) {
             throw new Exception('Directory does not exists : ' . $exportFullPath);
-        if (!is_writable($exportFullPath))
+        }
+        if (!is_writable($exportFullPath)) {
             throw new Exception('Directory is not writable : ' . $exportFullPath);
+        }
 
         $resource = fopen($zipFullPath, 'w');
 
@@ -54,8 +58,9 @@ trait Export
 
         $zip = new ZipArchive;
         $res = $zip->open($zipFullPath);
-        if ($res !== true)
+        if ($res !== true) {
             throw new Exception('Invalid zip file');
+        }
 
         $zip->extractTo($exportFullPath);
         $zip->close();

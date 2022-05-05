@@ -138,7 +138,7 @@ class ApidaeSerializer
             $request = $request->withHeader('Accept', 'application/json');
         }
 
-        // 
+        //
 
         // For Sso methods, client ID and secret are passed as basic auth
         if (in_array($operation->getName(), [
@@ -239,17 +239,21 @@ class ApidaeSerializer
                     $this->clientApi->config('metaClientId'),
                     $this->clientApi->config('metaSecret'),
                 ];
-            } else
+            } else {
                 throw new \Exception('Missing parameters metaClientId or metaSecret');
+            }
         } elseif ($scope == ClientApi::EDIT_SCOPE) {
             if ($this->clientApi->config('editClientId') && $this->clientApi->config('editSecret')) {
                 $auth = [
                     $this->clientApi->config('editClientId'),
                     $this->clientApi->config('editSecret'),
                 ];
-            } else throw new \Exception('Missing parameters editClientId or editSecret');
-        } else
+            } else {
+                throw new \Exception('Missing parameters editClientId or editSecret');
+            }
+        } else {
             throw new \Exception('UNKNOWNED SCOPE : ' . $scope);
+        }
 
         /** @var StreamInterface $bodyTokenResponse */
         $bodyTokenResponse = $this->clientHttp->get('/oauth/token', [

@@ -21,9 +21,9 @@ class AgendaTest extends FuncBase
         $this->assertEquals('vélo', $result['query']['searchQuery']);
         $this->assertEquals(61, $result['query']['count']);
         $this->assertEquals(61, sizeof($result['objetsTouristiques']));
-        $this->assertTrue($result['numFound'] > 100,'more than 400 results ?');
-        $this->assertTrue(isset($result['objetsTouristiques'][0]['type']),'First object has a type ?');
-        $this->assertTrue(isset($result['objetsTouristiques'][0]['localisation']['adresse']['commune']),'First object has a commune');
+        $this->assertTrue($result['numFound'] > 100, 'more than 400 results ?');
+        $this->assertTrue(isset($result['objetsTouristiques'][0]['type']), 'First object has a type ?');
+        $this->assertTrue(isset($result['objetsTouristiques'][0]['localisation']['adresse']['commune']), 'First object has a commune');
     }
 
     public function testsearchAgendaIdentifier()
@@ -33,7 +33,7 @@ class AgendaTest extends FuncBase
         $this->assertEquals('vélo', $result['query']['searchQuery']);
         $this->assertEquals(61, $result['query']['count']);
         $this->assertEquals(61, sizeof($result['objetTouristiqueIds']));
-        $this->assertTrue($result['numFound'] > 100,'more than 400 results ?');
+        $this->assertTrue($result['numFound'] > 100, 'more than 400 results ?');
         $this->assertTrue(sizeof($result['objetTouristiqueIds']) == sizeof(array_filter($result['objetTouristiqueIds'], 'is_int')));
     }
 

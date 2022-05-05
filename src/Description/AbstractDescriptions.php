@@ -21,8 +21,9 @@ abstract class AbstractDescriptions
         } else {
             $dataJson = $data;
             $dataObject = json_decode($data);
-            if (json_last_error() !== JSON_ERROR_NONE)
+            if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new \Exception('\'query\' parameter is not a valid json string : ' . $data);
+            }
         }
 
         if ($schema !== null && preg_match('#^a-zA-Z0-9+$#', $schema)) {

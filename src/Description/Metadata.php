@@ -138,7 +138,7 @@ class Metadata extends AbstractDescriptions
         ],
     );
 
-    /** 
+    /**
      * @param array<array<mixed>> $metadata
      * @return array<array<mixed>>
      */
