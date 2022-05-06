@@ -49,8 +49,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -77,8 +77,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -111,8 +111,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -139,8 +139,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -173,8 +173,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -201,8 +201,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -235,8 +235,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -263,8 +263,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -297,8 +297,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -325,8 +325,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -359,8 +359,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -387,8 +387,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -421,8 +421,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -449,8 +449,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -483,8 +483,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -511,8 +511,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -1003,8 +1003,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -1031,8 +1031,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -1065,8 +1065,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -1093,8 +1093,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -1127,8 +1127,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -1155,8 +1155,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
@@ -1189,8 +1189,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				@type string $searchQuery 'abcd...'
  *				@type string $searchFields 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES'
  *				@type string $criteresQuery 'abcd...'
- *				@type string $dateDebut '2022-02-01'
- *				@type string $dateFin '2022-02-01'
+ *				@type string $dateDebut '2022-05-06'
+ *				@type string $dateFin '2022-05-06'
  *				@type integer $first 1234
  *				@type integer $count 1234
  *				@type string $order 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM'
@@ -1217,8 +1217,8 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
  *				'searchQuery' => 'abcd...',
  *				'searchFields' => 'NOM|NOM_DESCRIPTION|NOM_DESCRIPTION_CRITERES',
  *				'criteresQuery' => 'abcd...',
- *				'dateDebut' => '2022-02-01',
- *				'dateFin' => '2022-02-01',
+ *				'dateDebut' => '2022-05-06',
+ *				'dateFin' => '2022-05-06',
  *				'first' => 1234,
  *				'count' => 1234,
  *				'order' => 'PERTINENCE|NOM|DISTANCE|IDENTIFIANT|DATE_OUVERTURE|RANDOM',
