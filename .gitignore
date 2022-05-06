@@ -6,3 +6,9 @@ config.inc.php
 /recette/
 .phpunit.result.cache
 /examples/export
+/docs/api/
+/docs/schemas/html/
+.phpdoc
+gh-pages/
+/dev/Client.php
+/dev/methods.txt
