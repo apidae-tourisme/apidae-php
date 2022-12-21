@@ -22,6 +22,7 @@ use GuzzleHttp\Command\ResultInterface;
 use ApidaePHP\Exception\ApidaeException;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\Operation;
+use ApidaePHP\Description\Collaborateurs;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use ApidaePHP\Description\TouristicObjects;
@@ -1410,14 +1411,14 @@ class Client extends GuzzleClient
     use Export;
     use ApidaeSso;
 
-    const NAME = 'apidae-php';
-    const VERSION = '2.0.0';
+    public const NAME = 'apidae-php';
+    public const VERSION = '2.0.0';
 
-    const META_SCOPE = 'api_metadonnees';
-    const SSO_SCOPE  = 'sso';
-    const EDIT_SCOPE  = 'api_ecriture';
+    public const META_SCOPE = 'api_metadonnees';
+    public const SSO_SCOPE  = 'sso';
+    public const EDIT_SCOPE  = 'api_ecriture';
 
-    const ENVIRONMENTS = [
+    public const ENVIRONMENTS = [
     'prod' => [
       'baseUri' => 'https://api.apidae-tourisme.com/',
       'ssoBaseUrl' => 'https://base.apidae-tourisme.com'
@@ -1502,6 +1503,7 @@ class Client extends GuzzleClient
 
         $this->operations = array_merge(
             Agenda::$operations,
+            Collaborateurs::$operations,
             Edit::$operations,
             Exports::$operations,
             Member::$operations,
@@ -1616,7 +1618,7 @@ class Client extends GuzzleClient
                 return $match[1];
             }
         }
-    
+
         if (! is_array($result) && preg_match('#^Guzzle.*Result$#', get_class($result))) {
             return $result->toArray() ;
         }
