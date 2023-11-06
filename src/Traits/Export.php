@@ -4,19 +4,17 @@ namespace ApidaePHP\Traits;
 
 use Exception;
 use ZipArchive;
-use Symfony\Component\Finder\Finder;
 
 trait Export
 {
     /**
-     * Download and read zip export
+     * Download, unzip and return export path containing files as a string
      *
      * @param  array<mixed> $params
-     * @return \Symfony\Component\Finder\Finder
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function getExportFiles(array $params): Finder
+    public function getExportFiles(array $params): string
     {
         $client = $this->getHttpClient();
 
@@ -56,7 +54,7 @@ trait Export
             $this->handleHttpError($e);
         }
 
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $res = $zip->open($zipFullPath);
         if ($res !== true) {
             throw new Exception('Invalid zip file');
@@ -65,9 +63,7 @@ trait Export
         $zip->extractTo($exportFullPath);
         $zip->close();
 
-        $finder = new Finder();
-        $finder->in($exportFullPath);
-        return $finder;
+        return $exportFullPath ;
     }
 
     /**
